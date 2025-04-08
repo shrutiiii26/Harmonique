@@ -10,6 +10,13 @@
 /node_modules
 npm-debug.log
 yarn-error.log
+* text=auto
+*.ts text
+*.js text
+*.html text
+*.css text
+*.json text
+
 
 # IDEs and editors
 .idea/
