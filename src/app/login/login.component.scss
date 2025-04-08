@@ -1,0 +1,46 @@
+@media (min-width:1366px) and (max-width:1600px){
+.login-card {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 40px 30px;
+  border-radius: 20px;
+  background-color: rgba(9, 18, 39, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+.login-logo {
+  width: 60px;
+  height: 60px;
+  background-color: #5C4DFF;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 15px;
+}
+.login-logo i {
+  color: white;
+  font-size: 24px;
+}
+.btn-login {
+  background-color: #5C4DFF;
+  color: white;
+  border-radius: 10px;
+}
+.btn-login:hover {
+  background-color: #4a39e0;
+}
+.btn-google {
+  border-radius: 10px;
+}
+.text-small {
+  font-size: 0.875rem;
+}
+
+.form-label{
+    color: white;
+}
+
+.head{
+    color: white;
+}
+}
