@@ -7,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrl: './liked-songs.component.scss'
 })
 export class LikedSongsComponent {
-
+  goBack(): void {
+    window.history.back();
+  }
+  
 }
