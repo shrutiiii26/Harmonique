@@ -4,25 +4,31 @@ import { HomeComponent } from './home/home.component';
 import { LikedSongsComponent } from './liked-songs/liked-songs.component';
 
 export const routes: Routes = [
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
     {
-        path:'login',
+        path: 'login',
         loadComponent: () =>
-            import('./login/login.component').then((c) =>c.LoginComponent),
+            import('./login/login.component').then((c) => c.LoginComponent),
     },
     {
-        path:'sidebar',
+        path: 'sidebar',
         loadComponent: () =>
-            import('./sidebar/sidebar.component').then((c) =>c.SidebarComponent),
+            import('./sidebar/sidebar.component').then((c) => c.SidebarComponent),
     },
     {
-        path:'home',
+        path: 'home',
         loadComponent: () =>
-            import('./home/home.component').then((c) =>c.HomeComponent),
+            import('./home/home.component').then((c) => c.HomeComponent),
     },
     {
-        path:'liked-songs',
+        path: 'liked-songs',
         loadComponent: () =>
-            import('./liked-songs/liked-songs.component').then((c) =>c.LikedSongsComponent),
+            import('./liked-songs/liked-songs.component').then((c) => c.LikedSongsComponent),
+    },
+    {
+        path: 'playing-now',
+        loadComponent: () =>
+            import('./playing-now/playing-now.component').then((c) => c.PlayingNowComponent),
     },
 
 

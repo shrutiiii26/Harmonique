@@ -1,0 +1,134 @@
+@media (min-width: 1366px) and (max-width: 1600px) {
+
+    .container-fluid {
+        height: 100vh;
+        width: 100vw;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    ::-webkit-scrollbar {
+        display: none;
+      }
+      
+    .player-container {
+        height: 100%;
+        width: 100%;
+        background-color: #0d1b2a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Segoe UI', sans-serif;
+        color: white;
+        padding: 40px;
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
+
+    .song-scroller {
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        padding: 10px 0;
+        box-sizing: border-box;
+    }
+
+    .scroll-wrapper {
+        display: flex;
+        gap: 15px;
+        padding: 0 10px;
+        box-sizing: border-box;
+    }
+
+    .scroll-wrapper img {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+    }
+
+    .scroll-wrapper img:hover {
+        transform: scale(1.1);
+    }
+
+    .player-box {
+        width: 340px;
+    }
+
+    .album-art {
+        width: 100%;
+        border-radius: 15px;
+    }
+
+    .track-info {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .track-info h5 {
+        margin: 0;
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .track-info p {
+        margin: 0;
+        color: #cccccc;
+        font-size: 13px;
+    }
+
+    .control-icons {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-top: 20px;
+    }
+
+    .control-icons i {
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .bottom-controls {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 20px;
+    }
+
+    .bottom-controls i {
+        font-size: 28px;
+        cursor: pointer;
+    }
+
+    .time-info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: #ccc;
+    }
+
+    input[type="range"] {
+        width: 100%;
+        accent-color: white;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+        background: white;
+    }
+
+    .back-button {
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    .playing-now {
+        text-align: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: #cccccc;
+    }
+}

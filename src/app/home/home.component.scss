@@ -8,6 +8,13 @@
         color: white;
     }
 
+    .time-info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: #ccc;
+    }
+
     .hamburger {
         cursor: pointer;
     }
@@ -150,5 +157,168 @@
         font-size: 12px;
         color: gray;
     }
+
+}
+
+@media (min-width:1024px) and (max-width:1366px) {
+    .container-fluid {
+        background-color: rgba(9, 18, 39, 1);
+        height: 200vh;
+    }
+
+    .head {
+        color: white;
+    }
+
+    .time-info {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: #ccc;
+    }
+
+    .hamburger {
+        cursor: pointer;
+    }
+
+    .sidebar-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1500;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -260px;
+        width: 260px;
+        height: 100vh;
+        background-color: #0b1022; // Dark blue background similar to the image
+        color: #fff;
+        transition: left 0.3s ease-in-out;
+        z-index: 2000;
+        padding: 2rem 1rem;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .sidebar .close-btn {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .sidebar ul {
+        padding-top: 3rem;
+    }
+
+    .sidebar li {
+        padding: 0.75rem 0;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        transition: color 0.2s ease;
+    }
+
+    .sidebar li i {
+        font-size: 1.1rem;
+        margin-right: 0.8rem;
+    }
+
+    .sidebar li:hover {
+        color: #9aa8ff; // Optional hover color to make it interactive
+    }
+
+
+    .close-btn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        cursor: pointer;
+    }
+
+    .album-img {
+        width: fit-content;
+        height: fit-content;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .album-title {
+        font-weight: 600;
+        font-size: 1rem;
+        color: rgb(219, 219, 219);
+    }
+
+    .album-artist {
+        font-size: 0.75rem;
+        color: #c9d1db;
+    }
+
+    .player-controls i {
+        font-size: 1.5rem;
+        margin: 0 10px;
+        cursor: pointer;
+    }
+
+    .progress {
+        height: 5px;
+        background-color: #444;
+    }
+
+    .progress-bar {
+        background-color: white;
+    }
+
+    .bottom-player {
+        background-color: #11182a;
+        padding: 10px;
+    }
+
+    .icon-btn {
+        color: white;
+    }
+
+    .scroll-container {
+        overflow-x: auto;
+        overflow-y: hidden;
+        white-space: nowrap;
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+
+        &::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Opera */
+        }
+    }
+
+
+    .album-img {
+        width: 100%;
+        border-radius: 8px;
+    }
+
+    .album-title {
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .album-artist {
+        font-size: 12px;
+        color: gray;
+    }
+
 
 }

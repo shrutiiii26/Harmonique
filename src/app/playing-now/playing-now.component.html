@@ -1,0 +1,55 @@
+<div class="container-fluid">
+    <div class="player-container">
+      <div class="player-box">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <i class="bi bi-arrow-left back-button"></i>
+          <div class="playing-now">Playing Now</div>
+          <div style="width: 20px;"></div>
+        </div>
+  
+        <!-- Album Art -->
+        <img [src]="currentSong.image" alt="Album Art" class="album-art" />
+  
+        <!-- Song Info -->
+        <div class="track-info">
+          <h5>{{ currentSong.title }}</h5>
+          <p>{{ currentSong.artist }}</p>
+        </div>
+  
+        <!-- Song Scroller - moved ABOVE controls and well aligned -->
+        <div class="song-scroller mt-4 mb-3">
+          <div class="scroll-wrapper">
+            <img *ngFor="let song of songs; let i = index"
+                 [src]="song.image"
+                 [alt]="song.title"
+                 (click)="selectSong(i)"
+                 [class.active]="i === currentIndex">
+          </div>
+        </div>
+  
+        <!-- Icons -->
+        <div class="control-icons">
+          <i class="bi bi-volume-down"></i>
+          <i class="bi bi-heart"></i>
+          <i class="bi bi-arrow-repeat"></i>
+        </div>
+  
+        <!-- Range & Time -->
+        <div class="mt-3">
+          <input type="range" min="0" max="240" value="50" class="form-range" id="songRange" />
+          <div class="time-info">
+            <span>00:50</span>
+            <span>04:00</span>
+          </div>
+        </div>
+  
+        <!-- Player Controls -->
+        <div class="bottom-controls">
+          <i class="bi bi-skip-backward-fill" (click)="prevSong()"></i>
+          <i class="bi bi-play-circle-fill"></i>
+          <i class="bi bi-skip-forward-fill" (click)="nextSong()"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  
