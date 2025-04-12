@@ -1,6 +1,18 @@
-
+<!-- 
 <div>
     <router-outlet></router-outlet>
 </div>
 
-<div><app-sidebar></app-sidebar></div>
+<div><app-sidebar></app-sidebar></div> -->
+
+
+<div *ngIf="showNavAndSidebar">
+    <app-sidebar></app-sidebar>
+    
+  </div>
+  <!-- Main content -->
+  <div class="main-content">
+  
+    <router-outlet></router-outlet>
+  </div>
+  
