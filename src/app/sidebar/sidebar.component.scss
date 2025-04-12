@@ -2,7 +2,10 @@
 .head {
     color: white;
 }
-
+.container-fluid{
+    background-color: rgba(9, 18, 39, 1);
+    height: 110%;
+}
 .hamburger {
     cursor: pointer;
 }

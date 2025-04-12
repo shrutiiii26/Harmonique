@@ -1,0 +1,75 @@
+.background {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: repeating-linear-gradient(to bottom,
+            #111 0px,
+            #111 1px,
+            transparent 2px,
+            transparent 30px);
+}
+
+.register-card {
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(125, 0, 255, 0.5);
+    max-width: 450px;
+    width: 100%;
+}
+
+.gradient-btn {
+    background: linear-gradient(to right, #a855f7, #3b82f6);
+    border: none;
+}
+
+.text-purple {
+    color: #a855f7;
+}
+
+.boxes {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.box {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.wave-icon {
+    width: 40px;
+    height: 30px;
+    background: linear-gradient(to top, #a855f7 20%, transparent 20%),
+        linear-gradient(to top, #a855f7 40%, transparent 40%),
+        linear-gradient(to top, #a855f7 60%, transparent 60%);
+    background-size: 8px 100%;
+    background-repeat: no-repeat;
+    background-position: 0 0, 16px 0, 32px 0;
+}
+
+.music-note {
+    position: absolute;
+    color: white;
+    font-size: 24px;
+    animation: floatNote 6s ease-in-out infinite;
+}
+
+@keyframes floatNote {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(-30px) rotate(10deg);
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+}

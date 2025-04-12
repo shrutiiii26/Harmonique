@@ -1,10 +1,9 @@
 import { Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { LikedSongsComponent } from './home/liked-songs/liked-songs.component';
+
 
 export const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
+
     {
         path: 'login',
         loadComponent: () =>
@@ -29,6 +28,11 @@ export const routes: Routes = [
         path: 'playing-now',
         loadComponent: () =>
             import('./home/playing-now/playing-now.component').then((c) => c.PlayingNowComponent),
+    },
+    {
+        path: 'register',
+        loadComponent: () =>
+            import('./home/register/register.component').then((c) => c.RegisterComponent),
     },
 
 

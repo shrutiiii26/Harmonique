@@ -1,52 +1,150 @@
-@media (min-width:1366px) and (max-width:1600px) {
-    .login-card {
-        max-width: 400px;
-        margin: 60px auto;
-        padding: 40px 30px;
-        border-radius: 20px;
-        background-color: rgba(9, 18, 39, 1);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: #000;
+    overflow: hidden;
+    color: #fff;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.login-wrapper {
+    background-color: black;
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+
+.login-container {
+    background: #111;
+    border-radius: 20px;
+    padding: 40px 30px;
+    max-width: 400px;
+    margin: 80px auto;
+    box-shadow: 0 0 30px rgba(123, 31, 162, 0.6);
+    position: relative;
+    z-index: 2;
+}
+
+:host {
+    display: block;
+    background-color: black;
+    color: white;
+    /* optional: to make text readable */
+    height: 100vh;
+    /* full viewport height */
+}
+
+
+.login-container h2 {
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 0 0 10px #9c27b0;
+}
+
+.login-container .form-control {
+    background-color: #222;
+    border: none;
+    color: #fff;
+}
+
+.login-container .btn {
+    background: linear-gradient(to right, #a020f0, #4169e1);
+    color: white;
+    font-weight: bold;
+    border: none;
+}
+
+.login-container .btn:hover {
+    opacity: 0.9;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.register-link a {
+    color: #c084fc;
+    text-decoration: none;
+}
+
+.music-bars {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.music-bars span {
+    width: 12px;
+    height: 30px;
+    margin: 0 2px;
+    background: linear-gradient(to top, #a020f0, #00bcd4);
+    animation: bounce 1s infinite ease-in-out;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.music-bars span:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.music-bars span:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.music-bars span:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.music-bars span:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: scaleY(1);
     }
 
-    .login-logo {
-        width: 60px;
-        height: 60px;
-        background-color: #5C4DFF;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 15px;
+    50% {
+        transform: scaleY(2);
+    }
+}
+
+.music-notes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.music-note {
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    animation: floatNote 10s linear infinite;
+}
+
+@keyframes floatNote {
+    0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
     }
 
-    .login-logo i {
-        color: white;
-        font-size: 24px;
+    50% {
+        opacity: 1;
     }
 
-    .btn-login {
-        background-color: #5C4DFF;
-        color: white;
-        border-radius: 10px;
-    }
-
-    .btn-login:hover {
-        background-color: #4a39e0;
-    }
-
-    .btn-google {
-        border-radius: 10px;
-    }
-
-    .text-small {
-        font-size: 0.875rem;
-    }
-
-    .form-label {
-        color: white;
-    }
-
-    .head {
-        color: white;
+    100% {
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
     }
 }

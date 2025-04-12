@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [NgIf,RouterLink,RouterModule],
+  imports: [NgIf,RouterLink,RouterModule,RouterOutlet],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
   
