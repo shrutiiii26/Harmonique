@@ -2,12 +2,13 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  imports: [SidebarComponent,RouterLink,RouterModule,],
+  imports: [RouterModule, CommonModule],
   styleUrls: ['./home.component.scss'],
 
 })

@@ -1,13 +1,13 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NgIf } from '@angular/common';  // ✅ Import NgIf explicitly
+import { CommonModule, NgIf } from '@angular/common';  // ✅ Import NgIf explicitly
 import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [NgIf,RouterLink,RouterModule,RouterOutlet],
+  imports: [NgIf, CommonModule, RouterModule],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  styleUrls: ['./sidebar.component.scss']
   
 })
 

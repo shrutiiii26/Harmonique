@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
 import { SidebarComponent } from '../sidebar/sidebar.component';
+import { RouterModule } from '@angular/router';
+import { routes } from '../app.routes';
 
 
 @NgModule({
@@ -10,7 +12,8 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SidebarComponent
+    SidebarComponent,
+    RouterModule.forChild(routes)
   ]
 })
 export class HomeModule { }
