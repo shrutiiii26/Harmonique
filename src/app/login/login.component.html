@@ -1,43 +1,43 @@
 <div class="music-notes">
   <!-- Repeated random music note icons -->
-  <span class="music-note" style="left: 10%; animation-delay: 0s;">🎵</span>
-  <span class="music-note" style="left: 30%; animation-delay: 1s;">🎶</span>
-  <span class="music-note" style="left: 50%; animation-delay: 2s;">🎵</span>
-  <span class="music-note" style="left: 70%; animation-delay: 3s;">🎶</span>
-  <span class="music-note" style="left: 90%; animation-delay: 4s;">🎵</span>
-  <span class="music-note" style="left: 20%; animation-delay: 5s;">🎶</span>
+  <span class="music-note" style="left: 10%; animation-delay: 0s;">♬</span>
+  <span class="music-note" style="left: 30%; animation-delay: 1s;">♪</span>
+  <span class="music-note" style="left: 50%; animation-delay: 2s;">♬</span>
+  <span class="music-note" style="left: 70%; animation-delay: 3s;">♩</span>
+  <span class="music-note" style="left: 90%; animation-delay: 4s;">♬</span>
+  <span class="music-note" style="left: 20%; animation-delay: 5s;">♪</span>
 </div>
 <div class="login-wrapper">
-<div class="login-container">
-  <div class="text-center mb-3">
-    <div class="d-flex justify-content-center gap-2 mb-2">
-      <div class="bg-light rounded p-2" style="width: 30px; height: 50px;"></div>
-      <div class="bg-light rounded p-2" style="width: 30px; height: 50px;"></div>
-      <div class="bg-light rounded p-2" style="width: 30px; height: 50px;"></div>
-      <div class="bg-light rounded p-2" style="width: 30px; height: 50px;"></div>
-      <div class="bg-light rounded p-2" style="width: 30px; height: 50px;"></div>
-      <div class="bg-light rounded p-2" style="width: 30px; height: 50px;"></div>
-      <div class="bg-light rounded p-2" style="width: 30px; height: 50px;"></div>
+  <div class="login-container">
+    <div class="text-center mb-3">
+      <div class="d-flex justify-content-center gap-2 mb-2">
+        <div class="bg-light rounded p-2" style="width: 30px; height: 50px;"></div>
+        <div class="bg-light rounded p-2" style="width: 30px; height: 50px;"></div>
+        <div class="bg-light rounded p-2" style="width: 30px; height: 50px;"></div>
+        <div class="bg-light rounded p-2" style="width: 30px; height: 50px;"></div>
+        <div class="bg-light rounded p-2" style="width: 30px; height: 50px;"></div>
+        <div class="bg-light rounded p-2" style="width: 30px; height: 50px;"></div>
+        <div class="bg-light rounded p-2" style="width: 30px; height: 50px;"></div>
+      </div>
+      <h4>Music Login</h4>
+      <div class="music-bars mt-3">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
     </div>
-    <h4>Music Login</h4>
-    <div class="music-bars mt-3">
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
-  </div>
 
-  <form>
-    <div class="mb-3">
-      <input type="email" class="form-control" placeholder="Email">
-    </div>
-    <div class="mb-3">
-      <input type="password" class="form-control" placeholder="Password">
-    </div>
-    <div class="d-grid">
-      <button type="submit" class="btn">Start Jamming</button>
-    </div>
-  </form>
-  <div class="register-link">
-    New to the band? <a href="#">Join now</a>
+    <form>
+      <div class="mb-3">
+        <input type="email" class="form-control" placeholder="Email">
+      </div>
+      <div class="mb-3">
+        <input type="password" class="form-control" placeholder="Password">
+      </div>
+      <div class="d-grid">
+        <button type="submit" class="btn">Start Jamming</button>
+      </div>
+    </form>
+    <div class="register-link" (click)="redirectRegister()">
+      New to the band? <a href="#">Join now</a>
+    </div>    
   </div>
-</div>
 </div>

@@ -1,12 +1,7 @@
 .background {
-    position: relative;
     width: 100%;
     height: 100vh;
-    background: repeating-linear-gradient(to bottom,
-            #111 0px,
-            #111 1px,
-            transparent 2px,
-            transparent 30px);
+    background-color: black;
 }
 
 .register-card {
