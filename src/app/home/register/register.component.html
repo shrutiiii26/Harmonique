@@ -18,13 +18,40 @@
             </div>
             <h2 class="text-white mb-2">Join the Band</h2>
             <div class="wave-icon mb-3"></div>
+            <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
+                <input type="text" class="form-control mb-2" placeholder="Full Name" formControlName="fullName">
+                <div *ngIf="registrationForm.get('fullName')?.invalid && registrationForm.get('fullName')?.touched"
+                    class="text-danger">
+                    Full Name is required and should be at least 3 characters long.
+                </div>
 
-            <input type="text" class="form-control mb-2" placeholder="Full Name">
-            <input type="email" class="form-control mb-2" placeholder="Email">
-            <input type="password" class="form-control mb-2" placeholder="Create Password">
-            <input type="password" class="form-control mb-3" placeholder="Confirm Password">
+                <input type="email" class="form-control mb-2" placeholder="Email" formControlName="email">
+                <div *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched"
+                    class="text-danger">
+                    A valid email is required.
+                </div>
 
-            <button class="btn btn-primary w-100 gradient-btn">Register</button>
+                <input type="password" class="form-control mb-2" placeholder="Create Password"
+                    formControlName="password">
+                <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched"
+                    class="text-danger">
+                    Password is required and must be at least 6 characters.
+                </div>
+
+                <input type="password" class="form-control mb-3" placeholder="Confirm Password"
+                    formControlName="confirmPassword">
+                <div *ngIf="registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched"
+                    class="text-danger">
+                    Confirm Password is required and must match the password.
+                </div>
+
+                <a routerLink="/home" class="btn btn-primary w-100 gradient-btn"
+                    [class.disabled]="registrationForm.invalid" [attr.aria-disabled]="registrationForm.invalid"
+                    (click)="registrationForm.invalid && $event.preventDefault()">
+                    Register
+                </a>
+
+            </form>
             <p class="text-white mt-3">Already have an account? <a routerLink="/login" class="text-purple">Login</a></p>
         </div>
     </div>
