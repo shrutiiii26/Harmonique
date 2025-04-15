@@ -2,7 +2,8 @@
     background-color: rgba(9, 18, 39, 1);
     height: 200vh;
 }
-.head{
+
+.head {
     color: white;
 }
 
@@ -13,4 +14,114 @@ img {
 
 .music-player {
     border-top: 1px solid #444;
+}
+
+/* Base styles */
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 6px;
+    background: #ddd;
+    border-radius: 5px;
+    outline: none;
+    transition: background 0.2s ease;
+}
+
+/* Track */
+input[type="range"]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 6px;
+    border-radius: 5px;
+}
+
+/* Thumb */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #a259ff;
+    cursor: pointer;
+    margin-top: -7px;
+    /* aligns thumb with track */
+}
+
+/* Focus */
+input[type="range"]:focus {
+    outline: none;
+}
+
+/* Dynamic crossfade track */
+input[type="range"].crossfade-slider::-webkit-slider-runnable-track {
+    background: linear-gradient(to right,
+            #a259ff 0%,
+            #a259ff var(--progress),
+            #ddd var(--progress),
+            #ddd 100%);
+}
+
+.bottom-player {
+    background-color: #11182a;
+    padding: 10px;
+}
+
+.icon-btn {
+    color: white;
+}
+
+.scroll-container {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+
+    &::-webkit-scrollbar {
+        display: none;
+        /* Chrome, Safari, Opera */
+    }
+}
+
+
+.album-img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.album-title {
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.album-artist {
+    font-size: 12px;
+    color: gray;
+}
+
+
+.album-img {
+    width: fit-content;
+    height: fit-content;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.album-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: rgb(219, 219, 219);
+}
+
+.album-artist {
+    font-size: 0.75rem;
+    color: #c9d1db;
+}
+
+.player-controls i {
+    font-size: 1.5rem;
+    margin: 0 10px;
+    cursor: pointer;
 }

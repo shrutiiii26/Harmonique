@@ -27,6 +27,9 @@ export class SidebarComponent {
   home() {
     this.router.navigateByUrl('/home');
   }
+  settings() {
+    this.router.navigateByUrl('/settings');
+  }
 
   // Navigate to liked songs
   likedsongs() {

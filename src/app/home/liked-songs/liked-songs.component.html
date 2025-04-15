@@ -1,4 +1,3 @@
-
 <div class="container-fluid py-3">
 
     <!-- Top bar -->
@@ -56,19 +55,28 @@
     </div>
 </div>
 
-<!-- Bottom Player -->
-<div class="music-player bg-black text-white p-2 fixed-bottom">
+<div class="bottom-player fixed-bottom">
     <div class="d-flex align-items-center">
-        <img src="https://via.placeholder.com/50" class="rounded me-2" />
-        <div class="flex-grow-1">
-            <p class="mb-0 fw-semibold head">Chaff & Dust</p>
-            <small class="text-secondary">HYONNA</small>
-        </div>
-        <div class="ms-auto d-flex gap-2 align-items-center">
-            <i class="bi bi-skip-backward-fill fs-5"></i>
-            <i class="bi bi-play-fill fs-3"></i>
-            <i class="bi bi-skip-forward-fill fs-5"></i>
+    <a routerLink="/playing-now"><img src="../assets/Mask Group (1).png" alt="cover" style="height: 50px; border-radius: 5px;"> </a> 
+        <div class="ms-3">
+            <div class="album-title mb-0">Chaff & Dust</div>
+            <div class="album-artist">HYONNA</div>
         </div>
     </div>
-    <input type="range" class="form-range mt-1" />
+
+
+    <!-- Crossfade Range Slider -->
+    <input type="range" min="0" max="50" [value]="crossfadeValue" class="form-range crossfade-slider"
+        (input)="onCrossfadeChange($event)" />
+
+    <div class="crossfade-info text-white">
+        <span id="crossfadeValue">{{ crossfadeValue }}</span> seconds
+    </div>
+
+    <!-- Controls -->
+    <div class="d-flex justify-content-center player-controls">
+        <i class="bi bi-skip-backward-fill icon-btn"></i>
+        <i class="bi bi-play-fill icon-btn"></i>
+        <i class="bi bi-skip-forward-fill icon-btn"></i>
+    </div>
 </div>

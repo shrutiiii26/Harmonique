@@ -3,8 +3,8 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
     {
-        path:'',
-        children:[
+        path: '',
+        children: [
             { path: '', redirectTo: 'login', pathMatch: 'full' },
 
             {
@@ -33,18 +33,23 @@ export const routes: Routes = [
                     import('./home/playing-now/playing-now.component').then((c) => c.PlayingNowComponent),
             },
             {
+                path: 'settings',
+                loadComponent: () =>
+                    import('./home/settings/settings.component').then((c) => c.SettingsComponent),
+            },
+            {
                 path: 'register',
                 loadComponent: () =>
                     import('./home/register/register.component').then((c) => c.RegisterComponent),
             },
             { path: '', redirectTo: 'login', pathMatch: 'full' }
-        
+
         ]
     },
     {
-        path:'**', redirectTo:'home'
+        path: '**', redirectTo: 'home'
     },
-   
+
 
 
 ];

@@ -1,0 +1,153 @@
+.settings-container {
+    width: 100%;
+    padding: 2rem;
+    background-color: #121212;
+    box-shadow: 0 0 20px rgba(98, 0, 234, 0.2);
+    overflow-y: auto;
+    max-height: 100vh;
+}
+.head{
+    color: white;
+}
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.setting-row h2 {
+    margin: 0;
+    font-size: 1rem;
+    color: #f1f1f1;
+}
+
+.setting-row select {
+    width: 50%;
+    max-width: 300px;
+    padding: 0.5rem;
+    background-color: #1f1f24;
+    color: #f1f1f1;
+    border: none;
+    border-radius: 6px;
+}
+
+h1 {
+    text-align: center;
+    color: #a259ff;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    letter-spacing: 2px;
+}
+
+.settings-group {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #333;
+}
+
+.settings-group h2 {
+    color: #a259ff;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.settings-group label,
+.settings-group p,
+.settings-group a {
+    display: block;
+    margin: 0.5rem 0;
+    font-size: 1rem;
+}
+
+select,
+input[type="range"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    background-color: #1f1f24;
+    color: #f1f1f1;
+    border: none;
+    border-radius: 6px;
+}
+
+.form-check-input {
+    width: 3rem;
+    height: 1.75rem;
+    border-radius: 2rem;
+    background-color: #ccc;
+    transition: background-color 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+/* Style the knob of the toggle switch */
+.form-check-input::before {
+    content: '';
+    position: absolute;
+    top: 0.125rem;
+    left: 0.125rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    background-color: white;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+/* When checked, move the knob */
+.form-check-input:checked::before {
+    transform: translateX(1.25rem); /* Move the knob to the right when checked */
+}
+
+/* Checked state background color */
+.form-check-input:checked {
+    background-color: #a259ff; /* Accent color when checked */
+}
+
+/* Focus state styling */
+.form-check-input:focus {
+    box-shadow: 0 0 0 0.25rem rgba(162, 89, 255, 0.25);
+}
+
+/* Optional: change label color when checked */
+.form-check-input:checked + .form-check-label {
+    color: #a259ff;
+}
+
+.form-check-label {
+    margin-bottom: 0;
+}
+
+.form-switch {
+    position: relative;
+    display: inline-block;
+    width: 3.75rem;
+    height: 2rem;
+}
+
+.btn,
+.save-btn {
+    background-color: #a259ff;
+    color: white;
+    padding: 0.8rem 1rem;
+    margin-top: 1rem;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn:hover,
+.save-btn:hover {
+    background-color: #8e3dff;
+}
+
+.btn.danger {
+    background-color: #ff3e3e;
+}
+
+.btn.danger:hover {
+    background-color: #cc2f2f;
+}

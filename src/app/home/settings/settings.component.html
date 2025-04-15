@@ -1,0 +1,89 @@
+<div class="settings-container">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <i class="bi bi-arrow-left head fs-4" (click)="goBack()" style="cursor: pointer;"></i>
+        <h1 class="m-0 head">Settings</h1>
+        <i class="bi bi-sliders head fs-4"></i>
+    </div>
+
+
+    <!-- Account -->
+    <section class="settings-group">
+        <div class="row align-items-center">
+          <div class="col">
+            <h2 class="text-white mb-0">Account</h2>
+          </div>
+          <div class="col-3 text-end">
+            <a routerLink="/login"><button class="btn btn-primary">Edit</button></a>
+          </div>
+        </div>
+        <p class="text-white mt-2">Edit login methods</p>
+      </section>
+      
+
+
+    <!-- Language -->
+    <section class="settings-group">
+        <div class="setting-row">
+            <h2 class="text-white">Language</h2>
+            <select>
+                <option>English (English)</option>
+                <option>Hindi (हिंदी)</option>
+                <option>Spanish (Español)</option>
+                <option>French (Français)</option>
+            </select>
+        </div>
+        <small class="text-white">Choose language - Changes will be applied after restarting the app</small>
+
+    </section>
+
+
+    <!-- Explicit Content -->
+    <section class="settings-group">
+        <h2 class="text-white">Explicit content</h2>
+        <label class="text-white">
+            Allow explicit content
+            <input type="checkbox" checked>
+        </label>
+        <small class="text-white">
+            Explicit content When off, explicit music and
+            podcasts are skipped.
+        </small>
+        <small class="text-light-emphasis">(It may take some time for your experience to update.)</small>
+    </section>
+
+    <!-- Autoplay -->
+    <section class="settings-group">
+        <div class="row align-items-center">
+          <div class="col">
+            <h2 class="text-white mb-1">Autoplay</h2>
+            <p class="text-white mb-0">Enjoy nonstop listening. When your audio ends, we’ll play you something similar</p>
+          </div>
+          <div class="col-auto text-end">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" role="switch" id="autoplaySwitch" checked>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+
+    <!-- Audio Quality -->
+    <section class="settings-group">
+        <div class="setting-row">
+            <h2>Wi-Fi Streaming</h2>
+            <select>
+                <option>Normal</option>
+                <option>High</option>
+                <option>Very High</option>
+            </select>
+        </div>
+        <div class="setting-row">
+            <h2>Download Quality</h2>
+            <select>
+                <option>Normal</option>
+                <option>High</option>
+            </select>
+        </div>
+    </section>
+   <a routerLink="/home"> <button class="save-btn" (click)="saveSettings()">Save Settings</button></a>
+</div>

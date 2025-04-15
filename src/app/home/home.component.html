@@ -101,20 +101,20 @@
 <!-- Bottom Music Player -->
 <div class="bottom-player fixed-bottom">
     <div class="d-flex align-items-center">
-        <img src="../assets/Mask Group (1).png" alt="cover" style="height: 50px; border-radius: 5px;">
+        <a routerLink="/playing-now"><img src="../assets/Mask Group (1).png" alt="cover" style="height: 50px; border-radius: 5px;"> </a>
         <div class="ms-3">
             <div class="album-title mb-0">Chaff & Dust</div>
             <div class="album-artist">HYONNA</div>
         </div>
     </div>
 
-    <!-- Progress Bar -->
-    <div class="mt-3">
-        <input type="range" min="0" max="200" value="50" class="form-range" id="songRange" />
-        <div class="time-info">
-            <span>00:50</span>
-            <span>04:00</span>
-        </div>
+
+    <!-- Crossfade Range Slider -->
+    <input type="range" min="0" max="50" [value]="crossfadeValue" class="form-range crossfade-slider"
+        (input)="onCrossfadeChange($event)" />
+
+    <div class="crossfade-info text-white">
+        <span id="crossfadeValue ">{{ crossfadeValue }}</span> seconds
     </div>
 
     <!-- Controls -->

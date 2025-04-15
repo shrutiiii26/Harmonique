@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-playing-now',
-  imports: [],
+  imports: [CommonModule, RouterModule],
   templateUrl: './playing-now.component.html',
-  styleUrl: './playing-now.component.scss'
+  styleUrls: ['./playing-now.component.scss']
 })
 export class PlayingNowComponent {
   songs = [
@@ -41,4 +43,8 @@ export class PlayingNowComponent {
   prevSong() {
     this.currentIndex = (this.currentIndex - 1 + this.songs.length) % this.songs.length;
   }
+  goBack(): void {
+    window.history.back();
+  }
+
 }

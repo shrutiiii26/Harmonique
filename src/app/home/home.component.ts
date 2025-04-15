@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; // Import FormBuilder and Validators
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
@@ -17,9 +17,10 @@ export class HomeComponent {
 
   @ViewChild('sidebar') sidebar!: ElementRef;
   isSidebarVisible: boolean = false;
+  crossfadeValue: number = 5;  
+
 
   constructor(private router: Router, private fb: FormBuilder) {
-    // Initialize the form with validators for each step
     this.form = this.fb.group({
       step1: ['', Validators.required],
       step2: ['', Validators.required],
@@ -32,13 +33,6 @@ export class HomeComponent {
     this.sidebar.nativeElement.classList.toggle('active');
   }
 
-  home() {
-    this.router.navigateByUrl('/home');
-  }
-
-  likedsongs() {
-    this.router.navigateByUrl('/liked-songs');
-  }
 
   // Calculate the progress percentage based on current step
   get progressPercentage(): number {
@@ -57,5 +51,13 @@ export class HomeComponent {
     if (this.currentStep > 1) {
       this.currentStep--;
     }
+  }
+
+  // Update the crossfade value
+  onCrossfadeChange(event: any): void {
+    this.crossfadeValue = event.target.value;
+  
+    const percentage = (this.crossfadeValue / 50) * 100;
+    event.target.style.setProperty('--progress', `${percentage}%`);
   }
 }
