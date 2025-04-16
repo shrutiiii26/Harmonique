@@ -9,16 +9,16 @@
     <!-- Account -->
     <section class="settings-group">
         <div class="row align-items-center">
-          <div class="col">
-            <h2 class="text-white mb-0">Account</h2>
-          </div>
-          <div class="col-3 text-end">
-            <a routerLink="/login"><button class="btn btn-primary">Edit</button></a>
-          </div>
+            <div class="col">
+                <h2 class="text-white mb-0">Account</h2>
+            </div>
+            <div class="col-3 text-end">
+                <a routerLink="/login"><button class="btn btn-primary">Edit</button></a>
+            </div>
         </div>
         <p class="text-white mt-2">Edit login methods</p>
-      </section>
-      
+    </section>
+
 
 
     <!-- Language -->
@@ -54,18 +54,19 @@
     <!-- Autoplay -->
     <section class="settings-group">
         <div class="row align-items-center">
-          <div class="col">
-            <h2 class="text-white mb-1">Autoplay</h2>
-            <p class="text-white mb-0">Enjoy nonstop listening. When your audio ends, we’ll play you something similar</p>
-          </div>
-          <div class="col-auto text-end">
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" role="switch" id="autoplaySwitch" checked>
+            <div class="col">
+                <h2 class="text-white mb-1">Autoplay</h2>
+                <p class="text-white mb-0">Enjoy nonstop listening. When your audio ends, we’ll play you something
+                    similar</p>
             </div>
-          </div>
+            <div class="col-auto text-end">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="autoplaySwitch" checked>
+                </div>
+            </div>
         </div>
-      </section>
-      
+    </section>
+
 
     <!-- Audio Quality -->
     <section class="settings-group">
@@ -85,5 +86,5 @@
             </select>
         </div>
     </section>
-   <a routerLink="/home"> <button class="save-btn" (click)="saveSettings()">Save Settings</button></a>
+    <a routerLink="/home"> <button class="save-btn" (click)="saveSettings()">Save Settings</button></a>
 </div>

@@ -1,0 +1,59 @@
+<div class="edit-profile-container">
+  <h1>Edit Profile</h1>
+
+  <form>
+    <!-- Profile Image -->
+    <div class="text-center mb-4">
+      <img src="https://via.placeholder.com/100" class="rounded-circle profile-img" alt="Profile Picture">
+      <div class="mt-2">
+        <button type="button" class="btn btn-outline-light btn-sm">Change Picture</button>
+      </div>
+    </div>
+
+    <!-- Full Name -->
+    <div class="mb-3">
+      <label for="name" class="form-label text-light">Full Name</label>
+      <input type="text" class="form-control custom-dark-input" id="name" placeholder="John Doe">
+    </div>
+
+    <!-- Username -->
+    <div class="mb-3">
+      <label for="username" class="form-label text-light">Username</label>
+      <input type="text" class="form-control custom-dark-input" id="username" placeholder="@johndoe">
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label for="email" class="form-label text-light">Email</label>
+      <input type="email" class="form-control custom-dark-input" id="email" placeholder="john@example.com">
+    </div>
+
+    <!-- Bio -->
+    <div class="mb-3">
+      <label for="bio" class="form-label text-light">Bio</label>
+      <textarea class="form-control custom-dark-input" id="bio" rows="3" placeholder="Tell us something about you..."></textarea>
+    </div>
+
+    <!-- Gender -->
+    <div class="mb-3">
+      <label class="form-label text-light">Gender</label>
+      <select class="form-select custom-dark-input">
+        <option selected>Prefer not to say</option>
+        <option>Male</option>
+        <option>Female</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <!-- Email Notifications -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <label class="text-light mb-0">Email Notifications</label>
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" id="emailNotify" checked>
+      </div>
+    </div>
+
+    <!-- Save Button -->
+    <button type="submit" class="save-btn">Save Changes</button>
+  </form>
+</div>

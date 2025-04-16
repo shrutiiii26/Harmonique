@@ -42,6 +42,11 @@ export const routes: Routes = [
                 loadComponent: () =>
                     import('./home/register/register.component').then((c) => c.RegisterComponent),
             },
+            {
+                path: 'edit-profile',
+                loadComponent: () =>
+                    import('./home/edit-profile/edit-profile.component').then((c) => c.EditProfileComponent),
+            },
             { path: '', redirectTo: 'login', pathMatch: 'full' }
 
         ]
