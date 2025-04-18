@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild,ChangeDetectorRef  } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -34,7 +34,7 @@ export class HomeComponent {
   ];
   currentSong: any;
 
-  constructor(private router: Router, private fb: FormBuilder) {
+  constructor(private router: Router, private fb: FormBuilder,private changeDetectorRef: ChangeDetectorRef) {
     this.form = this.fb.group({
       step1: ['', Validators.required],
       step2: ['', Validators.required],
@@ -51,29 +51,28 @@ export class HomeComponent {
       const file = files[i];
       const url = URL.createObjectURL(file);
       const audio = new Audio(url);
-
-      audio.addEventListener('timeupdate', () => {
-        if (this.currentSongIndex === i) {
-          this.importedSongs[i].currentTime = audio.currentTime;
-        }
-      });
-
-      audio.addEventListener('loadedmetadata', () => {
-        if (this.currentSongIndex === i) {
-          this.importedSongs[i].duration = audio.duration;
-        }
-      });
-
-      this.importedSongs.push({
+    
+      const songObj = {
         name: file.name,
         src: url,
         audio: audio,
         isPlaying: false,
         currentTime: 0,
         duration: 0,
-        artist: 'Unknown Artist', // Optionally populate with metadata
+        artist: 'Unknown Artist',
+      };
+    
+      audio.addEventListener('loadedmetadata', () => {
+        songObj.duration = audio.duration;
       });
+    
+      audio.addEventListener('timeupdate', () => {
+        songObj.currentTime = audio.currentTime;
+      });
+    
+      this.importedSongs.push(songObj);
     }
+    
   }
 
   togglePlay(index: number | null): void {
@@ -125,4 +124,22 @@ export class HomeComponent {
     const percentage = (this.crossfadeValue / 50) * 100;
     event.target.style.setProperty('--progress', `${percentage}%`);
   }
+  
+
+  seekTo(event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const seekTime = parseFloat(target.value);
+    const currentSong = this.importedSongs[this.currentSongIndex];
+    
+    if (currentSong?.audio) {
+        // Ensure seekTime is within valid range
+        const clampedTime = Math.max(0, Math.min(seekTime, currentSong.duration || 0));
+        
+        currentSong.audio.currentTime = clampedTime;
+        currentSong.currentTime = clampedTime;
+        
+        // Optional: Trigger change detection if needed
+        this.changeDetectorRef.detectChanges();
+    }
+}
 }
