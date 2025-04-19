@@ -3,10 +3,11 @@ import { RouterOutlet,RouterModule, NavigationEnd,Router } from '@angular/router
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HomeComponent } from './home/home.component';
 import { NgIf } from '@angular/common';  // ✅ Import NgIf explicitly
+import { FooterComponent } from './home/footer/footer.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,SidebarComponent,NgIf,RouterModule],
+  imports: [RouterOutlet,SidebarComponent,NgIf,RouterModule,FooterComponent,HomeComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -20,6 +21,8 @@ export class AppComponent {
       if (event instanceof NavigationEnd) {
         const hideRoutes = ['/login', '/register','/navbar','/','/liked-songs','/settings','/playing-now','/edit-profile'];
         this.showNavAndSidebar = !hideRoutes.includes(event.url);
+        const hideFooterRoutes = ['/login', '/register'];
+        this.showFooter = !hideFooterRoutes.includes(event.url);
       }
     });
   }

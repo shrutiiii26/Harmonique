@@ -1,7 +1,7 @@
 .settings-container {
     width: 100%;
     padding: 2rem;
-    background-color: rgba(9, 18, 39, 1);
+    background-color: #040613;
     box-shadow: 0 0 20px rgba(98, 0, 234, 0.2);
     overflow-y: auto;
     height: 100vh;
@@ -29,7 +29,7 @@
     width: 50%;
     max-width: 300px;
     padding: 0.5rem;
-    background-color: #8e82fd;
+    background-color: #152547;
     color: white;
     border: none;
     border-radius: 6px;
@@ -37,7 +37,7 @@
 
 h1 {
     text-align: center;
-    color: #a259ff;
+    color: #111828;
     margin-bottom: 2rem;
     font-size: 2rem;
     letter-spacing: 2px;
@@ -50,7 +50,7 @@ h1 {
 }
 
 .settings-group h2 {
-    color: #a259ff;
+    color: #111828;
     font-size: 1.2rem;
     margin-bottom: 1rem;
 }
@@ -131,7 +131,7 @@ input[type="range"] {
 // }
 
 .btn{
-    background-color: #a9a1ff;
+    background-color: #152547;
     color: white;
     padding: 0.8rem 1rem;
     margin-top: 1rem;
@@ -143,7 +143,7 @@ input[type="range"] {
     transition: background 0.3s ease;
 }
 .save-btn {
-    background-color: #a9a1ff;
+    background-color: #152547;
     color: white;
     padding: 0.8rem 1rem;
     margin-top: 1rem;
@@ -158,7 +158,7 @@ input[type="range"] {
 
 .btn:hover,
 .save-btn:hover {
-    background-color: #8e3dff;
+    background-color: #122552;
 }
 
 .btn.danger {

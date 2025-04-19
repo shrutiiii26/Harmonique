@@ -1,6 +1,6 @@
 @media (min-width:1366px) and (max-width:1600px) {
     .login-wrapper {
-        background-color: black;
+        background-color: #040613;
         color: white;
         min-height: 100vh;
         padding: 20px;
@@ -8,14 +8,15 @@
 
 
     .login-container {
-        background: #111;
+        background: #040613;
         border-radius: 20px;
         padding: 40px 30px;
         max-width: 400px;
-        margin: 80px auto;
-        box-shadow: 0 0 30px rgba(123, 31, 162, 0.6);
+        margin: 80px auto; 
+        box-shadow: 0 0 50px rgba(74, 10, 121, 0.6);
         position: relative;
         z-index: 2;
+        justify-content: center;
     }
 
     .btn-white {
@@ -52,9 +53,14 @@
     }
 
     .login-container .form-control {
-        background-color: #222;
+        background-color: #ffffff;
         border: none;
         color: #fff;
+        opacity: 10%;
+    }
+
+    .login-container .placeholder{
+        color: white;
     }
 
     .login-container .btn {

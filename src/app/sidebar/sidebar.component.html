@@ -5,7 +5,7 @@
     <i class="bi bi-list text-white fs-3 hamburger" (click)="toggleSidebar()"></i>
 
     <!-- Sidebar -->
-    <div sidebar class="sidebar bg-dark text-white" [class.active]="isSidebarVisible">
+    <div sidebar class="sidebar text-white" [class.active]="isSidebarVisible">
       <i class="bi bi-x fs-4 close-btn" (click)="toggleSidebar()"></i>
       <ul class="list-unstyled mt-4 ps-3">
         <a [routerLink]="['/liked-songs']"><li><i class="bi bi-heart me-2"></i>Liked Songs</li></a>

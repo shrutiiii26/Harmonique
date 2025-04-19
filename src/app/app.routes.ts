@@ -23,6 +23,11 @@ export const routes: Routes = [
                     import('./home/home.component').then((c) => c.HomeComponent),
             },
             {
+                path: 'footer',
+                loadComponent: () =>
+                    import('./home/footer/footer.component').then((c) => c.FooterComponent),
+            },
+            {
                 path: 'liked-songs',
                 loadComponent: () =>
                     import('./home/liked-songs/liked-songs.component').then((c) => c.LikedSongsComponent),
