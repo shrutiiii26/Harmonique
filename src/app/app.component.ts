@@ -4,10 +4,12 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { HomeComponent } from './home/home.component';
 import { NgIf } from '@angular/common';  // ✅ Import NgIf explicitly
 import { FooterComponent } from './home/footer/footer.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,SidebarComponent,NgIf,RouterModule,FooterComponent,HomeComponent],
+  imports: [RouterOutlet,SidebarComponent,NgIf,RouterModule,FooterComponent,HttpClientModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

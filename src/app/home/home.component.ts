@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AudioPlayerService } from '../home/services/audio-player.service'; // Adjust the path as needed
 
 @Component({
   selector: 'app-home',
@@ -43,7 +44,8 @@ export class HomeComponent {
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    public audioService: AudioPlayerService
   ) {
     this.form = this.fb.group({
       step1: ['', Validators.required],
@@ -115,13 +117,11 @@ export class HomeComponent {
   }
 
   get currentTime(): string {
-    const currentSong = this.importedSongs[this.currentSongIndex];
-    return currentSong ? this.formatTime(currentSong.currentTime) : '0:00';
+    return this.audioService.getCurrentTimeFormatted();
   }
 
   get duration(): string {
-    const currentSong = this.importedSongs[this.currentSongIndex];
-    return currentSong ? this.formatTime(currentSong.duration) : '0:00';
+    return this.audioService.getDurationFormatted();
   }
 
   private formatTime(sec: number): string {
@@ -137,23 +137,17 @@ export class HomeComponent {
   }
 
   seekTo(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    const seekTime = parseFloat(target.value);
-    const currentSong = this.importedSongs[this.currentSongIndex];
-
-    if (currentSong?.audio) {
-      const clampedTime = Math.max(0, Math.min(seekTime, currentSong.duration || 0));
-      currentSong.audio.currentTime = clampedTime;
-      currentSong.currentTime = clampedTime;
-      this.changeDetectorRef.detectChanges();
-    }
+    const input = event.target as HTMLInputElement;
+    this.audioService.seekTo(parseFloat(input.value));
   }
 
-  Duration($event: Event, _t16: number) {
+
+
+  Duration(_event: Event, _t16: number) {
     throw new Error('Method not implemented.');
   }
 
-  updateTime($event: Event, _t16: number) {
+  updateTime(_event: Event, _t16: number) {
     throw new Error('Method not implemented.');
   }
 }
