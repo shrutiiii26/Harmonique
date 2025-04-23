@@ -6,58 +6,63 @@
         <span class="music-note" style="left: 70%; animation-delay: 3s;">♩</span>
         <span class="music-note" style="left: 90%; animation-delay: 4s;">♬</span>
         <span class="music-note" style="left: 20%; animation-delay: 5s;">♪</span>
-      </div>
+    </div>
+
+
+    <!-- Your existing music notes and container code -->
 
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="register-card text-center p-4">
-            <div class="boxes mb-3">
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-                <div class="box"></div>
-            </div>
-            <h2 class="text-white mb-2">Join the Band</h2>
-            <div class="d-flex justify-content-center mb-3">
-                <div class="wave-icon"></div>
-              </div>              
+            <!-- Your existing decorative elements -->
+
             <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
+                <!-- Success message -->
+                <div *ngIf="successMessage" class="alert alert-success mb-3">
+                    {{ successMessage }}
+                </div>
+
+                <!-- Error message -->
+                <div *ngIf="errorMessage" class="alert alert-danger mb-3">
+                    {{ errorMessage }}
+                </div>
+
+                <!-- Form fields (keep your existing fields) -->
                 <input type="text" class="form-control mb-2" placeholder="Full Name" formControlName="fullName">
-                <div *ngIf="registrationForm.get('fullName')?.invalid && registrationForm.get('fullName')?.touched"
-                    class="text-danger">
-                    Full Name is required and should be at least 3 characters long.
+                <div *ngIf="f['fullName'].touched && f['fullName'].errors" class="text-danger">
+                    <div *ngIf="f['fullName'].errors['required']">Full Name is required</div>
+                    <div *ngIf="f['fullName'].errors['minlength']">Minimum 3 characters required</div>
                 </div>
 
                 <input type="email" class="form-control mb-2" placeholder="Email" formControlName="email">
-                <div *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched"
-                    class="text-danger">
-                    A valid email is required.
+                <div *ngIf="f['email'].touched && f['email'].errors" class="text-danger">
+                    <div *ngIf="f['email'].errors['required']">Email is required</div>
+                    <div *ngIf="f['email'].errors['email']">Please enter a valid email</div>
                 </div>
 
                 <input type="password" class="form-control mb-2" placeholder="Create Password"
                     formControlName="password">
-                <div *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched"
-                    class="text-danger">
-                    Password is required and must be at least 6 characters.
+                <div *ngIf="f['password'].touched && f['password'].errors" class="text-danger">
+                    <div *ngIf="f['password'].errors['required']">Password is required</div>
+                    <div *ngIf="f['password'].errors['minlength']">Minimum 6 characters required</div>
                 </div>
 
                 <input type="password" class="form-control mb-3" placeholder="Confirm Password"
                     formControlName="confirmPassword">
-                <div *ngIf="registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched"
-                    class="text-danger">
-                    Confirm Password is required and must match the password.
+                <div *ngIf="f['confirmPassword'].touched && f['confirmPassword'].errors" class="text-danger">
+                    <div *ngIf="f['confirmPassword'].errors['required']">Please confirm your password</div>
+                    <div *ngIf="registrationForm.errors?.['mismatch'] && f['confirmPassword'].touched">
+                        Passwords don't match
+                    </div>
                 </div>
 
-                <a routerLink="/home" class="btn btn-primary w-100 gradient-btn"
-                    [class.disabled]="registrationForm.invalid" [attr.aria-disabled]="registrationForm.invalid"
-                    (click)="registrationForm.invalid && $event.preventDefault()">
-                    Register
-                </a>
-
+                <button type="submit" class="btn btn-primary w-100 gradient-btn"
+                    [disabled]="isLoading || registrationForm.invalid">
+                    <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status"
+                        aria-hidden="true"></span>
+                    {{ isLoading ? 'Registering...' : 'Register' }}
+                </button>
             </form>
+
             <p class="text-white mt-3">Already have an account? <a routerLink="/login" class="text-purple">Login</a></p>
         </div>
     </div>

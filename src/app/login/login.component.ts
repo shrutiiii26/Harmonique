@@ -5,19 +5,19 @@ import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service.ts.service'; // Update path if needed
 import { HttpErrorResponse } from '@angular/common/http';
-import { ServicesService } from '../../services.service'; // ✅ Import ServicesService
-// import { HttpClientModule } from '@angular/common/http';
-
+import { ServicesService } from '../../services.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [ReactiveFormsModule, CommonModule, RouterModule,],
+  imports: [ReactiveFormsModule, CommonModule, RouterModule],
   standalone: true,
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  isLoading = false;
+  errorMessage: string | null = null;
 
   constructor(
     private router: Router,
@@ -44,18 +44,39 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    if (this.loginForm.valid) {
-      this.servicesService.login(this.loginForm.value).subscribe(
-        (response: any) => {
-          this.authService.storeToken(response.token); // Store token using AuthService
-          this.router.navigate(['/home']);             // Navigate after successful login
-        },
-        (error: HttpErrorResponse) => {
-          console.error('Login failed:', error.message);
-          alert('Login failed: Invalid credentials or server error');
-        }
-      );
+    if (this.loginForm.invalid) {
+      Object.keys(this.loginForm.controls).forEach(key => {
+        this.loginForm.get(key)?.markAsTouched();
+      });
+      return;
     }
+
+    this.isLoading = true;
+    this.errorMessage = null;
+
+    this.servicesService.login(this.loginForm.value).subscribe({
+      next: (response: any) => {
+        console.log('Login successful', response);
+        this.authService.storeToken(response.token);
+
+        if (response.user) {
+          localStorage.setItem('userData', JSON.stringify(response.user));
+        }
+
+        this.isLoading = false;
+        this.router.navigate(['/home']);
+      },
+      error: (error: HttpErrorResponse) => {
+        this.isLoading = false;
+        console.error('Login failed:', error);
+        if (error.status === 401) {
+          this.errorMessage = 'Invalid credentials';
+        } else if (error.status >= 500) {
+          this.errorMessage = 'Server error: Please try again later';
+        } else {
+          this.errorMessage = error.error?.message || 'An unexpected error occurred';
+        }
+      }
+    });
   }
-  
 }

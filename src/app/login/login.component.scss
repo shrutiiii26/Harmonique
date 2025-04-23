@@ -21,13 +21,13 @@
 
     .btn-white {
         background-color: white;
-        color: black;
+        // color: black;
         border: 1px solid #ccc;
     }
 
     :host {
         display: block;
-        background-color: black;
+        // background-color: black;
         color: white;
         /* optional: to make text readable */
         height: 100vh;
@@ -35,15 +35,15 @@
     }
 
     ::placeholder {
-        color: gray;
+        // color: gray;
         opacity: 1;
         /* ensure it's not faded out */
     }
 
     /* Optional: consistent styling across browsers */
-    input.form-control::placeholder {
-        color: gray;
-    }
+    // input.form-control::placeholder {
+    //     // color: gray;
+    // }
 
     .login-container h2 {
         text-align: center;
@@ -53,14 +53,14 @@
     }
 
     .login-container .form-control {
-        background-color: #ffffff;
+        background-color: rgb(255, 255, 255);
         border: none;
-        color: #fff;
-        opacity: 10%;
+        color: #000000;
+        opacity: 100%;
     }
 
     .login-container .placeholder{
-        color: white;
+        color: rgb(0, 0, 0);
     }
 
     .login-container .btn {
@@ -70,7 +70,11 @@
         border: none;
         width: 340px;
     }
-
+    .login-container .form-control::placeholder {
+        color: rgb(0, 0, 0);
+        opacity: 1; /* Makes sure it’s not faded */
+      }
+      
     .login-container .btn:hover {
         opacity: 0.9;
     }

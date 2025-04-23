@@ -9,8 +9,13 @@ import { Observable } from 'rxjs';
 export class ServicesService {
   http = inject(HttpClient);
 
-  login(data: any): Observable<any> {
-    const url = environment.login;
+  login(data: any){
+    const url = environment.login + '/login';
+    return this.http.post<any>(url, data);
+  }
+
+  register(data: any){
+    const url = environment.register + '/register';
     return this.http.post<any>(url, data);
   }
 }

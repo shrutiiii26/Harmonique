@@ -1,24 +1,14 @@
 <div class="music-notes">
   <span class="music-note" style="left: 10%; animation-delay: 0s;">♬</span>
   <span class="music-note" style="left: 30%; animation-delay: 1s;">♪</span>
-  <span class="music-note" style="left: 50%; animation-delay: 2s;">♬</span>
   <span class="music-note" style="left: 70%; animation-delay: 3s;">♩</span>
   <span class="music-note" style="left: 90%; animation-delay: 4s;">♬</span>
   <span class="music-note" style="left: 20%; animation-delay: 5s;">♪</span>
 </div>
 
 <div class="login-wrapper">
-  <div class="login-container ">
+  <div class="login-container">
     <div class="text-center mb-3">
-      <!-- <div class="d-flex justify-content-center gap-2 mb-2">
-        <div class="bg-light rounded p-2" style="width: 15px; height: 50px;"></div>
-        <div class="bg-light rounded p-2" style="width: 15px; height: 50px;"></div>
-        <div class="bg-light rounded p-2" style="width: 15px; height: 50px;"></div>
-        <div class="bg-light rounded p-2" style="width: 15px; height: 50px;"></div>
-        <div class="bg-light rounded p-2" style="width: 15px; height: 50px;"></div>
-        <div class="bg-light rounded p-2" style="width: 15px; height: 50px;"></div>
-        <div class="bg-light rounded p-2" style="width: 15px; height: 50px;"></div>
-      </div> -->
       <h4>Music Login</h4>
       <div class="music-bars mt-3">
         <span></span><span></span><span></span><span></span><span></span>
@@ -27,7 +17,7 @@
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
-        <input type="email" class="form-control" placeholder="Email" formControlName="email" />
+        <input type="email" class="form-control white-placeholder" placeholder="Email" formControlName="email"/>
         <small class="text-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
           Please enter a valid email.
         </small>
@@ -40,18 +30,22 @@
         </small>
       </div>
 
-      <div class="d-grid">
-        <a class="btn btn-white text-white text-center w-100" [class.disabled]="loginForm.invalid"
-          [routerLink]="loginForm.valid ? '/home' : null">
-          Start Jamming
-        </a>
+      <!-- Error message display -->
+      <div *ngIf="errorMessage" class="alert alert-danger mb-3">
+        {{ errorMessage }}
       </div>
 
+      <div class="d-grid">
+        <button type="submit" class="btn btn-white text-white text-center w-100" 
+                [disabled]="isLoading">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+          {{ isLoading ? 'Logging in...' : 'Start Jamming' }}
+        </button>
+      </div>
     </form>
 
     <p class="text-white mt-3 text-center">
       New to the band? <a routerLink="/register" class="text-purple">Join now</a>
     </p>
-
   </div>
 </div>
