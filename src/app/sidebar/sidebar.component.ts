@@ -36,6 +36,7 @@ export class SidebarComponent {
     this.router.navigateByUrl('/liked-songs');
   }
 
+
   // Search-related properties
   searchVisible = false;
   searchQuery = ''; // Holds the search input value

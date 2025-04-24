@@ -4,7 +4,7 @@
     }
 
     .container-fluid {
-        background-color: #111828;
+        background: linear-gradient(to right, #af9ce3, #89d4cf);
         height: 110%;
     }
 
@@ -52,7 +52,7 @@
         left: -260px;
         width: 260px;
         height: 100vh;
-        background-color: #111828; // Dark blue background similar to the image
+        background: linear-gradient(to bottom, #b29fe2, #a6f4ee);// Dark blue background similar to the image
         color: #fff;
         transition: left 0.3s ease-in-out;
         z-index: 2000;
@@ -101,7 +101,7 @@
     }
 
     .container-fluid {
-        background-color: rgba(9, 18, 39, 1);
+              background: linear-gradient(to right, #af9ce3, #89d4cf);
         height: 110%;
     }
 
@@ -149,7 +149,7 @@
         left: -260px;
         width: 260px;
         height: 100vh;
-        background-color: #0b1022; // Dark blue background similar to the image
+        background: linear-gradient(to bottom, #b29fe2, #a6f4ee);
         color: #fff;
         transition: left 0.3s ease-in-out;
         z-index: 2000;

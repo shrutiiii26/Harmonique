@@ -33,6 +33,11 @@ export const routes: Routes = [
                     import('./home/liked-songs/liked-songs.component').then((c) => c.LikedSongsComponent),
             },
             {
+                path: 'about-us',
+                loadComponent: () =>
+                    import('./home/about-us/about-us.component').then((c) => c.AboutUsComponent),
+            },
+            {
                 path: 'playing-now',
                 loadComponent: () =>
                     import('./home/playing-now/playing-now.component').then((c) => c.PlayingNowComponent),

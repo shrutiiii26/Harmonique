@@ -1,680 +1,851 @@
 @media (min-width:1366px) and (max-width:1600px) {
     .background {
-        width: 100%;
-        height: 100vh;
-        background: #040613;
-        box-shadow: 0 0 50px rgba(74, 10, 121, 0.6);
+        background: linear-gradient(135deg, #6e45e2 0%, #89d4cf 100%);
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #fff;
 
+        .music-notes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .music-note {
+            position: absolute;
+            color: white;
+            font-size: 24px;
+            animation: floatNote 8s linear infinite;
+            bottom: -50px;
+            opacity: 0;
+
+            /* Individual note positioning */
+            &:nth-child(1) {
+                left: 10%;
+                animation-delay: 0s;
+            }
+
+            &:nth-child(2) {
+                left: 30%;
+                animation-delay: 1s;
+            }
+
+            &:nth-child(3) {
+                left: 70%;
+                animation-delay: 3s;
+            }
+
+            &:nth-child(4) {
+                left: 90%;
+                animation-delay: 4s;
+            }
+
+            &:nth-child(5) {
+                left: 20%;
+                animation-delay: 5s;
+            }
+        }
+    }
+
+    @keyframes floatNote {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            bottom: -50px;
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 0.8;
+        }
+        100% {
+            transform: translateY(-100vh) rotate(360deg);
+            bottom: 100%;
+            opacity: 0;
+        }
+    }
+    
+    .music-note {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 24px;
+        animation: floatNote 8s ease-in infinite;
+        bottom: -50px;
+        opacity: 0;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        
+        /* Individual note positioning with random animation durations */
+        &:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 7s; }
+        &:nth-child(2) { left: 30%; animation-delay: 1s; animation-duration: 9s; }
+        &:nth-child(3) { left: 70%; animation-delay: 3s; animation-duration: 8s; }
+        &:nth-child(4) { left: 90%; animation-delay: 4s; animation-duration: 6s; }
+        &:nth-child(5) { left: 20%; animation-delay: 5s; animation-duration: 10s; }
+        &:nth-child(6) { left: 50%; animation-delay: 2s; animation-duration: 8s; }
+        &:nth-child(7) { left: 80%; animation-delay: 6s; animation-duration: 7s; }
+        &:nth-child(8) { left: 40%; animation-delay: 7s; animation-duration: 9s; }
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
     }
 
     .register-card {
-        background-color: #040613;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
         border-radius: 20px;
-        box-shadow: 0 0 50px rgba(74, 10, 121, 0.6);
-        max-width: 450px;
         width: 100%;
+        max-width: 500px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 2.5rem;
+
+        h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .wave-icon {
+            width: 50px;
+            height: 10px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg"><path fill="white" d="M0,15 C30,30 60,0 90,15 C100,20 110,15 120,20 L120,30 L0,30 Z"></path></svg>') repeat-x;
+            background-size: auto 100%;
+            margin: 0 auto 1.5rem;
+        }
+
+        form {
+            .form-control {
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                color: white;
+                padding: 12px 15px;
+                border-radius: 8px;
+                margin-bottom: 1rem;
+                transition: all 0.3s ease;
+
+                &::placeholder {
+                    color: rgba(255, 255, 255, 0.7);
+                }
+
+                &:focus {
+                    background: rgba(255, 255, 255, 0.2);
+                    border-color: white;
+                    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+                }
+            }
+
+            .text-danger {
+                text-align: left;
+                font-size: 0.85rem;
+                margin-top: -0.5rem;
+                margin-bottom: 0.5rem;
+                color: #ffcccc;
+            }
+
+            .alert {
+                text-align: left;
+                background: rgba(0, 0, 0, 0.2);
+                border: none;
+            }
+
+            .gradient-btn {
+                background: linear-gradient(to right, #6e45e2, #89d4cf);
+                border: none;
+                padding: 12px;
+                font-weight: 600;
+                border-radius: 8px;
+                color: white;
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                }
+
+                &:disabled {
+                    background: #cccccc;
+                    transform: none;
+                    box-shadow: none;
+                    cursor: not-allowed;
+                }
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+                    transform: translateX(-100%);
+                    transition: transform 0.3s ease;
+                }
+
+                &:hover::after {
+                    transform: translateX(0);
+                }
+            }
+        }
+
+        .text-white {
+            color: white;
+            margin-top: 1.5rem;
+
+            .text-purple {
+                color: #865eff;
+                text-decoration: none;
+                font-weight: 600;
+                transition: color 0.3s ease;
+
+                &:hover {
+                    color: white;
+                    text-decoration: underline;
+                }
+            }
+        }
     }
 
-
-    .white-btn.disabled {
-        pointer-events: none;
-        opacity: 0.6;
-    }
-
-    .gradient-btn {
-        background: linear-gradient(to right, #a855f7, #3b82f6);
-        border: none;
-    }
-
-    .text-purple {
-        color: #a855f7;
-    }
-
+    /* Boxes decoration */
     .boxes {
         display: flex;
         justify-content: center;
-        gap: 5px;
-    }
+        gap: 8px;
+        margin-bottom: 2rem;
 
-    .box {
-        width: 15px;
-        height: 50px;
-        background-color: white;
-        border-radius: 5px;
-    }
+        .box {
+            width: 15px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            animation: pulse 1.5s infinite ease-in-out;
 
-    .wave-icon {
-        width: 40px;
-        height: 30px;
-        background: linear-gradient(to top, #a855f7 20%, transparent 20%),
-            linear-gradient(to top, #a855f7 40%, transparent 40%),
-            linear-gradient(to top, #a855f7 60%, transparent 60%);
-        background-size: 8px 100%;
-        background-repeat: no-repeat;
-        background-position: 0 0, 16px 0, 32px 0;
+            &:nth-child(1) {
+                animation-delay: 0s;
+            }
 
-    }
+            &:nth-child(2) {
+                animation-delay: 0.2s;
+            }
 
-    .music-note {
-        position: absolute;
-        color: white;
-        font-size: 24px;
-        animation: floatNote 6s ease-in-out infinite;
-    }
+            &:nth-child(3) {
+                animation-delay: 0.4s;
+            }
 
-    .music-notes {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
-        z-index: 0;
-        pointer-events: none;
-        /* This line fixes the glitch */
-    }
+            &:nth-child(4) {
+                animation-delay: 0.6s;
+            }
 
+            &:nth-child(5) {
+                animation-delay: 0.8s;
+            }
 
-    @keyframes floatNote {
-        0% {
-            transform: translateY(100vh) rotate(0deg);
-            opacity: 0;
-        }
+            &:nth-child(6) {
+                animation-delay: 1s;
+            }
 
-        50% {
-            opacity: 1;
-        }
+            &:nth-child(7) {
+                animation-delay: 1.2s;
+            }
 
-        100% {
-            transform: translateY(-10vh) rotate(360deg);
-            opacity: 0;
+            &:nth-child(8) {
+                animation-delay: 1.4s;
+            }
         }
     }
 
-    .music-bars span {
-        width: 10px;
-        height: 20px;
-        margin: 0 2px;
-        background: linear-gradient(to top, #a020f0, #00bcd4);
-        animation: bounce 1s infinite ease-in-out;
-        display: inline-block;
-        border-radius: 5px;
-    }
 
-    .music-bars span:nth-child(2) {
-        animation-delay: 0.1s;
-    }
-
-    .music-bars span:nth-child(3) {
-        animation-delay: 0.2s;
-    }
-
-    .music-bars span:nth-child(4) {
-        animation-delay: 0.3s;
-    }
-
-    .music-bars span:nth-child(5) {
-        animation-delay: 0.4s;
-    }
-
-    .music-bars span {
-        width: 10px;
-        height: 20px;
-        margin: 0 2px;
-        background: linear-gradient(to top, #a020f0, #00bcd4);
-        animation: bounce 1s infinite ease-in-out;
-        display: inline-block;
-        border-radius: 5px;
-    }
-
-    .music-bars span:nth-child(2) {
-        animation-delay: 0.1s;
-    }
-
-    .music-bars span:nth-child(3) {
-        animation-delay: 0.2s;
-    }
-
-    .music-bars span:nth-child(4) {
-        animation-delay: 0.3s;
-    }
-
-    .music-bars span:nth-child(5) {
-        animation-delay: 0.4s;
-    }
-
-    @keyframes bounce {
+    /* Animations */
+    @keyframes float {
 
         0%,
         100% {
-            transform: scaleY(1);
+            transform: translateY(0) rotate(0deg);
         }
 
         50% {
-            transform: scaleY(2);
+            transform: translateY(-20px) rotate(5deg);
         }
     }
 
-    @keyframes floatNote {
-        0% {
-            transform: translateY(0) rotate(0deg);
-            opacity: 1;
-        }
-
-        50% {
-            transform: translateY(-30px) rotate(10deg);
-            opacity: 0.6;
-        }
-
-        100% {
-            transform: translateY(0) rotate(0deg);
-            opacity: 1;
-        }
-    }
-
-
-
-    .login-wrapper {
-        background-color: black;
-        color: white;
-        min-height: 100vh;
-        padding: 20px;
-    }
-
-
-    .login-container {
-        background: #111;
-        border-radius: 20px;
-        padding: 40px 30px;
-        max-width: 400px;
-        margin: 80px auto;
-        box-shadow: 0 0 30px rgba(123, 31, 162, 0.6);
-        position: relative;
-        z-index: 2;
-    }
-
-    .btn-white {
-        background-color: white;
-        color: black;
-        border: 1px solid #ccc;
-    }
-
-    :host {
-        display: block;
-        background-color: black;
-        color: white;
-        /* optional: to make text readable */
-        height: 100vh;
-        /* full viewport height */
-    }
-
-    ::placeholder {
-        color: gray;
-        opacity: 1;
-        /* ensure it's not faded out */
-    }
-
-    /* Optional: consistent styling across browsers */
-    input.form-control::placeholder {
-        color: gray;
-    }
-
-    .login-container h2 {
-        text-align: center;
-        color: #fff;
-        font-weight: bold;
-        text-shadow: 0 0 10px #9c27b0;
-    }
-
-    .login-container .form-control {
-        background-color: #222;
-        border: none;
-        color: #fff;
-    }
-
-    .login-container .btn {
-        background: linear-gradient(to right, #a020f0, #4169e1);
-        color: white;
-        font-weight: bold;
-        border: none;
-        width: 340px;
-    }
-
-    .login-container .btn:hover {
-        opacity: 0.9;
-    }
-
-    .register-link {
-        text-align: center;
-        margin-top: 15px;
-        font-size: 14px;
-    }
-
-    .register-link a {
-        color: #c084fc;
-        text-decoration: none;
-
-    }
-
-    .music-bars {
-        display: flex;
-        justify-content: center;
-        margin: 10px 0;
-        margin-bottom: 30px;
-    }
-
-    .music-bars span {
-        width: 10px;
-        height: 20px;
-        margin: 0 2px;
-        background: linear-gradient(to top, #a020f0, #00bcd4);
-        animation: bounce 1s infinite ease-in-out;
-        display: inline-block;
-        border-radius: 5px;
-    }
-
-    .music-bars span:nth-child(2) {
-        animation-delay: 0.1s;
-    }
-
-    .music-bars span:nth-child(3) {
-        animation-delay: 0.2s;
-    }
-
-    .music-bars span:nth-child(4) {
-        animation-delay: 0.3s;
-    }
-
-    .music-bars span:nth-child(5) {
-        animation-delay: 0.4s;
-    }
-
-    @keyframes bounce {
+    @keyframes pulse {
 
         0%,
         100% {
-            transform: scaleY(1);
+            transform: scale(1);
+            opacity: 0.7;
         }
 
         50% {
-            transform: scaleY(2);
-        }
-    }
-
-
-    .music-note {
-        position: absolute;
-        color: white;
-        font-size: 24px;
-        animation: floatNote 6s ease-in-out infinite;
-    }
-
-    .music-notes {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
-        z-index: 0;
-        pointer-events: none;
-        /* This line fixes the glitch */
-    }
-
-
-    @keyframes floatNote {
-        0% {
-            transform: translateY(100vh) rotate(0deg);
-            opacity: 0;
-        }
-
-        50% {
+            transform: scale(1.2);
             opacity: 1;
         }
 
-        100% {
-            transform: translateY(-10vh) rotate(360deg);
-            opacity: 0;
-        }
+
     }
+
 }
 
 
-@media (min-width:1024px) and (max-width:1366px) {
+@media (min-width: 1024px) and (max-width:1366px) {
     .background {
-        width: 100%;
-        height: 100vh;
-        background-color: black;
+        background: linear-gradient(135deg, #6e45e2 0%, #89d4cf 100%);
+        min-height: 100vh;
+        position: relative;
+        overflow: hidden;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #fff;
+
+        .music-notes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .music-note {
+            position: absolute;
+            color: white;
+            font-size: 24px;
+            animation: floatNote 8s linear infinite;
+            bottom: -50px;
+            opacity: 0;
+
+            /* Individual note positioning */
+            &:nth-child(1) {
+                left: 10%;
+                animation-delay: 0s;
+            }
+
+            &:nth-child(2) {
+                left: 30%;
+                animation-delay: 1s;
+            }
+
+            &:nth-child(3) {
+                left: 70%;
+                animation-delay: 3s;
+            }
+
+            &:nth-child(4) {
+                left: 90%;
+                animation-delay: 4s;
+            }
+
+            &:nth-child(5) {
+                left: 20%;
+                animation-delay: 5s;
+            }
+        }
+    }
+
+    @keyframes floatNote {
+        0% {
+            transform: translateY(0) rotate(0deg);
+            bottom: -50px;
+            opacity: 0;
+        }
+        10% {
+            opacity: 1;
+        }
+        90% {
+            opacity: 0.8;
+        }
+        100% {
+            transform: translateY(-100vh) rotate(360deg);
+            bottom: 100%;
+            opacity: 0;
+        }
+    }
+    
+    .music-note {
+        position: absolute;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 24px;
+        animation: floatNote 8s ease-in infinite;
+        bottom: -50px;
+        opacity: 0;
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        
+        /* Individual note positioning with random animation durations */
+        &:nth-child(1) { left: 10%; animation-delay: 0s; animation-duration: 7s; }
+        &:nth-child(2) { left: 30%; animation-delay: 1s; animation-duration: 9s; }
+        &:nth-child(3) { left: 70%; animation-delay: 3s; animation-duration: 8s; }
+        &:nth-child(4) { left: 90%; animation-delay: 4s; animation-duration: 6s; }
+        &:nth-child(5) { left: 20%; animation-delay: 5s; animation-duration: 10s; }
+        &:nth-child(6) { left: 50%; animation-delay: 2s; animation-duration: 8s; }
+        &:nth-child(7) { left: 80%; animation-delay: 6s; animation-duration: 7s; }
+        &:nth-child(8) { left: 40%; animation-delay: 7s; animation-duration: 9s; }
+    }
+
+    .container {
+        position: relative;
+        z-index: 1;
     }
 
     .register-card {
-        background: rgba(0, 0, 0, 0.85);
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
         border-radius: 20px;
-        box-shadow: 0 0 30px rgba(123, 31, 162, 0.6);
-        max-width: 450px;
         width: 100%;
+        max-width: 500px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        padding: 2.5rem;
+
+        h2 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .wave-icon {
+            width: 50px;
+            height: 10px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 120 30" xmlns="http://www.w3.org/2000/svg"><path fill="white" d="M0,15 C30,30 60,0 90,15 C100,20 110,15 120,20 L120,30 L0,30 Z"></path></svg>') repeat-x;
+            background-size: auto 100%;
+            margin: 0 auto 1.5rem;
+        }
+
+        form {
+            .form-control {
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                color: white;
+                padding: 12px 15px;
+                border-radius: 8px;
+                margin-bottom: 1rem;
+                transition: all 0.3s ease;
+
+                &::placeholder {
+                    color: rgba(255, 255, 255, 0.7);
+                }
+
+                &:focus {
+                    background: rgba(255, 255, 255, 0.2);
+                    border-color: white;
+                    box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.25);
+                }
+            }
+
+            .text-danger {
+                text-align: left;
+                font-size: 0.85rem;
+                margin-top: -0.5rem;
+                margin-bottom: 0.5rem;
+                color: #ffcccc;
+            }
+
+            .alert {
+                text-align: left;
+                background: rgba(0, 0, 0, 0.2);
+                border: none;
+            }
+
+            .gradient-btn {
+                background: linear-gradient(to right, #6e45e2, #89d4cf);
+                border: none;
+                padding: 12px;
+                font-weight: 600;
+                border-radius: 8px;
+                color: white;
+                transition: all 0.3s ease;
+                position: relative;
+                overflow: hidden;
+
+                &:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+                }
+
+                &:disabled {
+                    background: #cccccc;
+                    transform: none;
+                    box-shadow: none;
+                    cursor: not-allowed;
+                }
+
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: linear-gradient(to right, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+                    transform: translateX(-100%);
+                    transition: transform 0.3s ease;
+                }
+
+                &:hover::after {
+                    transform: translateX(0);
+                }
+            }
+        }
+
+        .text-white {
+            color: white;
+            margin-top: 1.5rem;
+
+            .text-purple {
+                color: #b399ff;
+                text-decoration: none;
+                font-weight: 600;
+                transition: color 0.3s ease;
+
+                &:hover {
+                    color: white;
+                    text-decoration: underline;
+                }
+            }
+        }
     }
 
-
-    .white-btn.disabled {
-        pointer-events: none;
-        opacity: 0.6;
-    }
-
-    .gradient-btn {
-        background: linear-gradient(to right, #a855f7, #3b82f6);
-        border: none;
-    }
-
-    .text-purple {
-        color: #a855f7;
-    }
-
+    /* Boxes decoration */
     .boxes {
         display: flex;
         justify-content: center;
-        gap: 5px;
-    }
+        gap: 8px;
+        margin-bottom: 2rem;
 
-    .box {
-        width: 15px;
-        height: 50px;
-        background-color: white;
-        border-radius: 5px;
-    }
+        .box {
+            width: 15px;
+            height: 15px;
+            background: rgba(255, 255, 255, 0.7);
+            animation: pulse 1.5s infinite ease-in-out;
 
-    .wave-icon {
-        width: 40px;
-        height: 30px;
-        background: linear-gradient(to top, #a855f7 20%, transparent 20%),
-            linear-gradient(to top, #a855f7 40%, transparent 40%),
-            linear-gradient(to top, #a855f7 60%, transparent 60%);
-        background-size: 8px 100%;
-        background-repeat: no-repeat;
-        background-position: 0 0, 16px 0, 32px 0;
+            &:nth-child(1) {
+                animation-delay: 0s;
+            }
 
-    }
+            &:nth-child(2) {
+                animation-delay: 0.2s;
+            }
 
-    .music-note {
-        position: absolute;
-        color: white;
-        font-size: 24px;
-        animation: floatNote 6s ease-in-out infinite;
-    }
+            &:nth-child(3) {
+                animation-delay: 0.4s;
+            }
 
-    .music-notes {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
-        z-index: 0;
-        pointer-events: none;
-        /* This line fixes the glitch */
-    }
+            &:nth-child(4) {
+                animation-delay: 0.6s;
+            }
 
+            &:nth-child(5) {
+                animation-delay: 0.8s;
+            }
 
-    @keyframes floatNote {
-        0% {
-            transform: translateY(100vh) rotate(0deg);
-            opacity: 0;
-        }
+            &:nth-child(6) {
+                animation-delay: 1s;
+            }
 
-        50% {
-            opacity: 1;
-        }
+            &:nth-child(7) {
+                animation-delay: 1.2s;
+            }
 
-        100% {
-            transform: translateY(-10vh) rotate(360deg);
-            opacity: 0;
+            &:nth-child(8) {
+                animation-delay: 1.4s;
+            }
         }
     }
 
-    .music-bars span {
-        width: 10px;
-        height: 20px;
-        margin: 0 2px;
-        background: linear-gradient(to top, #a020f0, #00bcd4);
-        animation: bounce 1s infinite ease-in-out;
-        display: inline-block;
-        border-radius: 5px;
-    }
 
-    .music-bars span:nth-child(2) {
-        animation-delay: 0.1s;
-    }
-
-    .music-bars span:nth-child(3) {
-        animation-delay: 0.2s;
-    }
-
-    .music-bars span:nth-child(4) {
-        animation-delay: 0.3s;
-    }
-
-    .music-bars span:nth-child(5) {
-        animation-delay: 0.4s;
-    }
-
-    .music-bars span {
-        width: 10px;
-        height: 20px;
-        margin: 0 2px;
-        background: linear-gradient(to top, #a020f0, #00bcd4);
-        animation: bounce 1s infinite ease-in-out;
-        display: inline-block;
-        border-radius: 5px;
-    }
-
-    .music-bars span:nth-child(2) {
-        animation-delay: 0.1s;
-    }
-
-    .music-bars span:nth-child(3) {
-        animation-delay: 0.2s;
-    }
-
-    .music-bars span:nth-child(4) {
-        animation-delay: 0.3s;
-    }
-
-    .music-bars span:nth-child(5) {
-        animation-delay: 0.4s;
-    }
-
-    @keyframes bounce {
+    /* Animations */
+    @keyframes float {
 
         0%,
         100% {
-            transform: scaleY(1);
+            transform: translateY(0) rotate(0deg);
         }
 
         50% {
-            transform: scaleY(2);
+            transform: translateY(-20px) rotate(5deg);
         }
     }
 
-    @keyframes floatNote {
-        0% {
-            transform: translateY(0) rotate(0deg);
-            opacity: 1;
-        }
-
-        50% {
-            transform: translateY(-30px) rotate(10deg);
-            opacity: 0.6;
-        }
-
-        100% {
-            transform: translateY(0) rotate(0deg);
-            opacity: 1;
-        }
-    }
-
-
-
-    .login-wrapper {
-        background-color: black;
-        color: white;
-        min-height: 100vh;
-        padding: 20px;
-    }
-
-
-    .login-container {
-        background: #111;
-        border-radius: 20px;
-        padding: 40px 30px;
-        max-width: 400px;
-        margin: 80px auto;
-        box-shadow: 0 0 30px rgba(123, 31, 162, 0.6);
-        position: relative;
-        z-index: 2;
-    }
-
-    .btn-white {
-        background-color: white;
-        color: black;
-        border: 1px solid #ccc;
-    }
-
-    :host {
-        display: block;
-        background-color: black;
-        color: white;
-        /* optional: to make text readable */
-        height: 100vh;
-        /* full viewport height */
-    }
-
-    ::placeholder {
-        color: gray;
-        opacity: 1;
-        /* ensure it's not faded out */
-    }
-
-    /* Optional: consistent styling across browsers */
-    input.form-control::placeholder {
-        color: gray;
-    }
-
-    .login-container h2 {
-        text-align: center;
-        color: #fff;
-        font-weight: bold;
-        text-shadow: 0 0 10px #9c27b0;
-    }
-
-    .login-container .form-control {
-        background-color: #222;
-        border: none;
-        color: #fff;
-    }
-
-    .login-container .btn {
-        background: linear-gradient(to right, #a020f0, #4169e1);
-        color: white;
-        font-weight: bold;
-        border: none;
-        width: 340px;
-    }
-
-    .login-container .btn:hover {
-        opacity: 0.9;
-    }
-
-    .register-link {
-        text-align: center;
-        margin-top: 15px;
-        font-size: 14px;
-    }
-
-    .register-link a {
-        color: #c084fc;
-        text-decoration: none;
-
-    }
-
-    .music-bars {
-        display: flex;
-        justify-content: center;
-        margin: 10px 0;
-        margin-bottom: 30px;
-    }
-
-    .music-bars span {
-        width: 10px;
-        height: 20px;
-        margin: 0 2px;
-        background: linear-gradient(to top, #a020f0, #00bcd4);
-        animation: bounce 1s infinite ease-in-out;
-        display: inline-block;
-        border-radius: 5px;
-    }
-
-    .music-bars span:nth-child(2) {
-        animation-delay: 0.1s;
-    }
-
-    .music-bars span:nth-child(3) {
-        animation-delay: 0.2s;
-    }
-
-    .music-bars span:nth-child(4) {
-        animation-delay: 0.3s;
-    }
-
-    .music-bars span:nth-child(5) {
-        animation-delay: 0.4s;
-    }
-
-    @keyframes bounce {
+    @keyframes pulse {
 
         0%,
         100% {
-            transform: scaleY(1);
+            transform: scale(1);
+            opacity: 0.7;
         }
 
         50% {
-            transform: scaleY(2);
-        }
-    }
-
-
-    .music-note {
-        position: absolute;
-        color: white;
-        font-size: 24px;
-        animation: floatNote 6s ease-in-out infinite;
-    }
-
-    .music-notes {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
-        z-index: 0;
-        pointer-events: none;
-        /* This line fixes the glitch */
-    }
-
-
-    @keyframes floatNote {
-        0% {
-            transform: translateY(100vh) rotate(0deg);
-            opacity: 0;
-        }
-
-        50% {
+            transform: scale(1.2);
             opacity: 1;
         }
 
-        100% {
-            transform: translateY(-10vh) rotate(360deg);
-            opacity: 0;
-        }
+
     }
+
 }
+
+
+
+
+// /* Base Styles */
+// .background {
+//     width: 100%;
+//     min-height: 100vh;
+//     background-color: black;
+//     position: relative;
+//     overflow: hidden;
+//     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+//   }
+
+//   /* Music Notes Animation */
+//   .music-notes {
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100vh;
+//     overflow: hidden;
+//     z-index: 0;
+//     pointer-events: none;
+//   }
+
+//   .music-note {
+//     position: absolute;
+//     color: white;
+//     font-size: 24px;
+//     animation: floatNote 8s linear infinite;
+//     bottom: -50px;
+//     opacity: 0;
+
+//     /* Individual note positioning */
+//     &:nth-child(1) { left: 10%; animation-delay: 0s; }
+//     &:nth-child(2) { left: 30%; animation-delay: 1s; }
+//     &:nth-child(3) { left: 70%; animation-delay: 3s; }
+//     &:nth-child(4) { left: 90%; animation-delay: 4s; }
+//     &:nth-child(5) { left: 20%; animation-delay: 5s; }
+//   }
+
+//   @keyframes floatNote {
+//     0% {
+//       transform: translateY(0) rotate(0deg);
+//       opacity: 0;
+//     }
+//     10% {
+//       opacity: 0.8;
+//     }
+//     50% {
+//       opacity: 1;
+//     }
+//     90% {
+//       opacity: 0.8;
+//     }
+//     100% {
+//       transform: translateY(-110vh) rotate(360deg);
+//       opacity: 0;
+//     }
+//   }
+
+//   /* Registration Card */
+//   .register-card {
+//     background: rgba(0, 0, 0, 0.85);
+//     border-radius: 20px;
+//     box-shadow: 0 0 30px rgba(123, 31, 162, 0.6);
+//     max-width: 450px;
+//     width: 100%;
+//     padding: 2.5rem;
+//     position: relative;
+//     z-index: 2;
+
+//     h2 {
+//       color: white;
+//       text-align: center;
+//       margin-bottom: 1.5rem;
+//       font-weight: 600;
+//       text-shadow: 0 0 10px rgba(156, 39, 176, 0.8);
+//     }
+//   }
+
+//   /* Form Elements */
+//   .form-control {
+//     background-color: #222;
+//     border: none;
+//     color: white;
+//     padding: 12px 15px;
+//     border-radius: 8px;
+//     margin-bottom: 1rem;
+//     width: 100%;
+
+//     &::placeholder {
+//       color: #888;
+//       opacity: 1;
+//     }
+
+//     &:focus {
+//       box-shadow: 0 0 0 0.25rem rgba(160, 32, 240, 0.25);
+//       outline: none;
+//     }
+//   }
+
+//   .text-danger {
+//     color: #ff6b6b;
+//     font-size: 0.85rem;
+//     margin-top: -0.5rem;
+//     margin-bottom: 0.5rem;
+//     display: block;
+//     text-align: left;
+//   }
+
+//   /* Buttons */
+//   .gradient-btn {
+//     background: linear-gradient(to right, #a855f7, #3b82f6);
+//     border: none;
+//     color: white;
+//     padding: 12px;
+//     font-weight: 600;
+//     border-radius: 8px;
+//     width: 100%;
+//     transition: all 0.3s ease;
+
+//     &:hover {
+//       opacity: 0.9;
+//       transform: translateY(-2px);
+//     }
+
+//     &:disabled {
+//       background: #666;
+//       opacity: 0.6;
+//       transform: none;
+//       cursor: not-allowed;
+//     }
+//   }
+
+//   /* Decorative Elements */
+//   .boxes {
+//     display: flex;
+//     justify-content: center;
+//     gap: 5px;
+//     margin-bottom: 2rem;
+
+//     .box {
+//       width: 15px;
+//       height: 50px;
+//       background-color: white;
+//       border-radius: 5px;
+//       animation: pulse 1.5s infinite ease-in-out;
+
+//       @for $i from 1 through 8 {
+//         &:nth-child(#{$i}) {
+//           animation-delay: $i * 0.1s;
+//         }
+//       }
+//     }
+//   }
+
+//   .wave-icon {
+//     width: 40px;
+//     height: 30px;
+//     background: linear-gradient(to top, #a855f7 20%, transparent 20%),
+//                 linear-gradient(to top, #a855f7 40%, transparent 40%),
+//                 linear-gradient(to top, #a855f7 60%, transparent 60%);
+//     background-size: 8px 100%;
+//     background-repeat: no-repeat;
+//     background-position: 0 0, 16px 0, 32px 0;
+//     margin: 0 auto 1.5rem;
+//   }
+
+//   /* Music Bars Animation */
+//   .music-bars {
+//     display: flex;
+//     justify-content: center;
+//     margin: 20px 0;
+
+//     span {
+//       width: 10px;
+//       height: 20px;
+//       margin: 0 2px;
+//       background: linear-gradient(to top, #a020f0, #00bcd4);
+//       animation: bounce 1s infinite ease-in-out;
+//       display: inline-block;
+//       border-radius: 5px;
+
+//       @for $i from 1 through 5 {
+//         &:nth-child(#{$i}) {
+//           animation-delay: $i * 0.1s;
+//         }
+//       }
+//     }
+//   }
+
+//   /* Animations */
+//   @keyframes pulse {
+//     0%, 100% {
+//       transform: scaleY(1);
+//       opacity: 0.7;
+//     }
+//     50% {
+//       transform: scaleY(1.2);
+//       opacity: 1;
+//     }
+//   }
+
+//   @keyframes bounce {
+//     0%, 100% {
+//       transform: scaleY(1);
+//     }
+//     50% {
+//       transform: scaleY(2);
+//     }
+//   }
+
+//   /* Text/Links */
+//   .text-white {
+//     color: white;
+//     margin-top: 1.5rem;
+//     text-align: center;
+
+//     .text-purple {
+//       color: #c084fc;
+//       text-decoration: none;
+//       font-weight: 600;
+//       transition: color 0.3s ease;
+
+//       &:hover {
+//         color: #a855f7;
+//         text-decoration: underline;
+//       }
+//     }
+//   }
+
+//   /* Alerts */
+//   .alert {
+//     padding: 0.75rem 1.25rem;
+//     border-radius: 8px;
+//     margin-bottom: 1rem;
+//     text-align: left;
+
+//     &-success {
+//       background-color: rgba(40, 167, 69, 0.2);
+//       border: 1px solid rgba(40, 167, 69, 0.3);
+//       color: #28a745;
+//     }
+
+//     &-danger {
+//       background-color: rgba(220, 53, 69, 0.2);
+//       border: 1px solid rgba(220, 53, 69, 0.3);
+//       color: #dc3545;
+//     }
+//   }
+
+//   /* Loading Spinner */
+//   .spinner-border {
+//     vertical-align: text-top;
+//   }

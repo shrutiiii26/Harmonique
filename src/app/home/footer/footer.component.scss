@@ -15,9 +15,9 @@
 }
 
 .bottom-player {
-    background-color: #111828;
+    background: linear-gradient(to bottom, #af9ce3, #89d4cf);
     height: 90px;
-    border-top: 1px solid #222;
+    // border-top: 1px solid #222;
     color: white;
 
     .cover-img {
