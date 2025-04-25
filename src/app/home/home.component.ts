@@ -34,7 +34,6 @@ export class HomeComponent {
     'assets/Mask Group.png'
   ];
   
-
   recommendedSongs: any[] = [
     { title: 'Believer', artist: 'Imagine Dragons' },
     { title: 'Monsters Go Bump', artist: 'Erika Recinos' },
@@ -54,6 +53,20 @@ export class HomeComponent {
     });
   }
 
+  ngOnInit(): void {
+    // Subscribe to the songs observable to keep the local importedSongs array in sync
+    this.audioService.songs$.subscribe(songs => {
+      this.importedSongs = songs;
+      this.changeDetectorRef.detectChanges();
+    });
+    
+    // Subscribe to current song index updates
+    this.audioService.currentSongIndex$.subscribe(index => {
+      this.currentSongIndex = index;
+      this.changeDetectorRef.detectChanges();
+    });
+  }
+
   getRandomImage(): string {
     const index = Math.floor(Math.random() * this.availableImages.length);
     return this.availableImages[index];
@@ -61,15 +74,30 @@ export class HomeComponent {
 
   loadFiles(event: any): void {
     const files: FileList = event.target.files;
-    this.importedSongs = [];
-
+  
+    // Get current songs from service
+    const newSongs = [...this.audioService.songs];
+  
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
+  
+      // Check if the file is an audio file
+      if (!file.type.startsWith('audio/')) {
+        console.warn(`File ${file.name} is not an audio file. Skipping.`);
+        continue;
+      }
+  
       const url = URL.createObjectURL(file);
       const audio = new Audio(url);
-
+  
+      // Check if the song is already in the list by its src
+      if (newSongs.some(song => song.src === url)) {
+        console.warn(`Song ${file.name} already imported. Skipping.`);
+        continue; // Skip if the song is already in the list
+      }
+  
       const songObj = {
-        name: file.name,
+        name: file.name.replace(/\.[^/.]+$/, ""), // Remove file extension
         src: url,
         audio: audio,
         isPlaying: false,
@@ -78,50 +106,58 @@ export class HomeComponent {
         artist: 'Unknown Artist',
         image: this.getRandomImage()
       };
-
+  
       audio.addEventListener('loadedmetadata', () => {
         songObj.duration = audio.duration;
+        this.changeDetectorRef.detectChanges();
       });
-
+  
       audio.addEventListener('timeupdate', () => {
         songObj.currentTime = audio.currentTime;
+        this.changeDetectorRef.detectChanges();
       });
-
-      this.importedSongs.push(songObj);
-    }
-  }
-
-  togglePlay(index: number | null): void {
-    if ((index === null || index === -1) && this.importedSongs.length > 0) {
-      index = 0;
-    }
-
-    if (index === null || !this.importedSongs[index]) return;
-
-    const currentSong = this.importedSongs[index];
-    this.currentSongIndex = index;
-
-    if (currentSong.audio.paused) {
-      this.importedSongs.forEach((song, i) => {
-        if (i !== index && song.audio) {
-          song.audio.pause();
-          song.isPlaying = false;
+  
+      // Add error handler for audio loading failures
+      audio.addEventListener('error', () => {
+        console.error(`Error loading audio file: ${file.name}`);
+        // Find and remove this song if it was already added
+        const index = newSongs.indexOf(songObj);
+        if (index !== -1) {
+          newSongs.splice(index, 1);
+          this.audioService.setSongs(newSongs);
         }
       });
-      currentSong.audio.play();
-      currentSong.isPlaying = true;
-    } else {
-      currentSong.audio.pause();
-      currentSong.isPlaying = false;
+  
+      // Add the new song to the list
+      newSongs.push(songObj);
     }
+  
+    // Update service with all songs (existing + new)
+    this.audioService.setSongs(newSongs);
+  
+    // Reset file input to allow selecting the same file again if needed
+    event.target.value = '';
+  }
+  
+  togglePlay(index: number): void {
+    // Use the audio service to control playback
+    this.audioService.togglePlay(index);
   }
 
   get currentTime(): string {
-    return this.audioService.getCurrentTimeFormatted();
+    if (this.currentSongIndex >= 0 && this.currentSongIndex < this.importedSongs.length) {
+      const currentSong = this.importedSongs[this.currentSongIndex];
+      return this.formatTime(currentSong.currentTime);
+    }
+    return '0:00';
   }
 
   get duration(): string {
-    return this.audioService.getDurationFormatted();
+    if (this.currentSongIndex >= 0 && this.currentSongIndex < this.importedSongs.length) {
+      const currentSong = this.importedSongs[this.currentSongIndex];
+      return this.formatTime(currentSong.duration);
+    }
+    return '0:00';
   }
 
   private formatTime(sec: number): string {
@@ -141,13 +177,12 @@ export class HomeComponent {
     this.audioService.seekTo(parseFloat(input.value));
   }
 
-
-
+  // These methods are not implemented but kept to maintain compatibility
   Duration(_event: Event, _t16: number) {
-    throw new Error('Method not implemented.');
+    // Implementation not needed as we're using the service now
   }
 
   updateTime(_event: Event, _t16: number) {
-    throw new Error('Method not implemented.');
+    // Implementation not needed as we're using the service now
   }
 }

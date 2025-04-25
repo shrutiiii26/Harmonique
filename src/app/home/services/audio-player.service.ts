@@ -1,135 +1,146 @@
+// audio-player.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-
-export interface Song {
-  name: string;
-  src: string;
-  audio: HTMLAudioElement;
-  isPlaying: boolean;
-  currentTime: number;
-  duration: number;
-  artist: string;
-  image: string;
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AudioPlayerService {
-  private songs: Song[] = [];
-  private currentIndex: number = -1;
+  private _songs = new BehaviorSubject<any[]>([]);
+  private _currentSongIndex = new BehaviorSubject<number>(-1);
+  private _isPlaying = new BehaviorSubject<boolean>(false);
 
-  private songsSubject = new BehaviorSubject<Song[]>([]);
-  private currentSongSubject = new BehaviorSubject<Song | null>(null);
+  // Public observables
+  songs$ = this._songs.asObservable();
+  currentSongIndex$ = this._currentSongIndex.asObservable();
+  isPlaying$ = this._isPlaying.asObservable();
 
-  songs$ = this.songsSubject.asObservable();
-  currentSong$ = this.currentSongSubject.asObservable();
-
-  loadFiles(files: FileList, randomImageCallback: () => string): void {
-    this.songs = [];
-
-    Array.from(files).forEach((file) => {
-      const url = URL.createObjectURL(file);
-      const audio = new Audio(url);
-
-      const song: Song = {
-        name: file.name,
-        src: url,
-        audio: audio,
-        isPlaying: false,
-        currentTime: 0,
-        duration: 0,
-        artist: 'Unknown Artist',
-        image: randomImageCallback()
-      };
-
-      audio.addEventListener('loadedmetadata', () => {
-        song.duration = audio.duration;
-      });
-
-      audio.addEventListener('timeupdate', () => {
-        song.currentTime = audio.currentTime;
-      });
-
-      this.songs.push(song);
-    });
-
-    this.songsSubject.next(this.songs);
-  }
-
-  togglePlay(index: number | null = null): void {
-    if ((index === null || index === -1) && this.songs.length > 0) {
-      index = 0;
-    }
-
-    if (index === null || !this.songs[index]) return;
-
-    const selected = this.songs[index];
-    this.currentIndex = index;
-
-    this.songs.forEach((song, i) => {
-      if (i !== index && song.audio) {
-        song.audio.pause();
-        song.isPlaying = false;
-      }
-    });
-
-    if (selected.audio.paused) {
-      selected.audio.play();
-      selected.isPlaying = true;
-    } else {
-      selected.audio.pause();
-      selected.isPlaying = false;
-    }
-
-    this.songsSubject.next(this.songs);
-    this.currentSongSubject.next(selected);
-  }
-
-  nextSong(): void {
-    if (this.songs.length === 0) return;
-    let nextIndex = (this.currentIndex + 1) % this.songs.length;
-    this.togglePlay(nextIndex);
-  }
-
-  previousSong(): void {
-    if (this.songs.length === 0) return;
-    let prevIndex = (this.currentIndex - 1 + this.songs.length) % this.songs.length;
-    this.togglePlay(prevIndex);
-  }
-
-  seekTo(time: number): void {
-    const currentSong = this.songs[this.currentIndex];
-    if (!currentSong) return;
-
-    currentSong.audio.currentTime = time;
-    currentSong.currentTime = time;
-
-    this.songsSubject.next(this.songs);
-    this.currentSongSubject.next(currentSong);
-  }
-
-  getCurrentTimeFormatted(): string {
-    const song = this.songs[this.currentIndex];
-    return song ? this.formatTime(song.currentTime) : '0:00';
-  }
-
-  getDurationFormatted(): string {
-    const song = this.songs[this.currentIndex];
-    return song ? this.formatTime(song.duration) : '0:00';
-  }
-
-  private formatTime(seconds: number): string {
-    const mins = Math.floor(seconds / 60);
-    const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
-    return `${mins}:${secs}`;
+  // Public getters
+  get songs(): any[] {
+    return this._songs.getValue();
   }
 
   get currentSongIndex(): number {
-    return this.currentIndex;
+    return this._currentSongIndex.getValue();
   }
 
-  get importedSongs(): Song[] {
-    return this.songs;
+  get isPlaying(): boolean {
+    return this._isPlaying.getValue();
+  }
+
+  // Get current song
+  get currentSong(): any {
+    const index = this.currentSongIndex;
+    if (index >= 0 && index < this.songs.length) {
+      return this.songs[index];
+    }
+    return null;
+  }
+
+  setSongs(songs: any[]): void {
+    this._songs.next(songs);
+  }
+
+  setCurrentSongIndex(index: number): void {
+    this._currentSongIndex.next(index);
+    if (index >= 0 && index < this.songs.length) {
+      const song = this.songs[index];
+      this._isPlaying.next(!song.audio.paused);
+    }
+  }
+
+  togglePlay(index: number | null = null): void {
+    let currentIndex = this.currentSongIndex;
+
+    if (index !== null) {
+      currentIndex = index;
+      this.setCurrentSongIndex(currentIndex);
+    }
+
+    if (currentIndex === -1 && this.songs.length > 0) {
+      currentIndex = 0;
+      this.setCurrentSongIndex(currentIndex);
+    }
+
+    if (currentIndex === -1 || !this.songs[currentIndex]) return;
+
+    const currentSong = this.songs[currentIndex];
+    
+    if (currentSong.audio.paused) {
+      // Pause all other songs
+      this.songs.forEach((song, i) => {
+        if (i !== currentIndex && song.audio) {
+          song.audio.pause();
+        }
+      });
+      currentSong.audio.play();
+      this._isPlaying.next(true);
+    } else {
+      currentSong.audio.pause();
+      this._isPlaying.next(false);
+    }
+  }
+
+  next(): void {
+    if (this.songs.length === 0) return;
+    const newIndex = (this.currentSongIndex + 1) % this.songs.length;
+    this.changeSong(newIndex);
+  }
+
+  previous(): void {
+    if (this.songs.length === 0) return;
+    const newIndex = (this.currentSongIndex - 1 + this.songs.length) % this.songs.length;
+    this.changeSong(newIndex);
+  }
+
+  private changeSong(newIndex: number): void {
+    // Pause current song if playing
+    if (this.currentSongIndex >= 0 && this.currentSongIndex < this.songs.length) {
+      this.songs[this.currentSongIndex].audio.pause();
+    }
+    
+    // Play new song
+    this.setCurrentSongIndex(newIndex);
+    this.songs[newIndex].audio.currentTime = 0;
+    this.songs[newIndex].audio.play();
+    this._isPlaying.next(true);
+  }
+
+  seekTo(time: number): void {
+    if (this.currentSongIndex >= 0 && this.currentSongIndex < this.songs.length) {
+      this.songs[this.currentSongIndex].audio.currentTime = time;
+    }
+  }
+
+  formatTime(sec: number): string {
+    const minutes = Math.floor(sec / 60);
+    const seconds = Math.floor(sec % 60).toString().padStart(2, '0');
+    return `${minutes}:${seconds}`;
+  }
+
+  // Implementing previously unimplemented methods
+  getCurrentTimeFormatted(): string {
+    const song = this.currentSong;
+    if (song && song.currentTime !== undefined) {
+      return this.formatTime(song.currentTime);
+    }
+    return '0:00';
+  }
+
+  getDurationFormatted(): string {
+    const song = this.currentSong;
+    if (song && song.duration !== undefined) {
+      return this.formatTime(song.duration);
+    }
+    return '0:00';
+  }
+
+  // Helper method to get current song progress as percentage
+  getCurrentProgress(): number {
+    const song = this.currentSong;
+    if (song && song.duration > 0) {
+      return (song.currentTime / song.duration) * 100;
+    }
+    return 0;
   }
 }

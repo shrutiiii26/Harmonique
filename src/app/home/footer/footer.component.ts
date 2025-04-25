@@ -1,161 +1,111 @@
-import { Component, ElementRef, ViewChild, ChangeDetectorRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// footer.component.ts
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { AudioPlayerService } from '../services/audio-player.service'; // adjust path as needed
+import { AudioPlayerService } from '../services/audio-player.service';
 
 @Component({
   selector: 'app-footer',
-  imports: [RouterModule, CommonModule],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss'
+  styleUrls: ['./footer.component.scss']
 })
-export class FooterComponent {
-  form: FormGroup;
-  currentStep: number = 1;
-  totalSteps: number = 3;
-
-  @ViewChild('sidebar') sidebar!: ElementRef;
-
-  isSidebarVisible: boolean = false;
+export class FooterComponent implements OnInit {
   crossfadeValue: number = 5;
-  progressValue: number = 5;
+  isPlaying: boolean = false;
 
-  importedSongs: any[] = [];
-  currentSongIndex: number = -1;
+  constructor(public audioService: AudioPlayerService) {}
 
-  availableImages = [
-    'assets/51c547366f2853da1052e531f4bfe4d5.jpg',
-    'assets/770a9cca1e543e6edeae6747db9522d2.jpg',
-    'assets/956b070b9df64cdd16d966caa1e016bf.jpg',
-    'assets/aa53683a96a23571867f1eafa0d845a1.jpg',
-    'assets/Listening To Music GIF - Head Phones Music Recording Studio - Discover & Share GIFs.gif',
-    'assets/Mask Group.png'
-  ];
-  
-
-  recommendedSongs: any[] = [
-    { title: 'Believer', artist: 'Imagine Dragons' },
-    { title: 'Monsters Go Bump', artist: 'Erika Recinos' },
-    { title: 'Moment Apart', artist: 'ODESZA' }
-  ];
-
-  constructor(
-    private router: Router,
-    private fb: FormBuilder,
-    private changeDetectorRef: ChangeDetectorRef,
-    public audioService: AudioPlayerService
-  ) {
-    this.form = this.fb.group({
-      step1: ['', Validators.required],
-      step2: ['', Validators.required],
-      step3: ['', Validators.required]
+  ngOnInit(): void {
+    // Subscribe to isPlaying changes
+    this.audioService.isPlaying$.subscribe(playing => {
+      this.isPlaying = playing;
     });
   }
 
-  getRandomImage(): string {
-    const index = Math.floor(Math.random() * this.availableImages.length);
-    return this.availableImages[index];
+  /**
+   * Toggles play/pause for the current song
+   */
+  togglePlay(): void {
+    this.audioService.togglePlay();
   }
 
-  loadFiles(event: any): void {
-    const files: FileList = event.target.files;
-    this.importedSongs = [];
-
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const url = URL.createObjectURL(file);
-      const audio = new Audio(url);
-
-      const songObj = {
-        name: file.name,
-        src: url,
-        audio: audio,
-        isPlaying: false,
-        currentTime: 0,
-        duration: 0,
-        artist: 'Unknown Artist',
-        image: this.getRandomImage()
-      };
-
-      audio.addEventListener('loadedmetadata', () => {
-        songObj.duration = audio.duration;
-      });
-
-      audio.addEventListener('timeupdate', () => {
-        songObj.currentTime = audio.currentTime;
-      });
-
-      this.importedSongs.push(songObj);
-    }
+  /**
+   * Skip to the next song
+   */
+  next(): void {
+    this.audioService.next();
   }
 
-  togglePlay(index: number | null): void {
-    if ((index === null || index === -1) && this.importedSongs.length > 0) {
-      index = 0;
-    }
-
-    if (index === null || !this.importedSongs[index]) return;
-
-    const currentSong = this.importedSongs[index];
-    this.currentSongIndex = index;
-
-    if (currentSong.audio.paused) {
-      this.importedSongs.forEach((song, i) => {
-        if (i !== index && song.audio) {
-          song.audio.pause();
-          song.isPlaying = false;
-        }
-      });
-      currentSong.audio.play();
-      currentSong.isPlaying = true;
-    } else {
-      currentSong.audio.pause();
-      currentSong.isPlaying = false;
-    }
+  /**
+   * Go back to the previous song
+   */
+  previous(): void {
+    this.audioService.previous();
   }
 
-  get currentTime(): string {
-    const currentSong = this.importedSongs[this.currentSongIndex];
-    return currentSong ? this.formatTime(currentSong.currentTime) : '0:00';
-  }
-
-  get duration(): string {
-    const currentSong = this.importedSongs[this.currentSongIndex];
-    return currentSong ? this.formatTime(currentSong.duration) : '0:00';
-  }
-
-  private formatTime(sec: number): string {
-    const minutes = Math.floor(sec / 60);
-    const seconds = Math.floor(sec % 60).toString().padStart(2, '0');
-    return `${minutes}:${seconds}`;
-  }
-
+  /**
+   * Handle crossfade slider change
+   */
   onCrossfadeChange(event: any): void {
     this.crossfadeValue = event.target.value;
     const percentage = (this.crossfadeValue / 50) * 100;
     event.target.style.setProperty('--progress', `${percentage}%`);
   }
 
-  seekTo(event: Event): void {
+  /**
+   * Handle seek operation when user drags the progress slider
+   */
+  handleSeek(event: Event): void {
     const target = event.target as HTMLInputElement;
-    const seekTime = parseFloat(target.value);
-    const currentSong = this.importedSongs[this.currentSongIndex];
+    this.audioService.seekTo(parseFloat(target.value));
+  }
 
-    if (currentSong?.audio) {
-      const clampedTime = Math.max(0, Math.min(seekTime, currentSong.duration || 0));
-      currentSong.audio.currentTime = clampedTime;
-      currentSong.currentTime = clampedTime;
-      this.changeDetectorRef.detectChanges();
+  /**
+   * Get formatted current playback time
+   */
+  get currentTime(): string {
+    return this.audioService.getCurrentTimeFormatted();
+  }
+
+  /**
+   * Get formatted song duration
+   */
+  get duration(): string {
+    return this.audioService.getDurationFormatted();
+  }
+
+  /**
+   * Get current song progress as percentage (for progress bar)
+   */
+  get currentSongProgress(): number {
+    return this.audioService.getCurrentProgress();
+  }
+
+  /**
+   * Get current song playback time in seconds
+   */
+  get currentSongTime(): number {
+    if (this.currentSong) {
+      return this.currentSong.currentTime || 0;
     }
+    return 0;
   }
 
-  Duration($event: Event, _t16: number) {
-    throw new Error('Method not implemented.');
+  /**
+   * Get current song duration in seconds
+   */
+  get currentSongDuration(): number {
+    if (this.currentSong) {
+      return this.currentSong.duration || 0;
+    }
+    return 0;
   }
 
-  updateTime($event: Event, _t16: number) {
-    throw new Error('Method not implemented.');
+  /**
+   * Get current song object
+   */
+  get currentSong(): any {
+    return this.audioService.currentSong;
   }
 }
