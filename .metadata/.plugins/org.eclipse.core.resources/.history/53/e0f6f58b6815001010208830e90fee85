@@ -1,0 +1,13 @@
+package com.harmonique.userservice.service;
+
+import com.harmonique.userservice.payload.UserRequest;
+import com.harmonique.userservice.payload.UserResponse;
+
+public interface UserService {
+
+    // Register a new user
+    UserResponse registerUser(UserRequest userRequest);
+
+    // Fetch user by email
+    UserResponse getUserByEmail(String email);
+}

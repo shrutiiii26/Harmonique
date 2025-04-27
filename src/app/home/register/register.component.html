@@ -1,5 +1,5 @@
 <div class="background">
-   
+
     <div class="music-notes">
         <span class="music-note" style="left: 10%; animation-delay: 0s;">♬</span>
         <span class="music-note" style="left: 30%; animation-delay: 1s;">♪</span>
@@ -15,6 +15,9 @@
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="register-card text-center p-4">
             <h4>Register</h4>
+            <div class="music-bars mt-3">
+                <span></span><span></span><span></span><span></span><span></span>
+            </div>
             <!-- Your existing decorative elements -->
 
             <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>

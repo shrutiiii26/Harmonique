@@ -1,0 +1,5 @@
+package com.harmonique.userservice.payload;
+
+public class RoleResponse {
+
+}

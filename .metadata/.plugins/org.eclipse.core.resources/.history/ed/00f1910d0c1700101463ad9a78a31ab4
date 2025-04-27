@@ -1,0 +1,5 @@
+package com.harmonique.songservice.payload;
+
+public class ApiResponse {
+
+}

@@ -1,0 +1,52 @@
+package com.harmonique.userservice.controller;
+
+import com.harmonique.userservice.payload.*;
+import com.harmonique.userservice.security.JwtTokenHelper;
+import com.harmonique.userservice.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.*;
+import org.springframework.security.authentication.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/users")
+@RequiredArgsConstructor
+public class UserController {
+
+    private final AuthenticationManager authenticationManager;
+    private final CustomUserDetailsService customUserDetailsService;
+    private final JwtTokenHelper jwtTokenHelper;
+    private final UserService userService;
+
+    // Register New User
+    @PostMapping("/register")
+    public ResponseEntity<UserResponse> registerUser(@RequestBody UserRequest userRequest) {
+        UserResponse savedUser = userService.registerUser(userRequest);
+        return new ResponseEntity<>(savedUser, HttpStatus.CREATED);
+    }
+
+    // Login User and Generate Token
+    @PostMapping("/login")
+    public ResponseEntity<JwtAuthResponse> loginUser(@RequestBody JwtAuthRequest request) {
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
+        );
+
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+
+        String token = jwtTokenHelper.generateToken(userDetails);
+
+        JwtAuthResponse response = new JwtAuthResponse(token);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    // Sample Protected API (Optional)
+    @GetMapping("/profile/{email}")
+    public ResponseEntity<UserResponse> getUserProfile(@PathVariable String email) {
+        UserResponse user = userService.getUserByEmail(email);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+}

@@ -1,0 +1,52 @@
+package com.harmonique.songservice.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.time.LocalDateTime;
+
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+@Entity
+@Table(name = "songs")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@EntityListeners(AuditingEntityListener.class)
+public class Song {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String title;
+
+    @Column(nullable = false)
+    private String artist;
+
+    @Column(nullable = false)
+    private String album;
+
+    private String genre;
+
+    private String duration;  // e.g. 210 seconds
+
+    private String url;         // for download or streaming
+
+    private String coverImageUrl;   // song cover/picture
+
+    @CreatedDate
+    @Column(updatable = false)
+    private LocalDateTime createdAt; // JPA Auditing managed (Autofill during INSERT)
+
+    @LastModifiedDate
+    private LocalDateTime updatedAt; // JPA Auditing managed (Autofill during UPDATE)
+    
+    @Column(nullable = false)
+    private Long uploadedBy;
+}

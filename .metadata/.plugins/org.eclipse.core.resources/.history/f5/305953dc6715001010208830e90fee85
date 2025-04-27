@@ -1,0 +1,54 @@
+package com.harmonique.userservice.service.impl;
+
+import com.harmonique.userservice.entity.Role;
+import com.harmonique.userservice.entity.User;
+import com.harmonique.userservice.exception.ResourceNotFoundException;
+import com.harmonique.userservice.payload.UserRequest;
+import com.harmonique.userservice.payload.UserResponse;
+import com.harmonique.userservice.repository.RoleRepository;
+import com.harmonique.userservice.repository.UserRepository;
+import com.harmonique.userservice.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
+
+@Service
+@RequiredArgsConstructor
+public class UserServiceImpl implements UserService {
+
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final ModelMapper modelMapper;
+
+    @Override
+    public UserResponse registerUser(UserRequest userRequest) {
+
+        User user = User.builder()
+                .name(userRequest.getName())
+                .email(userRequest.getEmail())
+                .password(passwordEncoder.encode(userRequest.getPassword()))
+                .about(userRequest.getAbout())
+                .build();
+
+        // Fetch ROLE_USER from database
+        Role role = roleRepository.findById(1L)
+                .orElseThrow(() -> new ResourceNotFoundException("Role", "id", 1L));
+
+        user.getRoles().add(role);
+
+        User savedUser = userRepository.save(user);
+
+        return modelMapper.map(savedUser, UserResponse.class);
+    }
+
+    @Override
+    public UserResponse getUserByEmail(String email) {
+
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User", "email", email));
+
+        return modelMapper.map(user, UserResponse.class);
+    }
+}

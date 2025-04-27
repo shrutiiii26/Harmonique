@@ -6,14 +6,13 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
-  login(value: any) {
-    throw new Error('Method not implemented.');
-  }
   private loggedIn = new BehaviorSubject<boolean>(false);
   private token: string | null = null;
 
   constructor(private router: Router) {
-    // this.token = localStorage.getItem('token');
+    if (typeof window !== 'undefined' && window.localStorage) {
+      this.token = localStorage.getItem('token');
+    }
     if (this.token) {
       this.loggedIn.next(true);
     }
@@ -26,14 +25,14 @@ export class AuthService {
       this.loggedIn.next(true);
     }
   }
-  
 
   getToken() {
     return this.token;
   }
 
   logout() {
-    // localStorage.removeItem('token');
+    localStorage.removeItem('token');
+    this.clearUserData();
     this.token = null;
     this.loggedIn.next(false);
     this.router.navigate(['/login']);
@@ -41,5 +40,25 @@ export class AuthService {
 
   isLoggedIn() {
     return this.loggedIn.asObservable();
+  }
+
+  storeUserData(user: any) {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('userData', JSON.stringify(user));
+    }
+  }
+
+  getUserData() {
+    if (typeof window !== 'undefined') {
+      const data = localStorage.getItem('userData');
+      return data ? JSON.parse(data) : null;
+    }
+    return null;
+  }
+
+  clearUserData() {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('userData');
+    }
   }
 }

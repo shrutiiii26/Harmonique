@@ -1,0 +1,29 @@
+package com.harmonique.songservice.payload;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.*;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class SongRequest {
+
+    @NotBlank(message = "Title is required")
+    @Size(min = 1, max = 100, message = "Title must be between 1 to 100 characters")
+    private String title;
+
+    @NotBlank(message = "Artist is required")
+    private String artist;
+
+    @NotBlank(message = "Album is required")
+    private String album;
+
+    @NotBlank(message = "Duration is required (example: 3:45)")
+    private int durationInSeconds;
+
+    @NotBlank(message = "URL is required")
+    private String url;
+}

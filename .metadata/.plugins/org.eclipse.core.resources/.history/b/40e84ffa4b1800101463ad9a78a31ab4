@@ -1,0 +1,24 @@
+package com.harmonique.songservice.service;
+
+import com.harmonique.songservice.payload.SongRequest;
+import com.harmonique.songservice.payload.SongResponse;
+
+import java.util.List;
+
+public interface SongService {
+
+    // Create Song
+    SongResponse createSong(SongRequest songRequest);
+
+    // Update Song
+    SongResponse updateSong(SongRequest songRequest, Long songId);
+
+    // Delete Song
+    void deleteSong(Long songId);
+
+    // Get Single Song
+    SongResponse getSongById(Long songId);
+
+    // Get All Songs
+    List<SongResponse> getAllSongs();
+}

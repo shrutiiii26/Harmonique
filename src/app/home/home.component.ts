@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AudioPlayerService } from '../home/services/audio-player.service'; // Adjust the path as needed
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +24,7 @@ export class HomeComponent {
   progressValue: number = 5;
 
   importedSongs: any[] = [];
+  backendSongs: any[] = []; // ✅ Added this to store fetched songs from backend
   currentSongIndex: number = -1;
 
   availableImages = [
@@ -44,7 +46,8 @@ export class HomeComponent {
     private router: Router,
     private fb: FormBuilder,
     private changeDetectorRef: ChangeDetectorRef,
-    public audioService: AudioPlayerService
+    public audioService: AudioPlayerService,
+    private http: HttpClient // ✅ Added HttpClient
   ) {
     this.form = this.fb.group({
       step1: ['', Validators.required],
@@ -65,6 +68,21 @@ export class HomeComponent {
       this.currentSongIndex = index;
       this.changeDetectorRef.detectChanges();
     });
+
+    // Fetch songs from backend
+    this.fetchSongsFromBackend();
+  }
+
+  fetchSongsFromBackend(): void {
+    this.http.get<any[]>('http://localhost:8080/songs')
+      .subscribe(
+        (data) => {
+          this.backendSongs = data; // Store backend songs in the array
+        },
+        (error) => {
+          console.error('Error fetching songs:', error);
+        }
+      );
   }
 
   getRandomImage(): string {

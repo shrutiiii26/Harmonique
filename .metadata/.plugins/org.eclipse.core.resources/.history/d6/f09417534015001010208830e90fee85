@@ -1,0 +1,5 @@
+package com.harmonique.userservice.config;
+
+public class JwtConfig {
+
+}

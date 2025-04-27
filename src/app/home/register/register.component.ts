@@ -51,7 +51,7 @@ export class RegisterComponent {
 
     const { fullName, email, password } = this.registrationForm.value;
 
-    this.servicesService.register({ fullName, email, password }).subscribe({
+    this.servicesService.register({  name: fullName, email, password }).subscribe({
       next: (response) => {
         this.isLoading = false;
         this.successMessage = 'Registration successful! Redirecting to login...';

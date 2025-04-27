@@ -3,7 +3,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service.ts.service'; // Update path if needed
+import { AuthService } from '../auth.service'; // Update path if needed
 import { HttpErrorResponse } from '@angular/common/http';
 import { ServicesService } from '../../services.service';
 
@@ -15,6 +15,12 @@ import { ServicesService } from '../../services.service';
   standalone: true,
 })
 export class LoginComponent {
+  toggleTheme() {
+    const body = document.body;
+    body.classList.toggle('dark-theme');
+    body.classList.toggle('light-theme');
+  }
+
   loginForm: FormGroup;
   isLoading = false;
   errorMessage: string | null = null;
@@ -60,8 +66,8 @@ export class LoginComponent {
         this.authService.storeToken(response.token);
 
         if (response.user) {
-          localStorage.setItem('userData', JSON.stringify(response.user));
-        }
+          this.authService.storeUserData(response.user);
+        }        
 
         this.isLoading = false;
         this.router.navigate(['/home']);

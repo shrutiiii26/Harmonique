@@ -1,0 +1,5 @@
+package com.harmonique.songservice.exception;
+
+public class GlobalExceptionHandler {
+
+}
