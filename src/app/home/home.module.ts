@@ -3,16 +3,17 @@ import { CommonModule } from '@angular/common';
 import { HomeRoutingModule } from './home-routing.module';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
-import { routes } from '../app.routes';
-
+import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [HomeComponent],  // Declare HomeComponent
   imports: [
     CommonModule,
-    HomeRoutingModule,
+    HomeRoutingModule,  // Import HomeRoutingModule here
     SidebarComponent,
-    RouterModule.forChild(routes)
+    HttpClientModule,  // Import HttpClientModule
+    RouterModule
   ]
 })
 export class HomeModule { }

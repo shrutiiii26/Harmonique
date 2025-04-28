@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { AudioPlayerService } from '../home/services/audio-player.service'; // Adjust the path as needed
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.development';
 
 @Component({
   selector: 'app-home',
@@ -74,7 +75,7 @@ export class HomeComponent {
   }
 
   fetchSongsFromBackend(): void {
-    this.http.get<any[]>('http://localhost:8080/songs')
+    this.http.get<any[]>(environment.songsApi)
       .subscribe(
         (data) => {
           this.backendSongs = data; // Store backend songs in the array
@@ -84,7 +85,7 @@ export class HomeComponent {
         }
       );
   }
-
+  
   getRandomImage(): string {
     const index = Math.floor(Math.random() * this.availableImages.length);
     return this.availableImages[index];
