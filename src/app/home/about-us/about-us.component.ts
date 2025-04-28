@@ -1,6 +1,3 @@
-
-
-
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -13,6 +10,9 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./about-us.component.scss']
 })
 export class AboutUsComponent {
+  goBack(): void {
+    window.history.back();
+  }
   teamMembers = [
     {
       name: 'Alex Johnson',

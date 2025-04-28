@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-profile',
-  imports: [],
+  imports: [RouterLink, RouterModule, RouterOutlet ],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.scss'
 })
@@ -18,6 +20,9 @@ export class EditProfileComponent {
       };
       reader.readAsDataURL(file);
     }
+  }
+  goBack(): void {
+    window.history.back();
   }
   
 }

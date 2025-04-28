@@ -38,6 +38,11 @@ export const routes: Routes = [
                     import('./home/about-us/about-us.component').then((c) => c.AboutUsComponent),
             },
             {
+                path: 'faq',
+                loadComponent: () =>
+                    import('./home/faq/faq.component').then((c) => c.FaqComponent),
+            },
+            {
                 path: 'playing-now',
                 loadComponent: () =>
                     import('./home/playing-now/playing-now.component').then((c) => c.PlayingNowComponent),

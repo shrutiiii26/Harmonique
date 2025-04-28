@@ -21,7 +21,7 @@ export class AppComponent {
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        const hideRoutes = ['/login', '/register','/navbar','/','/liked-songs','/settings','/playing-now','/edit-profile'];
+        const hideRoutes = ['/login', '/register','/navbar','/','/edit-profile'];
         this.showNavAndSidebar = !hideRoutes.includes(event.url);
         const hideFooterRoutes = ['/login', '/register'];
         this.showFooter = !hideFooterRoutes.includes(event.url);
