@@ -78,13 +78,16 @@ export class HomeComponent {
     this.http.get<any[]>(environment.songsApi)
       .subscribe(
         (data) => {
-          this.backendSongs = data; // Store backend songs in the array
+          this.backendSongs = data.map(song => ({
+            ...song,
+            image: song.imageUrl  // ✅ Assign the backend image URL to the image field
+          }));
         },
         (error) => {
           console.error('Error fetching songs:', error);
         }
       );
-  }
+  }  
   
   getRandomImage(): string {
     const index = Math.floor(Math.random() * this.availableImages.length);
