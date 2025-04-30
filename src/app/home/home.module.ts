@@ -7,13 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home.component';
 
 @NgModule({
-  declarations: [HomeComponent],  // Declare HomeComponent
   imports: [
     CommonModule,
-    HomeRoutingModule,  // Import HomeRoutingModule here
+    HomeRoutingModule,
     SidebarComponent,
-    HttpClientModule,  // Import HttpClientModule
-    RouterModule
+    HttpClientModule,
+    RouterModule,
+    HomeComponent
   ]
 })
 export class HomeModule { }

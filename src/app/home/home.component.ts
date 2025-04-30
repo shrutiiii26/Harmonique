@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AudioPlayerService } from '../home/services/audio-player.service'; // Adjust the path as needed
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-home',
@@ -36,7 +37,7 @@ export class HomeComponent {
     'assets/Listening To Music GIF - Head Phones Music Recording Studio - Discover & Share GIFs.gif',
     'assets/Mask Group.png'
   ];
-  
+
   recommendedSongs: any[] = [
     { title: 'Believer', artist: 'Imagine Dragons' },
     { title: 'Monsters Go Bump', artist: 'Erika Recinos' },
@@ -48,8 +49,9 @@ export class HomeComponent {
     private fb: FormBuilder,
     private changeDetectorRef: ChangeDetectorRef,
     public audioService: AudioPlayerService,
-    private http: HttpClient // ✅ Added HttpClient
-  ) {
+    private http: HttpClient, // ✅ Added HttpClient
+    private authService: AuthService
+) {
     this.form = this.fb.group({
       step1: ['', Validators.required],
       step2: ['', Validators.required],
@@ -63,7 +65,7 @@ export class HomeComponent {
       this.importedSongs = songs;
       this.changeDetectorRef.detectChanges();
     });
-    
+
     // Subscribe to current song index updates
     this.audioService.currentSongIndex$.subscribe(index => {
       this.currentSongIndex = index;
@@ -72,6 +74,32 @@ export class HomeComponent {
 
     // Fetch songs from backend
     this.fetchSongsFromBackend();
+  }
+
+  uploadSongs(event: any): void {
+    const files: FileList = event.target.files;
+    if (!files || files.length === 0) return;
+
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append('files', files[i]);
+    }
+
+    const token = this.authService.getToken(); // <-- Use the stored token
+
+    this.http.post(`${environment.songsApi}/upload/auto`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).subscribe({
+      next: (response: any) => {
+        console.log('Upload successful:', response);
+        this.fetchSongsFromBackend(); // Refresh the list after upload
+      },
+      error: (err) => {
+        console.error('Upload failed:', err);
+      }
+    });
   }
 
   fetchSongsFromBackend(): void {
@@ -87,8 +115,8 @@ export class HomeComponent {
           console.error('Error fetching songs:', error);
         }
       );
-  }  
-  
+  }
+
   getRandomImage(): string {
     const index = Math.floor(Math.random() * this.availableImages.length);
     return this.availableImages[index];
@@ -96,28 +124,28 @@ export class HomeComponent {
 
   loadFiles(event: any): void {
     const files: FileList = event.target.files;
-  
+
     // Get current songs from service
     const newSongs = [...this.audioService.songs];
-  
+
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
-  
+
       // Check if the file is an audio file
       if (!file.type.startsWith('audio/')) {
         console.warn(`File ${file.name} is not an audio file. Skipping.`);
         continue;
       }
-  
+
       const url = URL.createObjectURL(file);
       const audio = new Audio(url);
-  
+
       // Check if the song is already in the list by its src
       if (newSongs.some(song => song.src === url)) {
         console.warn(`Song ${file.name} already imported. Skipping.`);
         continue; // Skip if the song is already in the list
       }
-  
+
       const songObj = {
         name: file.name.replace(/\.[^/.]+$/, ""), // Remove file extension
         src: url,
@@ -128,17 +156,17 @@ export class HomeComponent {
         artist: 'Unknown Artist',
         image: this.getRandomImage()
       };
-  
+
       audio.addEventListener('loadedmetadata', () => {
         songObj.duration = audio.duration;
         this.changeDetectorRef.detectChanges();
       });
-  
+
       audio.addEventListener('timeupdate', () => {
         songObj.currentTime = audio.currentTime;
         this.changeDetectorRef.detectChanges();
       });
-  
+
       // Add error handler for audio loading failures
       audio.addEventListener('error', () => {
         console.error(`Error loading audio file: ${file.name}`);
@@ -149,18 +177,18 @@ export class HomeComponent {
           this.audioService.setSongs(newSongs);
         }
       });
-  
+
       // Add the new song to the list
       newSongs.push(songObj);
     }
-  
+
     // Update service with all songs (existing + new)
     this.audioService.setSongs(newSongs);
-  
+
     // Reset file input to allow selecting the same file again if needed
     event.target.value = '';
   }
-  
+
   togglePlay(index: number): void {
     // Use the audio service to control playback
     this.audioService.togglePlay(index);
