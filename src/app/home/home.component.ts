@@ -235,4 +235,11 @@ export class HomeComponent {
   updateTime(_event: Event, _t16: number) {
     // Implementation not needed as we're using the service now
   }
+  scrollIndex: number = 0;
+  scrollSongs() {
+    const songScroll: HTMLElement = document.querySelector('.song-scroll')!;
+    const songWidth = songScroll.children[0].clientWidth; // Get the width of a single song container
+    songScroll.scrollLeft = songWidth * this.scrollIndex; // Scroll horizontally by the width of a song
+  }
+
 }

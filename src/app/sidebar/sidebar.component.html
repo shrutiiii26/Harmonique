@@ -1,37 +1,47 @@
-<div class="container-fluid">
-  <div class="d-flex justify-content-between align-items-center">
+<div
+  class="sidebar"
+  [class.expanded]="isExpanded"
+  (mouseenter)="expandSidebar()"
+  (mouseleave)="collapseSidebar()"
+>
+  <nav class="nav-menu">
+    <ul>
 
-    <!-- Hamburger Icon -->
-    <i class="bi bi-list text-white fs-3 hamburger" (click)="toggleSidebar()"></i>
+      <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <a routerLink="/home" class="nav-link">
+          <i class="bi bi-house-door nav-icon"></i>
+          <span class="nav-text" *ngIf="isExpanded">Home</span>
+        </a>
+      </li>
 
-    <!-- Sidebar -->
-    <div sidebar class="sidebar text-white" [class.active]="isSidebarVisible">
-      <i class="bi bi-x fs-4 close-btn" (click)="toggleSidebar()"></i>
-      <ul class="list-unstyled mt-4 ps-3">
-        <a [routerLink]="['/home']"><li><i class="bi bi-heart me-2"></i>Home</li></a>
-        
-        <a [routerLink]="['/liked-songs']"><li><i class="bi bi-heart me-2"></i>Liked Songs</li></a>
+      <li routerLinkActive="active">
+        <a routerLink="/liked-songs" class="nav-link">
+          <i class="bi bi-heart nav-icon"></i>
+          <span class="nav-text" *ngIf="isExpanded">Liked Songs</span>
+        </a>
+      </li>
 
-        <a [routerLink]="['/about-us']"> <li><i class="bi bi-chat-dots me-2"></i>About us</li></a>
+      <li routerLinkActive="active">
+        <a routerLink="/about-us" class="nav-link">
+          <i class="bi bi-chat-dots nav-icon"></i>
+          <span class="nav-text" *ngIf="isExpanded">About Us</span>
+        </a>
+      </li>
 
-         <a [routerLink]="['/faq']"><li><i class="bi bi-question-circle me-2"></i>FAQs</li></a>
-        <a routerLink="/settings"><li><i class="bi bi-gear me-2"></i>Settings</li></a>
-      </ul>
-    </div>
+      <li routerLinkActive="active">
+        <a routerLink="/faq" class="nav-link">
+          <i class="bi bi-question-circle nav-icon"></i>
+          <span class="nav-text" *ngIf="isExpanded">FAQs</span>
+        </a>
+      </li>
 
-    <!-- Backdrop (clicking on it closes sidebar) -->
-    <div class="sidebar-backdrop" *ngIf="isSidebarVisible" (click)="toggleSidebar()"></div>
+      <li routerLinkActive="active">
+        <a routerLink="/settings" class="nav-link">
+          <i class="bi bi-gear nav-icon"></i>
+          <span class="nav-text" *ngIf="isExpanded">Settings</span>
+        </a>
+      </li>
 
-    <div class="search-container mt-3">
-      <i class="bi bi-search text-white fs-3" (click)="toggleSearch()"></i>
-      <input 
-        *ngIf="searchVisible" 
-        type="text" 
-        class="search-input" 
-        placeholder="Search something..." 
-        [(ngModel)]="searchQuery"
-      />
-    </div>
-    
-  </div>
+    </ul>
+  </nav>
 </div>

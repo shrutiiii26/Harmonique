@@ -18,6 +18,11 @@ export const routes: Routes = [
                     import('./sidebar/sidebar.component').then((c) => c.SidebarComponent),
             },
             {
+                path: 'navbar',
+                loadComponent: () =>
+                    import('./home/navbar/navbar.component').then((c) => c.NavbarComponent),
+            },
+            {
                 path: 'home',
                 loadComponent: () =>
                     import('./home/home.component').then((c) => c.HomeComponent),

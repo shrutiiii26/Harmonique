@@ -1,48 +1,69 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { CommonModule, NgIf } from '@angular/common';  // ✅ Import NgIf explicitly
-import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms'; // Import FormsModule for ngModel
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy
+} from '@angular/core';
+import {
+  Router,
+  RouterLink,
+  RouterModule,
+  NavigationEnd
+} from '@angular/router';
+import { CommonModule, NgIf } from '@angular/common';
+
+interface MenuItem {
+  id: number;
+  label: string;
+  icon: string;
+  route: string;
+}
 
 @Component({
   selector: 'app-sidebar',
-  imports: [NgIf, CommonModule, RouterModule, FormsModule], // Import FormsModule here
+  standalone: true,
+  imports: [CommonModule, NgIf, RouterLink, RouterModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
+  isExpanded = false;
+  selectedItem: number | null = null;
 
-  @ViewChild('sidebar') sidebar!: ElementRef;
-  isSidebarVisible: boolean = false;
+  menuItems: MenuItem[] = [
+    { id: 1, label: 'Home', icon: 'assets/Dashboard.png', route: '/home' },
+    { id: 2, label: 'Liked Songs', icon: 'assets/heart.png', route: '/liked-songs' },
+    { id: 3, label: 'About Us', icon: 'assets/chat.png', route: '/about-us' },
+    { id: 4, label: 'FAQs', icon: 'assets/question.png', route: '/faq' },
+    { id: 5, label: 'Settings', icon: 'assets/gear.png', route: '/settings' }
+  ];
 
   constructor(private router: Router) { }
 
-  // Toggle sidebar visibility
-  toggleSidebar(): void {
-    this.isSidebarVisible = !this.isSidebarVisible;
-    this.sidebar.nativeElement.classList.toggle('active');
+  ngOnInit(): void {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        const activeItem = this.menuItems.find(
+          (item) => item.route === this.router.url
+        );
+        if (activeItem) {
+          this.selectedItem = activeItem.id;
+        }
+      }
+    });
   }
 
-  // Navigate to home
-  home() {
-    this.router.navigateByUrl('/home');
-  }
-  settings() {
-    this.router.navigateByUrl('/settings');
+  expandSidebar(): void {
+    this.isExpanded = true;
   }
 
-  // Navigate to liked songs
-  likedsongs() {
-    this.router.navigateByUrl('/liked-songs');
+  collapseSidebar(): void {
+    this.isExpanded = false;
   }
 
-
-  // Search-related properties
-  searchVisible = false;
-  searchQuery = ''; // Holds the search input value
-
-  // Toggle the visibility of the search input
-  toggleSearch() {
-    this.searchVisible = !this.searchVisible;
+  selectItem(item: MenuItem): void {
+    if (this.router.url !== item.route) {
+      this.router.navigate([item.route]);
+    }
   }
 }

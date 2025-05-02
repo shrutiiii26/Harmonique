@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SidebarRoutingModule } from './sidebar-routing.module';
 import { RouterModule } from '@angular/router';
-import { routes } from '../app.routes';
+import { routes } from '../../app.routes';
+import { NavbarRoutingModule } from './navbar-routing.module';
 
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
-    SidebarRoutingModule,
+    NavbarRoutingModule,
     RouterModule.forChild(routes)
   ]
 })
-export class SidebarModule { }
+export class NavbarModule { }
