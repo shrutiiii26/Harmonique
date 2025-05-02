@@ -24,6 +24,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   isLoading = false;
   errorMessage: string | null = null;
+  lockIconClass = 'fa-solid fa-lock';
 
   constructor(
     private router: Router,
@@ -64,14 +65,17 @@ export class LoginComponent {
       next: (response: any) => {
         console.log('Login successful', response);
         this.authService.storeToken(response.token);
-
+      
         if (response.user) {
           this.authService.storeUserData(response.user);
-        }        
-
+        }
+      
+        this.lockIconClass = 'fa-solid fa-unlock';
+      
         this.isLoading = false;
         this.router.navigate(['/home']);
       },
+      
       error: (error: HttpErrorResponse) => {
         this.isLoading = false;
         console.error('Login failed:', error);
