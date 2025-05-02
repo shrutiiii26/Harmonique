@@ -53,6 +53,11 @@ export const routes: Routes = [
                     import('./home/register/register.component').then((c) => c.RegisterComponent),
             },
             {
+                path: 'faq',
+                loadComponent: () =>
+                    import('./home/faq/faq.component').then((c) => c.FaqComponent),
+            },
+            {
                 path: 'edit-profile',
                 loadComponent: () =>
                     import('./home/edit-profile/edit-profile.component').then((c) => c.EditProfileComponent),

@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-...your-integrity..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 <div class="login-wrapper">
   <div class="music-notes">
     <span class="music-note" style="left: 10%; animation-delay: 0s;">♬</span>
@@ -19,19 +17,19 @@
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="mb-3 position-relative">
-        <i class="fa-regular fa-envelope position-absolute top-50 start-0 translate-middle-y" style="margin-left: 20px; color: white;"></i>
+        <i class="fa-regular fa-envelope position-absolute top-50 start-0 translate-middle-y"
+          style="margin-left: 20px; color: white;"></i>
         <input type="email" class="form-control ps-5 white-placeholder" placeholder="Email" formControlName="email" />
       </div>
       <small class="text-danger" *ngIf="email.invalid && (email.dirty || email.touched)">
         Please enter a valid email.
       </small>
-      
+
 
       <div class="mb-3 position-relative">
-        <i class="position-absolute top-50 start-0 translate-middle-y"
-        [ngClass]="lockIconClass"
-        style="margin-left: 20px; color: white;"></i>
-             <input type="password" class="form-control ps-5" placeholder="Password" formControlName="password" />
+        <i class="position-absolute top-50 start-0 translate-middle-y" [ngClass]="lockIconClass"
+          style="margin-left: 20px; color: white;"></i>
+        <input type="password" class="form-control ps-5" placeholder="Password" formControlName="password" />
       </div>
       <small class="text-danger" *ngIf="password.invalid && (password.dirty || password.touched)">
         Password must be at least 6 characters.

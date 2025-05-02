@@ -18,6 +18,7 @@ export class RegisterComponent {
   isLoading = false;
   errorMessage: string | null = null;
   successMessage: string | null = null;
+  lockIconClass = 'fa-solid fa-lock';
 
   constructor(
     private fb: FormBuilder,

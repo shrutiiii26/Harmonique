@@ -9,9 +9,12 @@
       <i class="bi bi-x fs-4 close-btn" (click)="toggleSidebar()"></i>
       <ul class="list-unstyled mt-4 ps-3">
         <a [routerLink]="['/home']"><li><i class="bi bi-heart me-2"></i>Home</li></a>
+        
         <a [routerLink]="['/liked-songs']"><li><i class="bi bi-heart me-2"></i>Liked Songs</li></a>
+
         <a [routerLink]="['/about-us']"> <li><i class="bi bi-chat-dots me-2"></i>About us</li></a>
-        <li><i class="bi bi-question-circle me-2"></i>FAQs</li>
+
+         <a [routerLink]="['/faq']"><li><i class="bi bi-question-circle me-2"></i>FAQs</li></a>
         <a routerLink="/settings"><li><i class="bi bi-gear me-2"></i>Settings</li></a>
       </ul>
     </div>
