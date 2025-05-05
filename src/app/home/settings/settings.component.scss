@@ -1,174 +1,23 @@
 .settings-container {
-    width: 100%;
-    padding: 2rem;
-    background: linear-gradient(135deg, #6e45e2 0%, #89d4cf 100%); 
-    box-shadow: 0 0 20px rgba(98, 0, 234, 0.2);
-    overflow-y: auto;
-    height: 100vh;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+    margin-top: 5.5%;
 
 }
 
-.head {
-    color: white;
+.form-check-input:checked {
+    background-color: #6e45e2;
+    border-color: #6e45e2;
 }
 
-.setting-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1rem;
+.form-select:focus {
+    border-color: #89d4cf;
+    box-shadow: 0 0 0 0.25rem rgba(137, 212, 207, 0.25);
 }
 
-.setting-row h2 {
-    margin: 0;
-    font-size: 1rem;
-    color: #ffffff;
-}
-
-.setting-row select {
-    width: 50%;
-    max-width: 300px;
-    padding: 0.5rem;
-    background-color: #152547;
-    color: white;
-    border: none;
-    border-radius: 6px;
-}
-
-h1 {
-    text-align: center;
-    color: #111828;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-    letter-spacing: 2px;
-}
-
-.settings-group {
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #333;
-}
-
-.settings-group h2 {
-    color: #111828;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-}
-
-.settings-group label,
-.settings-group p,
-.settings-group a {
-    display: block;
-    margin: 0.5rem 0;
-    font-size: 1rem;
-}
-
-select,
-input[type="range"] {
-    width: 100%;
-    padding: 0.5rem;
-    margin-top: 0.3rem;
-    background: linear-gradient(to right, #7f71a8, #89d4cf);
-    border-color: #ffffff;
-    color: #f1f1f1;
-    border: none;
-    border-radius: 6px;
-}
-
-// .form-check-input {
-//     width: 3rem;
-//     height: 1.75rem;
-//     border-radius: 2rem;
-//     background-color: #ccc;
-//     transition: background-color 0.3s ease;
-//     position: relative;
-//     cursor: pointer;
-// }
-
-// /* Style the knob of the toggle switch */
-// .form-check-input::before {
-//     content: '';
-//     position: absolute;
-//     top: 0.125rem;
-//     left: 0.125rem;
-//     width: 1.5rem;
-//     height: 1.5rem;
-//     background-color: white;
-//     border-radius: 50%;
-//     transition: transform 0.3s ease;
-// }
-
-// /* When checked, move the knob */
-// .form-check-input:checked::before {
-//     transform: translateX(1.25rem);
-//     /* Move the knob to the right when checked */
-// }
-
-// /* Checked state background color */
-// .form-check-input:checked {
-//     background-color: #a259ff;
-//     /* Accent color when checked */
-// }
-
-// /* Focus state styling */
-// .form-check-input:focus {
-//     box-shadow: 0 0 0 0.25rem rgba(162, 89, 255, 0.25);
-// }
-
-// /* Optional: change label color when checked */
-// .form-check-input:checked+.form-check-label {
-//     color: #a259ff;
-// }
-
-// .form-check-label {
-//     margin-bottom: 0;
-// }
-
-// .form-switch {
-//     position: relative;
-//     display: inline-block;
-//     width: 3.75rem;
-//     height: 2rem;
-// }
-
-.btn{
-    background: linear-gradient(to top, #af9ce3, #89d4cf);
-    border-color: #ffffff;
-    color: white;
-    padding: 0.8rem 1rem;
-    margin-top: 1rem;
-    width: 50%;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-.save-btn {
-    background: linear-gradient(to right, #af9ce3, #89d4cf);
-    border-color: #ffffff;
-    color: white;
-    padding: 0.8rem 1rem;
-    margin-top: 1rem;
-    width: 30%;
-    border: none;
-    border-radius: 8px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s ease;
-    margin-left: 500px;
-}
-
-.btn:hover,
-.save-btn:hover {
-    background: linear-gradient(to right, #af9ce3, #89d4cf);
-    border-color: #ffffff;
-}
-
-.btn.danger {
-    background-color: #ff3e3e;
-}
-
-.btn.danger:hover {
-    background-color: #cc2f2f;
+.btn:hover {
+    opacity: 0.9;
 }

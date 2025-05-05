@@ -33,6 +33,11 @@ export const routes: Routes = [
                     import('./home/footer/footer.component').then((c) => c.FooterComponent),
             },
             {
+                path: 'profile',
+                loadComponent: () =>
+                    import('./home/profile/profile.component').then((c) => c.ProfileComponent),
+            },
+            {
                 path: 'liked-songs',
                 loadComponent: () =>
                     import('./home/liked-songs/liked-songs.component').then((c) => c.LikedSongsComponent),

@@ -36,6 +36,19 @@
       </li>
 
       <li routerLinkActive="active">
+        <a routerLink="/profile" class="nav-link">
+            <!-- Bootstrap Icons hollow user icon -->
+            <i class="bi bi-person nav-icon"></i>
+            
+            <!-- Alternative hollow icons -->
+            <!-- <i class="bi bi-person-circle nav-icon"></i> -->
+            <!-- <i class="bi bi-person-square nav-icon"></i> -->
+            
+            <span class="nav-text" *ngIf="isExpanded">PROFILE</span>
+        </a>
+    </li>
+
+      <li routerLinkActive="active">
         <a routerLink="/settings" class="nav-link">
           <i class="bi bi-gear nav-icon"></i>
           <span class="nav-text" *ngIf="isExpanded">Settings</span>
