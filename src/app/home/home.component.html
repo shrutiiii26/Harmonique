@@ -4,9 +4,11 @@
     <div class="scroll-container mb-5">
         <div class="row flex-nowrap">
             <div class="col-2" *ngFor="let song of backendSongs">
-                <img [src]="song.image || '../assets/Mask Group.png'" alt="cover" class="album-img mb-2">
-                <div class="album-title">{{ song.title }}</div>
-                <div class="album-artist">{{ song.artist }}</div>
+                <div class="card" style="width: 100%; border: none; background-color: transparent;">
+                    <img [src]="song.image || '../assets/Mask Group.png'" alt="cover" class="album-img mb-2">
+                    <div class="album-title">{{ song.title }}</div>
+                    <div class="album-artist">{{ song.artist }}</div>
+                </div>
             </div>
         </div>
     </div>

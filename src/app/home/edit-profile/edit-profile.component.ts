@@ -1,15 +1,19 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  styleUrls: ['./edit-profile.component.scss'],
+  imports: [CommonModule, FormsModule]
 })
 export class EditProfileComponent {
-  activeTab: string = 'profile'; // Default active tab
+  // Default active tab
+  activeTab: string = 'profile';
 
-  // Form model
+  // Form model for profile, privacy, and preferences
   profileForm = {
     firstName: 'Sarah',
     lastName: 'Johnson',
@@ -27,29 +31,29 @@ export class EditProfileComponent {
       autoplay: true,
       explicitContent: false,
       audioQuality: 'medium', // 'low' | 'medium' | 'high'
-      theme: 'light', // 'light' | 'dark' | 'system'
+      theme: 'light',         // 'light' | 'dark' | 'system'
       accentColor: '#6e45e2'
     }
   };
 
-  constructor(private location: Location) {}
+  constructor(private location: Location) { }
 
-  // Set active tab
+  // Change active tab
   setActiveTab(tab: string): void {
     this.activeTab = tab;
   }
 
-  // Check if tab is active
+  // Check if tab is currently active
   isTabActive(tab: string): boolean {
     return this.activeTab === tab;
   }
 
-  // Handle back navigation
+  // Navigate back
   goBack(): void {
     this.location.back();
   }
 
-  // Handle avatar upload
+  // Handle avatar image upload
   onAvatarUpload(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
@@ -64,18 +68,18 @@ export class EditProfileComponent {
     }
   }
 
-  // Change privacy option
+  // Set selected privacy visibility
   setPrivacyOption(option: 'public' | 'followers' | 'private'): void {
     this.profileForm.privacySettings.visibility = option;
   }
 
-  // Change accent color
+  // Set selected accent color
   setAccentColor(color: string): void {
     this.profileForm.preferences.accentColor = color;
     console.log('Accent color changed to:', color);
   }
 
-  // Save form data
+  // Save profile info
   saveProfile(): void {
     console.log('Profile saved:', this.profileForm);
   }

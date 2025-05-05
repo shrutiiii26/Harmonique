@@ -3,8 +3,8 @@
 <nav class="navbar navbar-expand-lg navbar-light shadow-sm sticky-top">
   <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-      <i class="fas fa-arrow-left fs-4 mt-4" (click)="goBack()" style="cursor: pointer; color: #6e45e2;"></i>
-      <div style="width: 24px;"></div>
+      <i class="fas fa-arrow-left fs-4 mt-4" (click)="goBack()" style="cursor: pointer; color: #6e45e2; border-radius: 1px;"></i>
+      <div style="width: 24px;"></div> <!-- Spacer for alignment -->
     </div>
     <a class="navbar-brand" href="#">HARMONIQUE</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -28,7 +28,6 @@
     </div>
   </div>
 </nav>
-
 
 <!-- Edit Header -->
 <header class="edit-header text-center">
@@ -70,9 +69,8 @@
       </button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="preferences-tab" data-bs-toggle="pill" data-bs-target="#preferences" type="button"
-        role="tab">
-        <i class="fas fa-sliders-h me-1"></i> Preferences
+      <button class="nav-link" id="preferences-tab" data-bs-toggle="pill" data-bs-target="#preferences" type="button" role="tab">
+        <i class="pi pi-cog"></i> Preferences
       </button>
     </li>
   </ul>
@@ -80,10 +78,9 @@
   <!-- Tab Content -->
   <div class="tab-content" id="editProfileTabsContent">
     <!-- Profile Tab -->
-    <div class="tab-pane" [class.show.active]="isTabActive('profile')">
+    <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
       <div class="edit-form-container">
-        <form (ngSubmit)="saveProfile()">
-
+        <form>
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="firstName" class="form-label">First Name</label>
@@ -129,133 +126,129 @@
     </div>
 
     <!-- Privacy Tab -->
-    <div class="tab-pane" [class.show.active]="isTabActive('privacy')">
+    <div class="tab-pane fade" id="privacy" role="tabpanel" aria-labelledby="privacy-tab">
       <div class="edit-form-container">
-        <form (ngSubmit)="savePrivacySettings()">
-          <h4 class="mb-4"><i class="fas fa-lock me-2"></i>Privacy Settings</h4>
+        <h4 class="mb-4"><i class="fas fa-lock me-2"></i>Privacy Settings</h4>
 
-          <div class="mb-4">
-            <h5>Profile Visibility</h5>
-            <p class="text-muted">Who can see your profile and activity</p>
+        <div class="mb-4">
+          <h5>Profile Visibility</h5>
+          <p class="text-muted">Who can see your profile and activity</p>
 
-            <div class="row">
-              <div class="col-md-4">
-                <div class="privacy-option active">
-                  <i class="fas fa-globe"></i>
-                  <h6>Public</h6>
-                  <p class="small text-muted">Anyone can see your profile</p>
-                </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="privacy-option active">
+                <i class="fas fa-globe"></i>
+                <h6>Public</h6>
+                <p class="small text-muted">Anyone can see your profile</p>
               </div>
-              <div class="col-md-4">
-                <div class="privacy-option">
-                  <i class="fas fa-users"></i>
-                  <h6>Followers Only</h6>
-                  <p class="small text-muted">Only your followers can see</p>
-                </div>
+            </div>
+            <div class="col-md-4">
+              <div class="privacy-option">
+                <i class="fas fa-users"></i>
+                <h6>Followers Only</h6>
+                <p class="small text-muted">Only your followers can see</p>
               </div>
-              <div class="col-md-4">
-                <div class="privacy-option">
-                  <i class="fas fa-lock"></i>
-                  <h6>Private</h6>
-                  <p class="small text-muted">Only you can see your profile</p>
-                </div>
+            </div>
+            <div class="col-md-4">
+              <div class="privacy-option">
+                <i class="fas fa-lock"></i>
+                <h6>Private</h6>
+                <p class="small text-muted">Only you can see your profile</p>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="mb-4">
-            <h5>Activity Sharing</h5>
-            <p class="text-muted">Control what activity is shared on your profile</p>
+        <div class="mb-4">
+          <h5>Activity Sharing</h5>
+          <p class="text-muted">Control what activity is shared on your profile</p>
 
-            <div class="form-check form-switch mb-3">
-              <input class="form-check-input" type="checkbox" id="shareListening" checked>
-              <label class="form-check-label" for="shareListening">Share what I'm listening to</label>
-            </div>
-
-            <div class="form-check form-switch mb-3">
-              <input class="form-check-input" type="checkbox" id="sharePlaylists" checked>
-              <label class="form-check-label" for="sharePlaylists">Show my public playlists</label>
-            </div>
-
-            <div class="form-check form-switch">
-              <input class="form-check-input" type="checkbox" id="shareFollowers">
-              <label class="form-check-label" for="shareFollowers">Show my followers/following count</label>
-            </div>
+          <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" id="shareListening" checked>
+            <label class="form-check-label" for="shareListening">Share what I'm listening to</label>
           </div>
 
-          <div class="d-flex justify-content-end mt-4">
-            <button type="button" class="btn btn-outline me-2">Cancel</button>
-            <button type="submit" class="btn btn-primary">Save Privacy Settings</button>
+          <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" id="sharePlaylists" checked>
+            <label class="form-check-label" for="sharePlaylists">Show my public playlists</label>
           </div>
-        </form>
+
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="shareFollowers">
+            <label class="form-check-label" for="shareFollowers">Show my followers/following count</label>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end mt-4">
+          <button type="button" class="btn btn-outline me-2">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Privacy Settings</button>
+        </div>
       </div>
     </div>
 
     <!-- Preferences Tab -->
-    <div class="tab-pane" [class.show.active]="isTabActive('preferences')">
+    <div class="tab-pane fade" id="preferences" role="tabpanel" aria-labelledby="preferences-tab">
       <div class="edit-form-container">
-        <form (ngSubmit)="savePreferences()">
-          <h4 class="mb-4"><i class="fas fa-sliders-h me-2"></i>Preferences</h4>
+        <h4 class="mb-4"><i class="fas fa-sliders-h me-2"></i>Preferences</h4>
 
-          <div class="mb-4">
-            <h5>Playback Settings</h5>
+        <div class="mb-4">
+          <h5>Playback Settings</h5>
 
-            <div class="form-check form-switch mb-3">
-              <input class="form-check-input" type="checkbox" id="autoplay" checked>
-              <label class="form-check-label" for="autoplay">Enable Autoplay</label>
-              <p class="small text-muted">Automatically play similar songs when your music ends</p>
-            </div>
-
-            <div class="form-check form-switch mb-3">
-              <input class="form-check-input" type="checkbox" id="explicitContent">
-              <label class="form-check-label" for="explicitContent">Allow Explicit Content</label>
-              <p class="small text-muted">Include songs with explicit lyrics in your playlists</p>
-            </div>
-
-            <div class="mb-3">
-              <label for="audioQuality" class="form-label">Audio Quality</label>
-              <select class="form-select" id="audioQuality">
-                <option value="low">Low (Data Saver)</option>
-                <option value="medium" selected>Medium (Balanced)</option>
-                <option value="high">High (Best Quality)</option>
-              </select>
-            </div>
+          <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" id="autoplay" checked>
+            <label class="form-check-label" for="autoplay">Enable Autoplay</label>
+            <p class="small text-muted">Automatically play similar songs when your music ends</p>
           </div>
 
-          <div class="mb-4">
-            <h5>Appearance</h5>
-
-            <div class="mb-3">
-              <label for="theme" class="form-label">Theme</label>
-              <select class="form-select" id="theme">
-                <option value="light">Light</option>
-                <option value="dark">Dark</option>
-                <option value="system">System Default</option>
-              </select>
-            </div>
-
-            <div class="mb-3">
-              <label for="accentColor" class="form-label">Accent Color</label>
-              <div class="d-flex">
-                <div class="color-option me-2 rounded-circle"
-                  style="width: 30px; height: 30px; background: #6e45e2; cursor: pointer;" data-color="#6e45e2"></div>
-                <div class="color-option me-2 rounded-circle"
-                  style="width: 30px; height: 30px; background: #1DB954; cursor: pointer;" data-color="#1DB954"></div>
-                <div class="color-option me-2 rounded-circle"
-                  style="width: 30px; height: 30px; background: #FF2D55; cursor: pointer;" data-color="#FF2D55"></div>
-                <div class="color-option me-2 rounded-circle"
-                  style="width: 30px; height: 30px; background: #5856D6; cursor: pointer;" data-color="#5856D6"></div>
-                <div class="color-option rounded-circle"
-                  style="width: 30px; height: 30px; background: #FF9500; cursor: pointer;" data-color="#FF9500"></div>
-              </div>
-            </div>
+          <div class="form-check form-switch mb-3">
+            <input class="form-check-input" type="checkbox" id="explicitContent">
+            <label class="form-check-label" for="explicitContent">Allow Explicit Content</label>
+            <p class="small text-muted">Include songs with explicit lyrics in your playlists</p>
           </div>
 
-          <div class="d-flex justify-content-end mt-4">
-            <button type="button" class="btn btn-outline me-2">Cancel</button>
-            <button type="submit" class="btn btn-primary">Save Preferences</button>
+          <div class="mb-3">
+            <label for="audioQuality" class="form-label">Audio Quality</label>
+            <select class="form-select" id="audioQuality">
+              <option value="low">Low (Data Saver)</option>
+              <option value="medium" selected>Medium (Balanced)</option>
+              <option value="high">High (Best Quality)</option>
+            </select>
           </div>
-        </form>
+        </div>
+
+        <div class="mb-4">
+          <h5>Appearance</h5>
+
+          <div class="mb-3">
+            <label for="theme" class="form-label">Theme</label>
+            <select class="form-select" id="theme">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+              <option value="system">System Default</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="accentColor" class="form-label">Accent Color</label>
+            <div class="d-flex">
+              <div class="color-option me-2 rounded-circle"
+                style="width: 30px; height: 30px; background: #6e45e2; cursor: pointer;" data-color="#6e45e2"></div>
+              <div class="color-option me-2 rounded-circle"
+                style="width: 30px; height: 30px; background: #1DB954; cursor: pointer;" data-color="#1DB954"></div>
+              <div class="color-option me-2 rounded-circle"
+                style="width: 30px; height: 30px; background: #FF2D55; cursor: pointer;" data-color="#FF2D55"></div>
+              <div class="color-option me-2 rounded-circle"
+                style="width: 30px; height: 30px; background: #5856D6; cursor: pointer;" data-color="#5856D6"></div>
+              <div class="color-option rounded-circle"
+                style="width: 30px; height: 30px; background: #FF9500; cursor: pointer;" data-color="#FF9500"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end mt-4">
+          <button type="button" class="btn btn-outline me-2">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Preferences</button>
+        </div>
       </div>
     </div>
   </div>
