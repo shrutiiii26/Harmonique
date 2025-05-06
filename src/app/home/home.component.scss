@@ -1,4 +1,6 @@
 .container-fluid {
+    margin-left: 50px;
+    margin-top: 50px;
     background: linear-gradient(135deg, #6e45e2 0%, #89d4cf 100%);
     height: 200vh;
 }
@@ -63,6 +65,7 @@
     border-radius: 10px;
     outline: none;
     -webkit-appearance: none;
+    appearance: none;
     width: 100%;
 
     /* Style for the slider thumb */
