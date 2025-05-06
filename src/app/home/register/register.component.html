@@ -3,15 +3,13 @@
     <div class="music-notes">
         <span class="music-note" style="left: 10%; animation-delay: 0s;">♬</span>
         <span class="music-note" style="left: 30%; animation-delay: 1s;">♪</span>
-        <!-- <span class="music-note" style="left: 50%; animation-delay: 2s;">♬</span> -->
+        <span class="music-note" style="left: 50%; animation-delay: 2s;">♬</span>
         <span class="music-note" style="left: 70%; animation-delay: 3s;">♩</span>
         <span class="music-note" style="left: 90%; animation-delay: 4s;">♬</span>
         <span class="music-note" style="left: 20%; animation-delay: 5s;">♪</span>
     </div>
 
-
-    <!-- Your existing music notes and container code -->
-
+    <!-- Existing music notes and container code -->
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="register-card text-center p-4">
             <h4>Register</h4>
@@ -31,8 +29,6 @@
                     {{ errorMessage }}
                 </div>
 
-
-                <!-- Full Name -->
                 <!-- Full Name -->
                 <div class="position-relative">
                     <input type="text" class="form-control ps-5 mb-2" placeholder="Full Name"
@@ -40,12 +36,11 @@
                     <i class="fa-regular fa-user position-absolute top-50 start-0 translate-middle-y"
                         style="margin-left: 15px; color: white;"></i>
                 </div>
+
                 <div *ngIf="f['fullName'].touched && f['fullName'].errors" class="text-danger">
                     <div *ngIf="f['fullName'].errors['required']">Full Name is required</div>
                     <div *ngIf="f['fullName'].errors['minlength']">Minimum 3 characters required</div>
                 </div>
-
-
 
                 <!-- Email -->
                 <div class="position-relative">
@@ -53,6 +48,7 @@
                     <i class="fa-regular fa-envelope position-absolute top-50 start-0 translate-middle-y"
                         style="margin-left: 15px; color: white;"></i>
                 </div>
+                
                 <div *ngIf="f['email'].touched && f['email'].errors" class="text-danger">
                     <div *ngIf="f['email'].errors['required']">Email is required</div>
                     <div *ngIf="f['email'].errors['email']">Please enter a valid email</div>
