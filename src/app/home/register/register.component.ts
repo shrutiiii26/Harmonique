@@ -19,6 +19,9 @@ export class RegisterComponent {
   errorMessage: string | null = null;
   successMessage: string | null = null;
   lockIconClass = 'fa-solid fa-lock';
+  showPassword = false;
+  showConfirmPassword = false;
+
 
   constructor(
     private fb: FormBuilder,
@@ -52,7 +55,7 @@ export class RegisterComponent {
 
     const { fullName, email, password } = this.registrationForm.value;
 
-    this.servicesService.register({  name: fullName, email, password }).subscribe({
+    this.servicesService.register({ name: fullName, email, password }).subscribe({
       next: (response) => {
         this.isLoading = false;
         this.successMessage = 'Registration successful! Redirecting to login...';

@@ -60,12 +60,20 @@
 
 
                 <!-- Create Password -->
+                <!-- Create Password -->
                 <div class="position-relative">
-                    <input type="password" class="form-control ps-5 mb-2" placeholder="Create Password"
-                        formControlName="password">
+                    <input [type]="showPassword ? 'text' : 'password'" class="form-control ps-5 pe-5 mb-2"
+                        placeholder="Create Password" formControlName="password" />
                     <i class="position-absolute top-50 start-0 translate-middle-y" [ngClass]="lockIconClass"
                         style="margin-left: 15px; color: white;"></i>
+
+                    <!-- Eye Icon -->
+                    <i class="fa" [ngClass]="showPassword ? 'fa-eye-slash' : 'fa-eye'"
+                        (click)="showPassword = !showPassword"
+                        style="position: absolute; top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer; color: white;">
+                    </i>
                 </div>
+
                 <div *ngIf="f['password'].touched && f['password'].errors" class="text-danger">
                     <div *ngIf="f['password'].errors['required']">Password is required</div>
                     <div *ngIf="f['password'].errors['minlength']">Minimum 6 characters required</div>
@@ -73,17 +81,25 @@
 
                 <!-- Confirm Password -->
                 <div class="position-relative">
-                    <input type="password" class="form-control ps-5 mb-3" placeholder="Confirm Password"
-                        formControlName="confirmPassword">
+                    <input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control ps-5 pe-5 mb-3"
+                        placeholder="Confirm Password" formControlName="confirmPassword" />
                     <i class="position-absolute top-50 start-0 translate-middle-y" [ngClass]="lockIconClass"
                         style="margin-left: 15px; color: white;"></i>
+
+                    <!-- Eye Icon -->
+                    <i class="fa" [ngClass]="showConfirmPassword ? 'fa-eye-slash' : 'fa-eye'"
+                        (click)="showConfirmPassword = !showConfirmPassword"
+                        style="position: absolute; top: 50%; right: 15px; transform: translateY(-50%); cursor: pointer; color: white;">
+                    </i>
                 </div>
+
                 <div *ngIf="f['confirmPassword'].touched && f['confirmPassword'].errors" class="text-danger">
                     <div *ngIf="f['confirmPassword'].errors['required']">Please confirm your password</div>
                     <div *ngIf="registrationForm.errors?.['mismatch'] && f['confirmPassword'].touched">
                         Passwords don't match
                     </div>
                 </div>
+
 
 
                 <button type="submit" class="btn btn-primary w-100 gradient-btn"
