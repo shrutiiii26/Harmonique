@@ -1,13 +1,13 @@
 <div class="scroll-container mb-4" *ngIf="audioService.songs.length">
     <div class="row flex-nowrap">
-      <div class="col-2" *ngFor="let song of audioService.songs; let i = index" (click)="audioService.togglePlay(i)">
-  
-      </div>
+        <div class="col-2" *ngFor="let song of audioService.songs; let i = index" (click)="audioService.togglePlay(i)">
+        </div>
     </div>
-  </div>
-  
+</div>
+
 <!-- Bottom Music Player -->
-<div class="bottom-player fixed-bottom d-flex justify-content-between align-items-center px-4 py-2" *ngIf="audioService.songs.length">
+<div class="bottom-player fixed-bottom d-flex justify-content-between align-items-center px-4 py-2"
+    *ngIf="audioService.songs.length">
     <!-- Left Section -->
     <div class="d-flex align-items-center">
         <a routerLink="/playing-now">
@@ -25,10 +25,8 @@
             <i class="bi bi-shuffle icon-btn"></i>
             <i class="bi bi-skip-backward-fill icon-btn" (click)="audioService.previous()"></i>
             <!-- Play/Pause Button -->
-            <i class="bi play-icon" 
-               [class.bi-play-circle-fill]="!audioService.isPlaying"
-               [class.bi-pause-circle-fill]="audioService.isPlaying"
-               (click)="audioService.togglePlay()">
+            <i class="bi play-icon" [class.bi-play-circle-fill]="!audioService.isPlaying"
+                [class.bi-pause-circle-fill]="audioService.isPlaying" (click)="audioService.togglePlay()">
             </i>
 
             <i class="bi bi-skip-forward-fill icon-btn" (click)="audioService.next()"></i>
@@ -38,10 +36,8 @@
         <div class="progress-bar-container d-flex align-items-center w-100">
             <span class="time text-white small">{{ currentTime }}</span>
 
-            <input type="range" class="form-range crossfade-slider" [min]="0"
-                [max]="currentSongDuration || 0"
-                [value]="currentSongTime || 0"
-                [style.--progress]="currentSongProgress + '%'"
+            <input type="range" class="form-range crossfade-slider" [min]="0" [max]="currentSongDuration || 0"
+                [value]="currentSongTime || 0" [style.--progress]="currentSongProgress + '%'"
                 (input)="handleSeek($event)" />
 
             <span class="time text-white small">{{ duration }}</span>

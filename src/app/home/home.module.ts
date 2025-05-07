@@ -5,15 +5,17 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SidebarComponent,
     HttpClientModule,
     RouterModule,
-    HomeComponent
+    MatCardModule,
+    HomeComponent,        // ✅ import standalone component
+    SidebarComponent      // ✅ import standalone component
   ]
 })
 export class HomeModule { }

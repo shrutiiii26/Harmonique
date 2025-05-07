@@ -1,27 +1,20 @@
-<!-- 
-<div>
-    <router-outlet></router-outlet>
+<!-- Sidebar -->
+<div *ngIf="showNavAndSidebar">
+  <app-sidebar (expandedChange)="isSidebarExpanded = $event"></app-sidebar>
 </div>
 
-<div><app-sidebar></app-sidebar></div> -->
+<!-- Navbar -->
+<div *ngIf="showNavbar">
+  <app-navbar></app-navbar>
+</div>
 
+<!-- Main content -->
+<div class="main-content">
+  <!-- Pass sidebar state to the home page -->
+  <router-outlet></router-outlet>
+</div>
 
-<div *ngIf="showNavAndSidebar">
-    <app-sidebar></app-sidebar>
-    
-  </div>
-
-  <div *ngIf="showNavbar">
-    <app-navbar></app-navbar>
-    
-  </div>
-  <!-- Main content -->
-  <div class="main-content">
-  
-    <router-outlet></router-outlet>
-  </div>
-
-  <div>
-    <app-footer *ngIf="showFooter"></app-footer>
-  </div>
-  
+<!-- Footer -->
+<div>
+  <app-footer *ngIf="showFooter"></app-footer>
+</div>

@@ -7,13 +7,18 @@ import { AudioPlayerService } from '../home/services/audio-player.service'; // A
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { AuthService } from '../auth.service';
+import { MatCardModule } from '@angular/material/card';
+import { SidebarService } from '../home/services/sidebar.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
+  standalone: true,
   templateUrl: './home.component.html',
-  imports: [RouterModule, CommonModule],
+  imports: [RouterModule, CommonModule, MatCardModule],
   styleUrls: ['./home.component.scss'],
 })
+
 export class HomeComponent {
   form: FormGroup;
   currentStep: number = 1;
@@ -50,8 +55,9 @@ export class HomeComponent {
     private changeDetectorRef: ChangeDetectorRef,
     public audioService: AudioPlayerService,
     private http: HttpClient, // ✅ Added HttpClient
-    private authService: AuthService
-) {
+    private authService: AuthService,
+    private sidebarService: SidebarService
+  ) {
     this.form = this.fb.group({
       step1: ['', Validators.required],
       step2: ['', Validators.required],
@@ -74,6 +80,11 @@ export class HomeComponent {
 
     // Fetch songs from backend
     this.fetchSongsFromBackend();
+
+    this.sidebarSubscription = this.sidebarService.expanded$.subscribe((expanded) => {
+      this.isSidebarExpanded = expanded;
+      this.changeDetectorRef.detectChanges();
+    });
   }
 
   uploadSongs(event: any): void {
@@ -242,4 +253,12 @@ export class HomeComponent {
     songScroll.scrollLeft = songWidth * this.scrollIndex; // Scroll horizontally by the width of a song
   }
 
+  isSidebarExpanded = false;
+  private sidebarSubscription!: Subscription;
+
+  ngOnDestroy(): void {
+    if (this.sidebarSubscription) {
+      this.sidebarSubscription.unsubscribe();
+    }
+  }
 }

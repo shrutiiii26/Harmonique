@@ -1,15 +1,26 @@
 import {
+  SidebarService
+} from '../home/services/sidebar.service';
+
+import {
   Component,
   OnInit,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter
 } from '@angular/core';
+
 import {
   Router,
   RouterLink,
   RouterModule,
   NavigationEnd
 } from '@angular/router';
-import { CommonModule, NgIf } from '@angular/common';
+
+import {
+  CommonModule,
+  NgIf
+} from '@angular/common';
 
 interface MenuItem {
   id: number;
@@ -26,6 +37,7 @@ interface MenuItem {
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
+
 export class SidebarComponent implements OnInit {
   isExpanded = false;
   selectedItem: number | null = null;
@@ -38,7 +50,7 @@ export class SidebarComponent implements OnInit {
     { id: 5, label: 'Settings', icon: 'assets/gear.png', route: '/settings' }
   ];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private sidebarService: SidebarService) { }
 
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
@@ -55,10 +67,12 @@ export class SidebarComponent implements OnInit {
 
   expandSidebar(): void {
     this.isExpanded = true;
+    this.sidebarService.setExpanded(true);
   }
-
+  
   collapseSidebar(): void {
     this.isExpanded = false;
+    this.sidebarService.setExpanded(false);
   }
 
   selectItem(item: MenuItem): void {
