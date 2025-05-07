@@ -1,9 +1,4 @@
-<div
-  class="sidebar"
-  [class.expanded]="isExpanded"
-  (mouseenter)="expandSidebar()"
-  (mouseleave)="collapseSidebar()"
->
+<div class="sidebar" [class.expanded]="isExpanded" (mouseenter)="expandSidebar()" (mouseleave)="collapseSidebar()">
   <nav class="nav-menu">
     <ul>
 
@@ -37,16 +32,16 @@
 
       <li routerLinkActive="active">
         <a routerLink="/profile" class="nav-link">
-            <!-- Bootstrap Icons hollow user icon -->
-            <i class="bi bi-person nav-icon"></i>
-            
-            <!-- Alternative hollow icons -->
-            <!-- <i class="bi bi-person-circle nav-icon"></i> -->
-            <!-- <i class="bi bi-person-square nav-icon"></i> -->
-            
-            <span class="nav-text" *ngIf="isExpanded">Profile</span>
+          <!-- Bootstrap Icons hollow user icon -->
+          <i class="bi bi-person nav-icon"></i>
+
+          <!-- Alternative hollow icons -->
+          <!-- <i class="bi bi-person-circle nav-icon"></i> -->
+          <!-- <i class="bi bi-person-square nav-icon"></i> -->
+
+          <span class="nav-text" *ngIf="isExpanded">Profile</span>
         </a>
-    </li>
+      </li>
 
       <li routerLinkActive="active">
         <a routerLink="/settings" class="nav-link">

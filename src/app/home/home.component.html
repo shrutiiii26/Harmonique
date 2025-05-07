@@ -15,19 +15,8 @@
 
     <!-- Upload Songs Button -->
     <div class="mt-2">
-        <button class="btn btn-success" (click)="uploadInput.click()">Upload Songs</button>
+        <button class="btn btn-primary" (click)="uploadInput.click()">Upload Songs</button>
         <input type="file" #uploadInput accept="audio/*" multiple (change)="uploadSongs($event)" hidden />
-    </div>
-
-    <!-- Display Imported Songs -->
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h5 class="mb-0 head" *ngIf="importedSongs.length">Recommended Songs</h5>
-
-        <!-- Import Songs Button -->
-        <div>
-            <button class="btn btn-primary" (click)="fileInput.click()">Import Songs</button>
-            <input type="file" #fileInput accept="audio/*" multiple (change)="loadFiles($event)" hidden />
-        </div>
     </div>
 
     <div class="scroll-container mb-5" *ngIf="importedSongs.length">

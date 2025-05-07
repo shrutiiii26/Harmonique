@@ -1,0 +1,42 @@
+/* Ensure body and html take full height */
+:host {
+    display: block;
+    height: 100%;
+}
+
+/* Sidebar is fixed already in its own styles */
+
+app-sidebar {
+    position: fixed;
+    top: 60px; // adjust to navbar height
+    left: 0;
+    height: calc(100vh - 60px);
+    width: 60px; // base width; controlled via component class for expand
+    z-index: 2000;
+    pointer-events: auto;
+}
+
+/* Navbar */
+app-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2100;
+}
+
+/* Main content area */
+.main-content {
+    padding-left: 60px; // Match collapsed sidebar width
+    padding-top: 70px; // Adjust if navbar is fixed
+    transition: padding-left 0.3s ease;
+    min-height: calc(100vh - 60px); // Optional: ensure full height
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+
+/* Footer stays at bottom */
+app-footer {
+    width: 100%;
+}

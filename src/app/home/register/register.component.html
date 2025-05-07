@@ -81,9 +81,9 @@
 
                 <!-- Confirm Password -->
                 <div class="position-relative">
-                    <input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control ps-5 pe-5 mb-3"
+                    <input [type]="showConfirmPassword ? 'text' : 'password'" class="form-control ps-5 pe-5 mb-2"
                         placeholder="Confirm Password" formControlName="confirmPassword" />
-                    <i class="position-absolute top-50 start-0 translate-middle-y" [ngClass]="lockIconClass"
+                    <i class="position-absolute top-50 start-0 translate-middle-y " [ngClass]="lockIconClass"
                         style="margin-left: 15px; color: white;"></i>
 
                     <!-- Eye Icon -->
@@ -99,8 +99,6 @@
                         Passwords don't match
                     </div>
                 </div>
-
-
 
                 <button type="submit" class="btn btn-primary w-100 gradient-btn"
                     [disabled]="isLoading || registrationForm.invalid">
