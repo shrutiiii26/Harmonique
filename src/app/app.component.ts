@@ -47,6 +47,7 @@ export class AppComponent implements OnDestroy {
           this.showFooter = !HIDE_FOOTER_ROUTES.includes(currentUrl);
           this.showNavbar = !HIDE_NAVBAR_ROUTES.includes(currentUrl);
           this.layoutClass = NO_LAYOUT_ROUTES.includes(currentUrl) ? 'no-layout' : 'with-layout';
+
         }
       });
   }
