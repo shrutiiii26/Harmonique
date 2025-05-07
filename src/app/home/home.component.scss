@@ -1,4 +1,6 @@
 .container-fluid {
+    margin-left: 50px;
+    margin-top: 50px;
     background: linear-gradient(135deg, #6e45e2 0%, #89d4cf 100%);
     height: 200vh;
 }
@@ -6,6 +8,8 @@
 .head {
     color: white;
 }
+
+
 
 .close-btn {
     position: absolute;
@@ -40,7 +44,7 @@
 }
 
 .btn-success {
-    margin-left: 140px;
+    margin-left: 2%;
     margin-bottom: 15px;
 }
 
@@ -63,6 +67,7 @@
     border-radius: 10px;
     outline: none;
     -webkit-appearance: none;
+    appearance: none;
     width: 100%;
 
     /* Style for the slider thumb */
