@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!-- Sidebar -->
 <div *ngIf="showNavAndSidebar">
   <app-sidebar (expandedChange)="isSidebarExpanded = $event"></app-sidebar>
@@ -16,5 +17,25 @@
 
 <!-- Footer -->
 <div>
+=======
+<div [ngClass]="layoutClass">
+  <div class="app-layout">
+    <div *ngIf="showNavAndSidebar">
+      <app-navbar></app-navbar>
+    </div>
+
+    <div class="app-content">
+      <!-- Only wrapper has class, not inside app-sidebar -->
+      <div *ngIf="showNavAndSidebar" class="sidebar-wrapper">
+        <app-sidebar></app-sidebar>
+      </div>
+
+      <div class="main-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+
+>>>>>>> e7278caf119b0a83afd2948acaa1bfd4e1dd2828
   <app-footer *ngIf="showFooter"></app-footer>
 </div>

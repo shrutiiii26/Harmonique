@@ -1,9 +1,13 @@
 import {
+<<<<<<< HEAD
   SidebarService
 } from '../home/services/sidebar.service';
 
 import {
   Component,
+=======
+  Component,ViewEncapsulation,
+>>>>>>> e7278caf119b0a83afd2948acaa1bfd4e1dd2828
   OnInit,
   ChangeDetectionStrategy,
   Output,
@@ -27,6 +31,7 @@ interface MenuItem {
   label: string;
   icon: string;
   route: string;
+  exact?: boolean;
 }
 
 @Component({
@@ -35,15 +40,19 @@ interface MenuItem {
   imports: [CommonModule, NgIf, RouterLink, RouterModule],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  styleUrls: ['./sidebar.component.scss'],
+  encapsulation: ViewEncapsulation.None 
 })
 
 export class SidebarComponent implements OnInit {
+  @Output() sidebarState = new EventEmitter<boolean>();
+  
   isExpanded = false;
   selectedItem: number | null = null;
+  hoverTimeout: any;
 
   menuItems: MenuItem[] = [
-    { id: 1, label: 'Home', icon: 'assets/Dashboard.png', route: '/home' },
+    { id: 1, label: 'Home', icon: 'assets/Dashboard.png', route: '/home', exact: true },
     { id: 2, label: 'Liked Songs', icon: 'assets/heart.png', route: '/liked-songs' },
     { id: 3, label: 'About Us', icon: 'assets/chat.png', route: '/about-us' },
     { id: 4, label: 'FAQs', icon: 'assets/question.png', route: '/faq' },
@@ -53,18 +62,15 @@ export class SidebarComponent implements OnInit {
   constructor(private router: Router, private sidebarService: SidebarService) { }
 
   ngOnInit(): void {
+    this.setActiveItem();
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        const activeItem = this.menuItems.find(
-          (item) => item.route === this.router.url
-        );
-        if (activeItem) {
-          this.selectedItem = activeItem.id;
-        }
+        this.setActiveItem();
       }
     });
   }
 
+<<<<<<< HEAD
   expandSidebar(): void {
     this.isExpanded = true;
     this.sidebarService.setExpanded(true);
@@ -73,11 +79,56 @@ export class SidebarComponent implements OnInit {
   collapseSidebar(): void {
     this.isExpanded = false;
     this.sidebarService.setExpanded(false);
+=======
+  private setActiveItem(): void {
+    const activeItem = this.menuItems.find(item => 
+      item.exact 
+        ? this.router.url === item.route
+        : this.router.url.startsWith(item.route)
+    );
+    this.selectedItem = activeItem?.id || null;
+  }
+
+  expandSidebar() {
+    clearTimeout(this.hoverTimeout);
+    this.isExpanded = true;
+    this.sidebarState.emit(true);
+  }
+  
+  collapseSidebar() {
+    this.hoverTimeout = setTimeout(() => {
+      if (!this.isExpanded) return;
+      this.isExpanded = false;
+      this.sidebarState.emit(false);
+    }, 300); // Small delay to prevent flickering
+  }
+
+  cancelCollapse() {
+    clearTimeout(this.hoverTimeout);
+  }
+
+  toggleSidebar(): void {
+    this.isExpanded = !this.isExpanded;
+    this.sidebarState.emit(this.isExpanded);
+>>>>>>> e7278caf119b0a83afd2948acaa1bfd4e1dd2828
   }
 
   selectItem(item: MenuItem): void {
     if (this.router.url !== item.route) {
       this.router.navigate([item.route]);
     }
+    // Auto-collapse for mobile if needed
+    if (window.innerWidth < 768) {
+      this.isExpanded = false;
+      this.sidebarState.emit(false);
+    }
   }
+<<<<<<< HEAD
+=======
+
+  trackByItemId(index: number, item: MenuItem): number {
+    return item.id;
+  }
+  
+>>>>>>> e7278caf119b0a83afd2948acaa1bfd4e1dd2828
 }
