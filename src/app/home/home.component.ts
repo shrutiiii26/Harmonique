@@ -102,6 +102,8 @@ export class HomeComponent {
     });
   }
 
+  
+
   fetchSongsFromBackend(): void {
     this.http.get<any[]>(environment.songsApi)
       .subscribe(

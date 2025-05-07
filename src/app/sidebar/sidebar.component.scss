@@ -1,60 +1,76 @@
-.sidebar {
+.sidebar-container {
     position: fixed;
-    top: 60px; // height of the navbar
+    top: 60px;
     left: 0;
-    height: calc(100vh - 60px); // subtract navbar height
-    background: linear-gradient(to bottom, #f147d2, #b41ccb);
-    color: #fff;
-    padding: 1rem 0.5rem;
+    height: calc(100vh - 60px);
     width: 60px;
     transition: width 0.3s ease;
+    overflow: hidden;
     z-index: 2000;
-    overflow-x: hidden;
+}
 
-    &.expanded {
-        width: 220px;
-    }
+.sidebar-container:hover {
+    width: 220px;
+}
 
-    .nav-menu {
-        ul {
-            list-style: none;
-            padding: 2rem 0 0 0;
-            margin: 0;
+.sidebar {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #b29fe2, #a6f4ee);
+    color: #fff;
+    padding: 1rem 0.5rem;
+}
 
-            li {
-                margin: 0.5rem 0;
+.nav-menu ul {
+    list-style: none;
+    padding: 2rem 0 0 0;
+    margin: 0;
+}
 
-                .nav-link {
-                    display: flex;
-                    align-items: center;
-                    padding: 10px 15px;
-                    color: white;
-                    text-decoration: none;
-                    border-radius: 8px;
-                    transition: background-color 0.3s ease;
+.nav-menu li {
+    margin: 0.5rem 0;
+}
 
-                    &:hover {
-                        background-color: rgba(255, 255, 255, 0.2);
-                        color: white;
-                    }
+.nav-menu a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
 
-                    .nav-icon {
-                        width: 24px;
-                        height: 24px;
-                        margin-right: 1rem;
-                        flex-shrink: 0;
-                    }
+.nav-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
 
-                    .nav-text {
-                        white-space: nowrap;
-                        font-size: 1rem;
-                    }
-                }
+.nav-menu i {
+    width: 24px;
+    height: 24px;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-                &.active .nav-link {
-                    background-color: rgba(255, 255, 255, 0.3);
-                }
-            }
-        }
-    }
+.nav-menu span {
+    white-space: nowrap;
+    font-size: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    display: none;
+}
+
+.sidebar-container:hover .nav-menu span {
+    opacity: 1;
+    visibility: visible;
+    display: block;
+}
+
+.nav-menu li.active a {
+    background-color: rgba(255, 255, 255, 0.3);
 }
