@@ -1,0 +1,70 @@
+package com.harmonique.songservice.controller;
+
+import com.harmonique.songservice.payload.ApiResponse;
+import com.harmonique.songservice.payload.SongRequest;
+import com.harmonique.songservice.payload.SongResponse;
+import com.harmonique.songservice.security.JwtUtils;
+import com.harmonique.songservice.service.SongService;
+
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/songs")
+@Tag(name = "Songs", description = "Song Management APIs")
+@SecurityRequirement(name = "bearerAuth")
+public class SongController {
+
+    @Autowired
+    private SongService songService;
+    @Autowired
+    private JwtUtils jwtUtils;
+
+
+    // ADD NEW SONG
+    @PostMapping("/add")
+    public ResponseEntity<SongResponse> createSong(
+            @RequestBody @Valid SongRequest songRequest,
+            @RequestHeader("Authorization") String token
+    ) {
+        Long userId = jwtUtils.extractUserId(token);
+        SongResponse songResponse = songService.createSong(songRequest, userId);
+        return new ResponseEntity<>(songResponse, HttpStatus.CREATED);
+    }
+
+    // UPDATE SONG
+    @PutMapping("/update/{id}")
+    public ResponseEntity<SongResponse> updateSong(@Valid @RequestBody SongRequest request, @PathVariable Long id) {
+        SongResponse response = songService.updateSong(request, id);
+        return ResponseEntity.ok(response);
+    }
+
+    // DELETE SONG
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<ApiResponse> deleteSong(@PathVariable Long id) {
+        songService.deleteSong(id);
+        return new ResponseEntity<>(new ApiResponse("Song deleted successfully", true, HttpStatus.OK), HttpStatus.OK);
+    }
+
+    // GET SONG BY ID
+    @GetMapping("/{id}")
+    public ResponseEntity<SongResponse> getSongById(@PathVariable Long id) {
+        SongResponse response = songService.getSongById(id);
+        return ResponseEntity.ok(response);
+    }
+
+    // GET ALL SONGS
+    @GetMapping
+    public ResponseEntity<List<SongResponse>> getAllSongs() {
+        List<SongResponse> responseList = songService.getAllSongs();
+        return ResponseEntity.ok(responseList);
+    }
+}

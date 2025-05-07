@@ -1,0 +1,5 @@
+package com.harmonique.songservice.controller;
+
+public class SongController {
+
+}

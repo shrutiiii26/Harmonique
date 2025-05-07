@@ -1,0 +1,49 @@
+package com.harmonique.userservice.controller;
+
+import com.harmonique.userservice.payload.ApiResponse;
+import com.harmonique.userservice.payload.JwtAuthRequest;
+import com.harmonique.userservice.payload.JwtAuthResponse;
+import com.harmonique.userservice.payload.UserRequest;
+import com.harmonique.userservice.payload.UserResponse;
+import com.harmonique.userservice.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/user")
+@RequiredArgsConstructor
+public class UserController {
+
+    private final UserService userService;
+
+    // 3. Get Own Profile (from JWT token)
+    @GetMapping("/profile")
+    public ResponseEntity<UserResponse> getUserProfile(Authentication authentication) {
+        String username = authentication.getName();
+        UserResponse userResponse = userService.getUserProfile(username);
+        return ResponseEntity.ok(userResponse);
+    }
+
+    // 4. Get User by Email (Admin / internal use)
+    @PreAuthorize("hasRole('ADMIN') or #email == authentication.name")
+    @GetMapping("/email/{email}")
+    public ResponseEntity<UserResponse> getUserByEmail(@PathVariable String email) {
+        UserResponse userResponse = userService.getUserByEmail(email);
+        return ResponseEntity.ok(userResponse);
+    }
+
+    // 5. Add New Role
+    @PostMapping("/role")
+    public ResponseEntity<ApiResponse> addRole(@RequestParam String roleName) {
+        ApiResponse response = ApiResponse.builder()
+                .message("Role added successfully")
+                .success(true)
+                .status(HttpStatus.CREATED.value())
+                .build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+}

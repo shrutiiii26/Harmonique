@@ -1,174 +1,145 @@
-@media (min-width:1366px) and (max-width:1600px) {
-    .container-fluid {
-        background: linear-gradient(135deg, #6e45e2 0%, #89d4cf 100%); 
-        height: 200vh;
+.home-container {
+    margin-left: 60px; // collapsed sidebar width
+    transition: margin-left 0.3s ease;
+
+    &.expanded {
+        margin-left: 220px; // expanded sidebar width
     }
+}
 
-    .head {
-        color: white;
-    }
+.container-fluid {
+    margin-top: 60px;
+    background: #3066e2;
+    //height: 200vh;
+}
 
-    .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        cursor: pointer;
-    }
+.song-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    padding: 16px;
+}
 
-    .album-img {
-        width: 90%;
-        height: 60%;
-        border-radius: 10px;
-        cursor: pointer;
-    }
+.song-card {
+    background: #18192c99;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+}
 
-    .album-title {
-        font-weight: 600;
-        font-size: 1rem;
-        color: rgb(219, 219, 219);
-    }
+.album-img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    /* keeps it perfectly square */
+    object-fit: cover;
+    border-radius: 8px;
+}
 
-    .album-artist {
-        font-size: 0.75rem;
-        color: #c9d1db;
-    }
+.mat-card-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: rgb(219, 219, 219);
+}
 
-    .btn-primary {
-     background: linear-gradient(to right, #af9ce3, #89d4cf);
-        border-color: #ffffff;
-    }
+.mat-card-subtitle {
+    font-size: 0.75rem;
+    color: #c9d1db;
+}
 
-    .btn-primary:hover {
-        background-color: #605188;
-    }
+.head {
+    color: white;
+}
 
-    .crossfade-slider {
-        --progress: 0%;
-        /* Default value for progress */
-
-        /* Apply a gradient where the left part is purple for played, 
-           and the right part is white for the remaining song */
-        background: linear-gradient(to right,
-                #8248ee var(--progress),
-                /* Purple for the played portion */
-                #fff var(--progress));
-        /* White for the remaining portion */
-        height: 8px;
-        border-radius: 10px;
-        outline: none;
-        -webkit-appearance: none;
-        width: 100%;
-
-        /* Style for the slider thumb */
-        &::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 18px;
-            width: 18px;
-            border-radius: 50%;
-            background: #8248ee;
-            /* Purple thumb */
-            cursor: pointer;
-            border: none;
-        }
-
-        &::-moz-range-thumb {
-            height: 18px;
-            width: 18px;
-            border-radius: 50%;
-            background: #8248ee;
-            /* Purple thumb */
-            cursor: pointer;
-            border: none;
-        }
-    }
-
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
 
 }
 
+.album-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: rgb(219, 219, 219);
+}
 
-@media (min-width:1024px) and (max-width:1366px) {
-    .container-fluid {
-        background: linear-gradient(135deg, #6e45e2 0%, #89d4cf 100%); 
-        height: 200vh;
-    }
+.album-artist {
+    font-size: 0.75rem;
+    color: #c9d1db;
+}
 
-    .head {
-        color: white;
-    }
+.btn-primary {
+    background: linear-gradient(to right, #af9ce3, #89d4cf);
+    border-color: #ffffff;
+    margin-left: 140px;
+}
 
-    .close-btn {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        cursor: pointer;
-    }
+.btn-success {
+    margin-left: 2%;
+    margin-bottom: 15px;
+}
 
-    .album-img {
-        width: 90%;
-        height: 60%;
-        border-radius: 10px;
-        cursor: pointer;
-    }
+.btn-primary:hover {
+    background-color: #605188;
+}
 
-    .album-title {
-        font-weight: 600;
-        font-size: 1rem;
-        color: rgb(219, 219, 219);
-    }
+.crossfade-slider {
+    --progress: 0%;
+    /* Default value for progress */
 
-    .album-artist {
-        font-size: 0.75rem;
-        color: #c9d1db;
-    }
-
-    .btn-primary {
-     background: linear-gradient(to right, #af9ce3, #89d4cf);
-        border-color: #ffffff;
-    }
-
-    .btn-primary:hover {
-        background-color: #605188;
-    }
-
-    .crossfade-slider {
-        --progress: 0%;
-        /* Default value for progress */
-
-        /* Apply a gradient where the left part is purple for played, 
+    /* Apply a gradient where the left part is purple for played, 
            and the right part is white for the remaining song */
-        background: linear-gradient(to right,
-                #8248ee var(--progress),
-                /* Purple for the played portion */
-                #fff var(--progress));
-        /* White for the remaining portion */
-        height: 8px;
-        border-radius: 10px;
-        outline: none;
+    background: linear-gradient(to right,
+            #8248ee var(--progress),
+            /* Purple for the played portion */
+            #fff var(--progress));
+    /* White for the remaining portion */
+    height: 8px;
+    border-radius: 10px;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+
+    /* Style for the slider thumb */
+    &::-webkit-slider-thumb {
         -webkit-appearance: none;
-        width: 100%;
-
-        /* Style for the slider thumb */
-        &::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 18px;
-            width: 18px;
-            border-radius: 50%;
-            background: #8248ee;
-            /* Purple thumb */
-            cursor: pointer;
-            border: none;
-        }
-
-        &::-moz-range-thumb {
-            height: 18px;
-            width: 18px;
-            border-radius: 50%;
-            background: #8248ee;
-            /* Purple thumb */
-            cursor: pointer;
-            border: none;
-        }
+        height: 18px;
+        width: 18px;
+        border-radius: 50%;
+        background: #8248ee;
+        /* Purple thumb */
+        cursor: pointer;
+        border: none;
     }
 
+    &::-moz-range-thumb {
+        height: 18px;
+        width: 18px;
+        border-radius: 50%;
+        background: #8248ee;
+        /* Purple thumb */
+        cursor: pointer;
+        border: none;
+    }
+}
 
+.slider-container {
+    width: 100%;
+    text-align: center;
+}
+
+input[type="range"] {
+    width: 80%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.slider-info {
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: bold;
 }

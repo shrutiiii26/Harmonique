@@ -1,0 +1,95 @@
+package com.harmonique.songservice.service.impl;
+
+import com.harmonique.songservice.entity.Song;
+import com.harmonique.songservice.exception.ResourceNotFoundException;
+import com.harmonique.songservice.payload.SongRequest;
+import com.harmonique.songservice.payload.SongResponse;
+import com.harmonique.songservice.repository.SongRepository;
+import com.harmonique.songservice.security.JwtUtils;
+import com.harmonique.songservice.service.SongService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class SongServiceImpl implements SongService {
+
+    @Autowired
+    private SongRepository songRepository;
+
+    @Override
+    public SongResponse createSong(SongRequest songRequest, Long uploadedByUserId) {
+
+        Song song = mapToEntity(songRequest);
+        song.setUploadedBy(uploadedByUserId);
+
+        Song savedSong = songRepository.save(song);
+        return mapToResponse(savedSong);
+    }
+
+    @Override
+    public SongResponse updateSong(SongRequest songRequest, Long songId) {
+        Song song = songRepository.findById(songId)
+                .orElseThrow(() -> new ResourceNotFoundException("Song not found with ID: " + songId));
+
+        song.setTitle(songRequest.getTitle());
+        song.setArtist(songRequest.getArtist());
+        song.setAlbum(songRequest.getAlbum());
+        song.setGenre(songRequest.getGenre());
+        song.setUrl(songRequest.getUrl());
+        song.setDuration(songRequest.getDuration());
+
+        Song updatedSong = songRepository.save(song);
+        return mapToResponse(updatedSong);
+    }
+
+    @Override
+    public void deleteSong(Long songId) {
+        Song song = songRepository.findById(songId)
+                .orElseThrow(() -> new ResourceNotFoundException("Song not found with ID: " + songId));
+        songRepository.delete(song);
+    }
+
+    @Override
+    public SongResponse getSongById(Long songId) {
+        Song song = songRepository.findById(songId)
+                .orElseThrow(() -> new ResourceNotFoundException("Song not found with ID: " + songId));
+        return mapToResponse(song);
+    }
+
+    @Override
+    public List<SongResponse> getAllSongs() {
+        List<Song> songs = songRepository.findAll();
+        return songs.stream().map(this::mapToResponse).collect(Collectors.toList());
+    }
+
+    // Entity → Response
+    private SongResponse mapToResponse(Song song) {
+        return SongResponse.builder()
+                .id(song.getId())
+                .title(song.getTitle())
+                .artist(song.getArtist())
+                .album(song.getAlbum())
+                .genre(song.getGenre())
+                .duration(song.getDuration())
+                .url(song.getUrl())
+                .uploadedBy(song.getUploadedBy())
+                .createdAt(song.getCreatedAt())
+                .updatedAt(song.getUpdatedAt())
+                .build();
+    }
+
+    // Request → Entity
+    private Song mapToEntity(SongRequest request) {
+        return Song.builder()
+                .title(request.getTitle())
+                .artist(request.getArtist())
+                .album(request.getAlbum())
+                .genre(request.getGenre())
+                .duration(request.getDuration())
+                .url(request.getUrl())
+                .build();
+    }
+}

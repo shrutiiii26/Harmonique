@@ -1,31 +1,56 @@
-import { Component } from '@angular/core';
-import { RouterOutlet,RouterModule, NavigationEnd,Router } from '@angular/router';
+import { Component, OnDestroy } from '@angular/core';
+import { RouterOutlet, RouterModule, NavigationEnd, Router } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { HomeComponent } from './home/home.component';
-import { NgIf } from '@angular/common';  // ✅ Import NgIf explicitly
+import { NgIf, NgClass } from '@angular/common'; // ✅ Import NgClass here
 import { FooterComponent } from './home/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NavbarComponent } from './home/navbar/navbar.component';
+import { Subscription, filter } from 'rxjs';
 
+const NO_LAYOUT_ROUTES = ['/login', '/register'];
+const HIDE_FOOTER_ROUTES = ['/login', '/register'];
+const HIDE_NAVBAR_ROUTES = ['/login', '/register'];
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,SidebarComponent,NgIf,RouterModule,FooterComponent,HttpClientModule],
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    RouterModule,
+    NavbarComponent,
+    FooterComponent,
+    HttpClientModule,
+    NgIf,
+    NgClass // ✅ Fix: Add this
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   title = 'harmonique';
-  showNavAndSidebar: boolean = true;
-  showFooter: boolean = true; 
+  showNavAndSidebar = true;
+  showFooter = true;
+  showNavbar = true;
+  layoutClass = 'with-layout';
+
+  private routerSubscription: Subscription;
 
   constructor(private router: Router) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        const hideRoutes = ['/login', '/register','/navbar','/','/edit-profile'];
-        this.showNavAndSidebar = !hideRoutes.includes(event.url);
-        const hideFooterRoutes = ['/login', '/register'];
-        this.showFooter = !hideFooterRoutes.includes(event.url);
-      }
-    });
+    this.routerSubscription = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          const currentUrl = event.url.split('?')[0]; // Remove query params
+
+          this.showNavAndSidebar = !NO_LAYOUT_ROUTES.includes(currentUrl);
+          this.showFooter = !HIDE_FOOTER_ROUTES.includes(currentUrl);
+          this.showNavbar = !HIDE_NAVBAR_ROUTES.includes(currentUrl);
+          this.layoutClass = NO_LAYOUT_ROUTES.includes(currentUrl) ? 'no-layout' : 'with-layout';
+        }
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.routerSubscription?.unsubscribe();
   }
 }

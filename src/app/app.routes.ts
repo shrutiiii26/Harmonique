@@ -18,6 +18,11 @@ export const routes: Routes = [
                     import('./sidebar/sidebar.component').then((c) => c.SidebarComponent),
             },
             {
+                path: 'navbar',
+                loadComponent: () =>
+                    import('./home/navbar/navbar.component').then((c) => c.NavbarComponent),
+            },
+            {
                 path: 'home',
                 loadComponent: () =>
                     import('./home/home.component').then((c) => c.HomeComponent),
@@ -26,6 +31,11 @@ export const routes: Routes = [
                 path: 'footer',
                 loadComponent: () =>
                     import('./home/footer/footer.component').then((c) => c.FooterComponent),
+            },
+            {
+                path: 'profile',
+                loadComponent: () =>
+                    import('./home/profile/profile.component').then((c) => c.ProfileComponent),
             },
             {
                 path: 'liked-songs',
@@ -56,6 +66,11 @@ export const routes: Routes = [
                 path: 'register',
                 loadComponent: () =>
                     import('./home/register/register.component').then((c) => c.RegisterComponent),
+            },
+            {
+                path: 'faq',
+                loadComponent: () =>
+                    import('./home/faq/faq.component').then((c) => c.FaqComponent),
             },
             {
                 path: 'edit-profile',

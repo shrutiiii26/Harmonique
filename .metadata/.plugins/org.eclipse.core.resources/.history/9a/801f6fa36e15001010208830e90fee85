@@ -1,0 +1,62 @@
+package com.harmonique.userservice.controller;
+
+import com.harmonique.userservice.payload.ApiResponse;
+import com.harmonique.userservice.payload.JwtAuthRequest;
+import com.harmonique.userservice.payload.JwtAuthResponse;
+import com.harmonique.userservice.payload.UserRequest;
+import com.harmonique.userservice.payload.UserResponse;
+import com.harmonique.userservice.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/users")
+@RequiredArgsConstructor
+public class UserController {
+
+    private final UserService userService;
+
+    // 1. Register New User
+    @PostMapping("/register")
+    public ResponseEntity<UserResponse> registerUser(@RequestBody UserRequest userRequest) {
+        UserResponse userResponse = userService.registerUser(userRequest);
+        return new ResponseEntity<>(userResponse, HttpStatus.CREATED);
+    }
+
+    // 2. Login User
+    @PostMapping("/login")
+    public ResponseEntity<JwtAuthResponse> loginUser(@RequestBody JwtAuthRequest request) {
+        JwtAuthResponse response = userService.login(request);
+        return ResponseEntity.ok(response);
+    }
+
+    // 3. Get Own Profile (from JWT token)
+    @GetMapping("/profile")
+    public ResponseEntity<UserResponse> getUserProfile(Authentication authentication) {
+        String username = authentication.getName();
+        UserResponse userResponse = userService.getUserProfile(username);
+        return ResponseEntity.ok(userResponse);
+    }
+
+    // 4. Get User by Email (Admin / internal use)
+    @GetMapping("/email/{email}")
+    public ResponseEntity<UserResponse> getUserByEmail(@PathVariable String email) {
+        UserResponse userResponse = userService.getUserByEmail(email);
+        return ResponseEntity.ok(userResponse);
+    }
+
+    // 5. Add New Role
+    @PostMapping("/role")
+    public ResponseEntity<ApiResponse> addRole(@RequestParam String roleName) {
+        String message = userService.addRole(roleName);
+        ApiResponse response = ApiResponse.builder()
+                .message("Role added successfully")
+                .success(true)
+                .status(HttpStatus.CREATED.value())
+                .build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+}

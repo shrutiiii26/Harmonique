@@ -1,0 +1,5 @@
+package com.harmonique.userservice.service.impl;
+
+public class RoleServiceImpl {
+
+}

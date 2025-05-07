@@ -1,0 +1,5 @@
+package com.harmonique.songservice.service.impl;
+
+public class SongServiceImp {
+
+}

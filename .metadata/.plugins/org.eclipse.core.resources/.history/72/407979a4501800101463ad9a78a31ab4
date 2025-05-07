@@ -1,0 +1,23 @@
+package com.harmonique.songservice.security;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import org.springframework.stereotype.Component;
+
+@Component
+public class JwtUtils {
+
+    private final String secret = "your_secret_key"; // use the same as in User-Service
+
+    public Long extractUserId(String token) {
+        if (token.startsWith("Bearer ")) {
+            token = token.substring(7);
+        }
+        Claims claims = Jwts.parser()
+                .setSigningKey(secret.getBytes())
+                .parseClaimsJws(token)
+                .getBody();
+
+        return Long.parseLong(claims.getSubject());
+    }
+}

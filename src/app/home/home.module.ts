@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { HomeRoutingModule } from './home-routing.module';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { RouterModule } from '@angular/router';
-import { routes } from '../app.routes';
-
+import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home.component';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     HomeRoutingModule,
-    SidebarComponent,
-    RouterModule.forChild(routes)
+    HttpClientModule,
+    RouterModule,
+    MatCardModule,
+    HomeComponent,        // ✅ import standalone component
+    SidebarComponent      // ✅ import standalone component
   ]
 })
 export class HomeModule { }

@@ -1,3 +1,4 @@
+
 @media (min-width:1366px) and (max-width:1600px) {
     .head {
         color: white;
@@ -113,120 +114,81 @@
     .sidebar li:hover {
         color: #9aa8ff; // Optional hover color to make it interactive
     }
+
+.sidebar-container {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: calc(100vh - 60px);
+    width: 60px;
+    transition: width 0.3s ease;
+    overflow: hidden;
+    z-index: 2000;
+
 }
 
-@media (min-width:1024px) and (max-width:1366px) {
-    .head {
-        color: white;
-    }
+.sidebar-container:hover {
+    width: 220px;
+}
 
-    .sidebar a {
-        text-decoration: none;
-        color: white;
-        display: block;
-        /* Important for making the box full clickable */
-        padding: 10px 15px;
-        /* Some padding for better look */
-        border-radius: 8px;
-        /* Rounded box */
-        transition: background-color 0.3s ease;
-        /* Smooth hover */
-    }
+.sidebar {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #b29fe2, #a6f4ee);
+    color: #fff;
+    padding: 1rem 0.5rem;
+}
 
-    .sidebar a:hover {
-        background-color: rgba(255, 255, 255, 0.2);
-        /* Light white transparent box */
-        color: white;
-    }
+.nav-menu ul {
+    list-style: none;
+    padding: 2rem 0 0 0;
+    margin: 0;
+}
 
-    .container-fluid {
-        background: linear-gradient(to right, #af9ce3, #89d4cf);
-        height: 110%;
-    }
+.nav-menu li {
+    margin: 0.5rem 0;
+}
 
-    .hamburger {
-        cursor: pointer;
-    }
+.nav-menu a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
 
-    .search-container {
-        position: relative;
-        display: flex;
-        align-items: center;
-    }
+.nav-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
 
-    .search-input {
-        display: none;
-        transition: width 0.3s ease;
-        width: 0;
-        padding: 8px;
-        border-radius: 20px;
-        border: 1px solid #ccc;
-        margin-left: 10px;
-        background-color: #fff;
-        color: #333;
-    }
+.nav-menu i {
+    width: 24px;
+    height: 24px;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-    .search-container .search-input {
-        display: block;
-        width: 200px;
-        /* Set a width for expanded search bar */
-    }
+.nav-menu span {
+    white-space: nowrap;
+    font-size: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    display: none;
+}
 
-    .sidebar-backdrop {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1500;
-    }
+.sidebar-container:hover .nav-menu span {
+    opacity: 1;
+    visibility: visible;
+    display: block;
+}
 
-    .sidebar {
-        position: fixed;
-        top: 0;
-        left: -260px;
-        width: 260px;
-        height: 100vh;
-        background: linear-gradient(to bottom, #b29fe2, #a6f4ee);
-        color: #fff;
-        transition: left 0.3s ease-in-out;
-        z-index: 2000;
-        padding: 2rem 1rem;
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4);
-    }
-
-    .sidebar.active {
-        left: 0;
-    }
-
-    .sidebar .close-btn {
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        color: #fff;
-        cursor: pointer;
-    }
-
-    .sidebar ul {
-        padding-top: 3rem;
-    }
-
-    .sidebar li {
-        padding: 0.75rem 0;
-        font-size: 1rem;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        transition: color 0.2s ease;
-    }
-
-    .sidebar li i {
-        font-size: 1.1rem;
-        margin-right: 0.8rem;
-    }
-
-    .sidebar li:hover {
-        color: #9aa8ff; // Optional hover color to make it interactive
-    }
+.nav-menu li.active a {
+    background-color: rgba(255, 255, 255, 0.3);
 }
