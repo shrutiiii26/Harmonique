@@ -1,13 +1,14 @@
 <div class="settings-container">
     <!-- Header with back button -->
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <i  (click)="goBack()" style="cursor: pointer; color: #6e45e2;"></i>
+        <i (click)="goBack()" style="cursor: pointer; color: #6e45e2;"></i>
         <h1 class="m-0" style="color: #6e45e2; font-weight: 600;">Settings</h1>
         <div style="width: 24px;"></div> <!-- Spacer for alignment -->
     </div>
 
     <!-- Account Section -->
-    <section class="settings-group mb-4 p-4 rounded-3" style="background: white; box-shadow: 0 4px 15px rgba(110, 69, 226, 0.1); border-top: 3px solid #89d4cf;">
+    <section class="settings-group mb-4 p-4 rounded-3"
+        style="background: white; box-shadow: 0 4px 15px rgba(110, 69, 226, 0.1); border-top: 3px solid #89d4cf;">
         <div class="row align-items-center mb-2" routerLink="/profile" style="cursor: pointer;">
             <div class="col">
                 <h2 class="mb-0" style="color: #6e45e2; font-size: 1.25rem;">
@@ -24,7 +25,8 @@
     </section>
 
     <!-- Language Section -->
-    <section class="settings-group mb-4 p-4 rounded-3" style="background: white; box-shadow: 0 4px 15px rgba(110, 69, 226, 0.1); border-top: 3px solid #89d4cf;">
+    <section class="settings-group mb-4 p-4 rounded-3"
+        style="background: white; box-shadow: 0 4px 15px rgba(110, 69, 226, 0.1); border-top: 3px solid #89d4cf;">
         <div class="setting-row mb-3">
             <h2 style="color: #6e45e2; font-size: 1.25rem;">
                 <i class="fas fa-language me-2"></i>Language
@@ -42,7 +44,8 @@
     </section>
 
     <!-- Explicit Content Section -->
-    <section class="settings-group mb-4 p-4 rounded-3" style="background: white; box-shadow: 0 4px 15px rgba(110, 69, 226, 0.1); border-top: 3px solid #89d4cf;">
+    <section class="settings-group mb-4 p-4 rounded-3"
+        style="background: white; box-shadow: 0 4px 15px rgba(110, 69, 226, 0.1); border-top: 3px solid #89d4cf;">
         <h2 style="color: #6e45e2; font-size: 1.25rem; margin-bottom: 1rem;">
             <i class="fas fa-exclamation-triangle me-2"></i>Explicit content
         </h2>
@@ -61,7 +64,8 @@
     </section>
 
     <!-- Autoplay Section -->
-    <section class="settings-group mb-4 p-4 rounded-3" style="background: white; box-shadow: 0 4px 15px rgba(110, 69, 226, 0.1); border-top: 3px solid #89d4cf;">
+    <section class="settings-group mb-4 p-4 rounded-3"
+        style="background: white; box-shadow: 0 4px 15px rgba(110, 69, 226, 0.1); border-top: 3px solid #89d4cf;">
         <div class="row align-items-center">
             <div class="col">
                 <h2 style="color: #6e45e2; font-size: 1.25rem; margin-bottom: 0.5rem;">
@@ -73,7 +77,8 @@
             </div>
             <div class="col-auto">
                 <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" role="switch" checked style="border-color: #6e45e2;">
+                    <input class="form-check-input" type="checkbox" role="switch" checked
+                        style="border-color: #6e45e2;">
                 </div>
             </div>
         </div>
@@ -82,8 +87,7 @@
     <!-- Save Button -->
     <div class="d-grid gap-2">
         <a routerLink="/home">
-            <button class="btn btn-lg mt-3" (click)="saveSettings()" 
-                    style="background: linear-gradient(135deg, #6e45e2 0%, #89d4cf 100%); 
+            <button class="btn btn-lg mt-3" (click)="saveSettings()" style="background: linear-gradient(135deg, #6e45e2 0%, #89d4cf 100%); 
                            color: white; 
                            border: none;
                            border-radius: 8px;">

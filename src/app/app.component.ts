@@ -17,6 +17,7 @@ const HIDE_NAVBAR_ROUTES = ['/login', '/register'];
   imports: [
     RouterOutlet,
     RouterModule,
+    SidebarComponent,
     NavbarComponent,
     FooterComponent,
     HttpClientModule,

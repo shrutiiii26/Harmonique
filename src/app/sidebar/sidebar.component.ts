@@ -1,13 +1,5 @@
 import {
-<<<<<<< HEAD
-  SidebarService
-} from '../home/services/sidebar.service';
-
-import {
-  Component,
-=======
-  Component,ViewEncapsulation,
->>>>>>> e7278caf119b0a83afd2948acaa1bfd4e1dd2828
+  Component, ViewEncapsulation,
   OnInit,
   ChangeDetectionStrategy,
   Output,
@@ -41,12 +33,12 @@ interface MenuItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  encapsulation: ViewEncapsulation.None 
+  encapsulation: ViewEncapsulation.None
 })
 
 export class SidebarComponent implements OnInit {
   @Output() sidebarState = new EventEmitter<boolean>();
-  
+
   isExpanded = false;
   selectedItem: number | null = null;
   hoverTimeout: any;
@@ -59,7 +51,7 @@ export class SidebarComponent implements OnInit {
     { id: 5, label: 'Settings', icon: 'assets/gear.png', route: '/settings' }
   ];
 
-  constructor(private router: Router, private sidebarService: SidebarService) { }
+  constructor(private router: Router,) { }
 
   ngOnInit(): void {
     this.setActiveItem();
@@ -70,19 +62,9 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-<<<<<<< HEAD
-  expandSidebar(): void {
-    this.isExpanded = true;
-    this.sidebarService.setExpanded(true);
-  }
-  
-  collapseSidebar(): void {
-    this.isExpanded = false;
-    this.sidebarService.setExpanded(false);
-=======
   private setActiveItem(): void {
-    const activeItem = this.menuItems.find(item => 
-      item.exact 
+    const activeItem = this.menuItems.find(item =>
+      item.exact
         ? this.router.url === item.route
         : this.router.url.startsWith(item.route)
     );
@@ -94,7 +76,7 @@ export class SidebarComponent implements OnInit {
     this.isExpanded = true;
     this.sidebarState.emit(true);
   }
-  
+
   collapseSidebar() {
     this.hoverTimeout = setTimeout(() => {
       if (!this.isExpanded) return;
@@ -110,7 +92,6 @@ export class SidebarComponent implements OnInit {
   toggleSidebar(): void {
     this.isExpanded = !this.isExpanded;
     this.sidebarState.emit(this.isExpanded);
->>>>>>> e7278caf119b0a83afd2948acaa1bfd4e1dd2828
   }
 
   selectItem(item: MenuItem): void {
@@ -123,12 +104,9 @@ export class SidebarComponent implements OnInit {
       this.sidebarState.emit(false);
     }
   }
-<<<<<<< HEAD
-=======
 
   trackByItemId(index: number, item: MenuItem): number {
     return item.id;
   }
-  
->>>>>>> e7278caf119b0a83afd2948acaa1bfd4e1dd2828
+
 }
